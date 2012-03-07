@@ -1,32 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.ServiceProcess;
 using System.Text;
-using Network.Bonjour;
-using Network.ZeroConf;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.ServiceModel;
-using System.ServiceModel.Discovery;
 using BeCharming.Common;
 using System.ServiceModel.Description;
+using System.ServiceModel.Discovery;
 
-namespace BeCharming.ListenerService
+namespace BeCharming.Listener
 {
-  public partial class Service1 : ServiceBase
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : Window
   {
-    private ServiceHost host;
+    private ServiceHost host = null;
 
-    public Service1()
+    public MainWindow()
     {
       InitializeComponent();
-    }
-
-    protected override void OnStart(string[] args)
-    {
-      host = new ServiceHost(typeof(Listener), new Uri("http://localhost:10001/becharming"));
+      
+      host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:10001/becharming"));
       host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);
 
       ServiceMetadataBehavior metaDataBehavior = new ServiceMetadataBehavior();
@@ -40,11 +43,6 @@ namespace BeCharming.ListenerService
       host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
       host.Open();
-    }
-
-    protected override void OnStop()
-    {
-      host.Close();
     }
   }
 }

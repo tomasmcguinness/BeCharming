@@ -18,7 +18,7 @@ namespace BeCharming.Common.Sending
       EndpointAddress address = discoveryResponse.Endpoints[0].Address;
 
       ListenerClient service = new ListenerClient(new BasicHttpBinding(), address);
-      service.Echo("WS-Discovery test");
+      service.Echo("http://www.google.com");
     }
   }
 }

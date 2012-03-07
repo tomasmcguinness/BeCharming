@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeCharming.ListenerService", "BeCharming.ListenerService\BeCharming.ListenerService.csproj", "{51C0BD0C-6B9E-415F-8615-F0D812660AC1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeCharming.Common", "BeCharming.Common.Sending\BeCharming.Common.csproj", "{AFA3F7C8-1549-41D3-90DE-A96EFAD9D2B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeCharming.TestClient", "BeCharming.TestClient\BeCharming.TestClient.csproj", "{D2545FD2-C147-4BFE-804F-F8DD3BE238A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeCharming.Listener", "BeCharming.Listener\BeCharming.Listener.csproj", "{4DC446FD-D592-4950-8055-55F2B9AB9010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +13,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{51C0BD0C-6B9E-415F-8615-F0D812660AC1}.Debug|x86.ActiveCfg = Debug|x86
-		{51C0BD0C-6B9E-415F-8615-F0D812660AC1}.Debug|x86.Build.0 = Debug|x86
-		{51C0BD0C-6B9E-415F-8615-F0D812660AC1}.Release|x86.ActiveCfg = Release|x86
-		{51C0BD0C-6B9E-415F-8615-F0D812660AC1}.Release|x86.Build.0 = Release|x86
 		{AFA3F7C8-1549-41D3-90DE-A96EFAD9D2B0}.Debug|x86.ActiveCfg = Debug|x86
 		{AFA3F7C8-1549-41D3-90DE-A96EFAD9D2B0}.Debug|x86.Build.0 = Debug|x86
 		{AFA3F7C8-1549-41D3-90DE-A96EFAD9D2B0}.Release|x86.ActiveCfg = Release|x86
@@ -25,6 +21,10 @@ Global
 		{D2545FD2-C147-4BFE-804F-F8DD3BE238A2}.Debug|x86.Build.0 = Debug|x86
 		{D2545FD2-C147-4BFE-804F-F8DD3BE238A2}.Release|x86.ActiveCfg = Release|x86
 		{D2545FD2-C147-4BFE-804F-F8DD3BE238A2}.Release|x86.Build.0 = Release|x86
+		{4DC446FD-D592-4950-8055-55F2B9AB9010}.Debug|x86.ActiveCfg = Debug|x86
+		{4DC446FD-D592-4950-8055-55F2B9AB9010}.Debug|x86.Build.0 = Debug|x86
+		{4DC446FD-D592-4950-8055-55F2B9AB9010}.Release|x86.ActiveCfg = Release|x86
+		{4DC446FD-D592-4950-8055-55F2B9AB9010}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
