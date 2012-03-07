@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4ff97846-25ca-4856-b618-0123fb1c1c90" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:10001/becharming" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="becharming.xsd" MetadataType="Schema" ID="01d8d413-06f9-42c9-b521-15e88673b86b" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd1" />
+    <MetadataFile FileName="Listener.wsdl" MetadataType="Wsdl" ID="4178cbf0-a4f4-4be5-9362-b76ba6e57e43" SourceId="1" SourceUrl="http://localhost:10001/becharming?wsdl" />
+    <MetadataFile FileName="becharming.disco" MetadataType="Disco" ID="7ad9ce5b-1ca3-4c59-b416-cfddbdb25e49" SourceId="1" SourceUrl="http://localhost:10001/becharming?disco" />
+    <MetadataFile FileName="becharming1.xsd" MetadataType="Schema" ID="16b4315b-d2f8-4535-a208-98782b9a3cb7" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
