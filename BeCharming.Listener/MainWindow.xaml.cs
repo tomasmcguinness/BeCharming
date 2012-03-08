@@ -15,6 +15,7 @@ using System.ServiceModel;
 using BeCharming.Common;
 using System.ServiceModel.Description;
 using System.ServiceModel.Discovery;
+using System.Windows.Forms;
 
 namespace BeCharming.Listener
 {
@@ -28,7 +29,12 @@ namespace BeCharming.Listener
     public MainWindow()
     {
       InitializeComponent();
-      
+
+      NotifyIcon icon = new NotifyIcon();
+      icon.Visible = true;
+      icon.Icon = new System.Drawing.Icon("Icon1.ico");
+      icon.ShowBalloonTip(5, "BeCharming", "Running...", ToolTipIcon.Info);
+
       host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:10001/becharming"));
       host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);
 

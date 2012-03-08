@@ -11,14 +11,26 @@ namespace BeCharming.Common.Sending
 {
   public class Sender
   {
+    public delegate void ListenerDiscoveredHandler(string serviceName);
+    public event ListenerDiscoveredHandler ListenerDiscovered;
+
     public void DiscoverServices()
     {
       DiscoveryClient discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint());
       FindResponse discoveryResponse = discoveryClient.Find(new FindCriteria(typeof(IListener)));
-      EndpointAddress address = discoveryResponse.Endpoints[0].Address;
 
-      ListenerClient service = new ListenerClient(new BasicHttpBinding(), address);
-      service.Echo("http://www.google.com");
+      foreach (var endpoint in discoveryResponse.Endpoints)
+      {
+        EndpointAddress address = endpoint.Address;
+
+        //ListenerClient service = new ListenerClient(new BasicHttpBinding(), address);
+        //ervice.FetchDetails();
+
+        if (ListenerDiscovered != null)
+        {
+          ListenerDiscovered("Hello");
+        }
+      }
     }
   }
 }

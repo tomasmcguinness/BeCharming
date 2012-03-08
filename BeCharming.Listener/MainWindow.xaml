@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+    <TextBlock FontFamily="Segoe UI" FontSize="42" Margin="40" Foreground="Red">Be Charming</TextBlock>
     </Grid>
 </Window>
