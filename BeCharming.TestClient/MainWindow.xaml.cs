@@ -27,9 +27,10 @@ namespace BeCharming.TestClient
 
     private void button1_Click(object sender, RoutedEventArgs e)
     {
-      Sender serviceSender = new Sender();
-      serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
-      serviceSender.DiscoverServices();
+      //Sender serviceSender = new Sender();
+      //serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
+      //serviceSender.DiscoverServices();
+      Probe.SendProbe();
     }
 
     void serviceSender_ListenerDiscovered(string serviceName)

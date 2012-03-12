@@ -22,5 +22,13 @@ namespace BeCharming.Listener
 
       return "okay";
     }
+
+    public DiscoveryDetails PerformDiscovery()
+    {
+      return new DiscoveryDetails()
+      {
+        Name = "My First Server"
+      };
+    }
   }
 }
