@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1d541182-0713-4fe0-89b4-a3eed657c2e5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:10001/becharming" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="becharming.xsd" MetadataType="Schema" ID="793b4ddc-9fa1-483e-bf10-6124cf7e525c" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd1" />
+    <MetadataFile FileName="ListenerService.wsdl" MetadataType="Wsdl" ID="1de24727-24e4-4d7e-9445-d994c311ad23" SourceId="1" SourceUrl="http://localhost:10001/becharming?wsdl" />
+    <MetadataFile FileName="becharming.disco" MetadataType="Disco" ID="2d20a556-a83e-47df-9a98-dd6762df093b" SourceId="1" SourceUrl="http://localhost:10001/becharming?disco" />
+    <MetadataFile FileName="becharming1.xsd" MetadataType="Schema" ID="d6717156-446b-4e6c-8c56-1752bd55cacb" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

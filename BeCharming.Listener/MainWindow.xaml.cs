@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
-using BeCharming.Common;
 using System.ServiceModel.Description;
 using System.ServiceModel.Discovery;
 using System.Windows.Forms;

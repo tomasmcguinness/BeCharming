@@ -92,12 +92,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BeCharming.Common.Sending\BeCharming.Common.csproj">
-      <Project>{AFA3F7C8-1549-41D3-90DE-A96EFAD9D2B0}</Project>
-      <Name>BeCharming.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BeCharming.Common.Sending;
 
 namespace BeCharming.TestClient
 {
@@ -27,9 +26,9 @@ namespace BeCharming.TestClient
 
     private void button1_Click(object sender, RoutedEventArgs e)
     {
-      Sender serviceSender = new Sender();
-      serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
-      serviceSender.DiscoverServices();
+      //Sender serviceSender = new Sender();
+      //serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
+      //serviceSender.DiscoverServices();
     }
 
     void serviceSender_ListenerDiscovered(string serviceName)
