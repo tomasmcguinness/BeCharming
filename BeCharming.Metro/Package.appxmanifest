@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="f9966ac8-df1e-4739-954b-463c4b49a3cd" Publisher="CN=Tomas" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>BeCharming.Metro</DisplayName>
+    <PublisherDisplayName>Tomas</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>BeCharming.Metro</Description>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2</OSMinVersion>
+    <OSMaxVersionTested>6.2</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BeCharming.Metro.App">
+      <VisualElements DisplayName="BeCharming" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming is a multi-purpose sharing app for Windows 8.." ForegroundText="light" BackgroundColor="#222222">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+        </InitialRotationPreference>
+      </VisualElements>
+      <Extensions>
+        <Extension Category="windows.shareTarget">
+          <ShareTarget>
+            <SupportedFileTypes>
+              <SupportsAnyFileType />
+            </SupportedFileTypes>
+            <DataFormat>Text</DataFormat>
+            <DataFormat>Uri</DataFormat>
+            <DataFormat>Html</DataFormat>
+            <DataFormat>Rtf</DataFormat>
+          </ShareTarget>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
