@@ -27,7 +27,7 @@ namespace BeCharming.Metro
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
-       public App()
+        public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
@@ -65,6 +65,18 @@ namespace BeCharming.Metro
         void OnSuspending(object sender, SuspendingEventArgs e)
         {
             //TODO: Save application state and stop any background activity
+        }
+
+        /// <summary>
+        /// Invoked when the user selects to share something
+        /// </summary>
+        /// <param name="args"></param>
+        protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            ShareTargets targets = new ShareTargets();
+
+            Window.Current.Content = targets;
+            Window.Current.Activate();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace BeCharming.Listener
       NotifyIcon icon = new NotifyIcon();
       icon.Visible = true;
       icon.Icon = new System.Drawing.Icon("Icon1.ico");
-      icon.ShowBalloonTip(5, "BeCharming", "Running...", ToolTipIcon.Info);
+      icon.ShowBalloonTip(3, "BeCharming", "Running...", ToolTipIcon.Info);
 
       host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:10001/becharming"));
       host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);

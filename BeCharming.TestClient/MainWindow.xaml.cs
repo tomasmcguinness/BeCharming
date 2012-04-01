@@ -14,26 +14,27 @@ using System.Windows.Shapes;
 
 namespace BeCharming.TestClient
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
-  {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-      InitializeComponent();
-    }
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
-    private void button1_Click(object sender, RoutedEventArgs e)
-    {
-      //Sender serviceSender = new Sender();
-      //serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
-      //serviceSender.DiscoverServices();
-    }
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            //Sender serviceSender = new Sender();
+            //serviceSender.ListenerDiscovered += new Sender.ListenerDiscoveredHandler(serviceSender_ListenerDiscovered);
+            //serviceSender.DiscoverServices();
+            Probe.SendProbe();
+        }
 
-    void serviceSender_ListenerDiscovered(string serviceName)
-    {
-      listBox1.Items.Add(serviceName);
+        void serviceSender_ListenerDiscovered(string serviceName)
+        {
+            listBox1.Items.Add(serviceName);
+        }
     }
-  }
 }

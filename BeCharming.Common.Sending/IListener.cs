@@ -10,6 +10,9 @@ namespace BeCharming.Common
   public interface IListener
   {
     [OperationContract]
+    DiscoveryDetails PerformDiscovery();
+
+    [OperationContract]
     string Echo(string message);
   }
 }
