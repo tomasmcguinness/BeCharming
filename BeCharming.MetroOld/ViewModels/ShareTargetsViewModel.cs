@@ -29,7 +29,7 @@ namespace BeCharming.Metro.ViewModels
 
         public void TargetSelected(object state)
         {
-            //var service = new ListenerClient();
+            var service = new ListenerClient();
         }
     }
 }

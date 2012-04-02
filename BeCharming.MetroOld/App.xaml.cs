@@ -48,7 +48,7 @@ namespace BeCharming.Metro
 
             // Create a Frame to act navigation context and navigate to the first page
             var rootFrame = new Frame();
-            rootFrame.Navigate(typeof(Main));
+            rootFrame.Navigate(typeof(BlankPage));
 
             // Place the frame in the current Window and ensure that it is active
             Window.Current.Content = rootFrame;
@@ -67,9 +67,14 @@ namespace BeCharming.Metro
             //TODO: Save application state and stop any background activity
         }
 
+        /// <summary>
+        /// Invoked when the user selects to share something
+        /// </summary>
+        /// <param name="args"></param>
         protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
             ShareTargets targets = new ShareTargets();
+
             Window.Current.Content = targets;
             Window.Current.Activate();
         }
