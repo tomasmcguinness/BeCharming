@@ -15,10 +15,10 @@ namespace WinRT.WSDiscovery
 
         }
 
-        public void Find()
+        public async void Find()
         {
             DatagramSocket s = new DatagramSocket();
-            s.BindEndpointAsync(new HostName("127.0.0.1:3702"), "BeCharming");
+            await s.BindEndpointAsync(new HostName("127.0.0.1:3702"), "BeCharming");
 
         }
     }

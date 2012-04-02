@@ -103,12 +103,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BeCharming.Common.Sending\BeCharming.Common.csproj">
-      <Project>{afa3f7c8-1549-41d3-90de-a96efad9d2b0}</Project>
-      <Name>BeCharming.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

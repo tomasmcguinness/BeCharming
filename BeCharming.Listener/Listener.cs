@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using BeCharming.Common;
 
 namespace BeCharming.Listener
 {
@@ -21,15 +20,6 @@ namespace BeCharming.Listener
             runCmd.Start();
 
             return "okay";
-        }
-
-
-        public DiscoveryDetails PerformDiscovery()
-        {
-            return new DiscoveryDetails()
-            {
-                Name = "My First Server"
-            };
         }
     }
 }
