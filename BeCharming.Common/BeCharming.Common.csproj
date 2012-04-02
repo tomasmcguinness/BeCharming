@@ -112,7 +112,6 @@
     <Compile Include="..\BeCharming.Listener\IListener.cs">
       <Link>IListener.cs</Link>
     </Compile>
-    <Compile Include="ClientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ListenerService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -147,12 +146,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WinRT.WSDiscovery\WinRT.WSDiscovery.csproj">
-      <Project>{a0ca4b1a-4277-4c69-abf7-6251ffe5e4cd}</Project>
-      <Name>WinRT.WSDiscovery</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
