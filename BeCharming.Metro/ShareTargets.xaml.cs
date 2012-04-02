@@ -26,6 +26,7 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new ShareTargetsViewModel();
+            ((ShareTargetsViewModel)DataContext).LoadTargets();
         }
 
         /// <summary>
