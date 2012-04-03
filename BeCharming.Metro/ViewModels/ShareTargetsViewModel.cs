@@ -21,10 +21,25 @@ namespace BeCharming.Metro.ViewModels
 
         public void LoadTargets()
         {
-            ShareTarget t = new ShareTarget();
-            t.Name = "Test";
-            t.IP = "192.168.1.8";
-            Targets.Add(t);
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.Containers["BeCharmingSettings"];
+
+            var xml = container.Values["ShareTargets"] as String;
+
+            if (xml == null)
+            {
+                return;
+            }
+
+            var shareTargets = ObjectSerializer<List<String>>.FromXml(xml);
+
+            foreach (var target in shareTargets)
+            {
+                ShareTarget t = new ShareTarget();
+                t.Name = "Test";
+                t.IP = target;
+                Targets.Add(t);
+            }
         }
 
         public void TargetSelected(object state)
