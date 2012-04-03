@@ -22,23 +22,27 @@ namespace BeCharming.Metro.ViewModels
         public void LoadTargets()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            var container = localSettings.Containers["BeCharmingSettings"];
 
-            var xml = container.Values["ShareTargets"] as String;
-
-            if (xml == null)
+            if (localSettings.Containers.ContainsKey("BeCharmingSettings"))
             {
-                return;
-            }
+                var container = localSettings.Containers["BeCharmingSettings"];
 
-            var shareTargets = ObjectSerializer<List<String>>.FromXml(xml);
+                var xml = container.Values["ShareTargets"] as String;
 
-            foreach (var target in shareTargets)
-            {
-                ShareTarget t = new ShareTarget();
-                t.Name = "Test";
-                t.IP = target;
-                Targets.Add(t);
+                if (xml == null)
+                {
+                    return;
+                }
+
+                var shareTargets = ObjectSerializer<List<String>>.FromXml(xml);
+
+                foreach (var target in shareTargets)
+                {
+                    ShareTarget t = new ShareTarget();
+                    t.Name = "Test";
+                    t.IP = target;
+                    Targets.Add(t);
+                }
             }
         }
 

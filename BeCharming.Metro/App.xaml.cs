@@ -70,6 +70,7 @@ namespace BeCharming.Metro
         protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
             ShareTargets targets = new ShareTargets();
+
             Window.Current.Content = targets;
             Window.Current.Activate();
         }
