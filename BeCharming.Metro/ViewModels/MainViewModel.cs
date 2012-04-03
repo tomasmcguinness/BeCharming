@@ -15,14 +15,21 @@ namespace BeCharming.Metro.ViewModels
         public MainViewModel()
         {
             AddTarget = new DelegateCommand(AddTargetExecute);
+            CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
         }
 
         public ICommand AddTarget { get; set; }
+        public ICommand CancelAddTarget { get; set; }
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
 
         public void AddTargetExecute(object state)
         {
             ShowAddNewShareTarget = true;
+        }
+
+        public void CancelAddTargetExecute(object state)
+        {
+            showAddNewShareTarget = false;
         }
 
         public void NotifyPropertyChanged(string propertyName)

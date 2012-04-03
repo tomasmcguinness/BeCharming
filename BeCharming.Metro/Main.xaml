@@ -21,32 +21,32 @@
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="32,32,0,0"/>
 
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}">
-            <Grid>
+            <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="350" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="1" Background="White">
-                	<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                		<Grid.RowDefinitions>
-                			<RowDefinition Height="Auto"/>
-                			<RowDefinition Height="Auto"/>
-                			<RowDefinition Height="Auto"/>
-                			<RowDefinition Height="Auto"/>
-                		</Grid.RowDefinitions>
-                		<Grid.ColumnDefinitions>
-                			<ColumnDefinition/>
-                			<ColumnDefinition Width="Auto"/>
-                		</Grid.ColumnDefinitions>
-                		<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
-                		<TextBlock Margin="0,30,0,0" TextWrapping="Wrap" Text="Enter the IP address of the computer to add it as a share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                		<TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,35" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
-                		<StackPanel HorizontalAlignment="Center" Grid.RowSpan="3" Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                			<Button Content="Add" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}"/>
-                			<Button Content="Cancel" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
-                		</StackPanel>
-                	</Grid>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
+                        <TextBlock Margin="0,30,0,0" TextWrapping="Wrap" Text="Enter the IP address of the computer to add it as a share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,35" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
+                        <StackPanel HorizontalAlignment="Center" Grid.RowSpan="3" Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button Content="Add" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}"/>
+                            <Button Content="Cancel" Command="{Binding Path=CancelAddTarget}" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
             </Grid>
         </Border>
