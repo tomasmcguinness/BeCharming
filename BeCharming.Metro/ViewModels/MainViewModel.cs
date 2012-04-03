@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,9 @@ using System.Windows.Input;
 
 namespace BeCharming.Metro.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public event EventHandler OpenAddTargetDialog;
+        private bool showAddNewShareTarget = false;
 
         public MainViewModel()
         {
@@ -17,13 +18,21 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public ICommand AddTarget { get; set; }
+        public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
 
         public void AddTargetExecute(object state)
         {
-            if (OpenAddTargetDialog != null)
+            ShowAddNewShareTarget = true;
+        }
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
             {
-                OpenAddTargetDialog(this, null);
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

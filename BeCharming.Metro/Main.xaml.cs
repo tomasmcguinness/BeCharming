@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BeCharming.Metro.ViewModels;
 //using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,8 +27,7 @@ namespace BeCharming.Metro
         public Main()
         {
             this.InitializeComponent();
-            //this.DataContext = new MainViewModel();
-            //((MainViewModel)DataContext).OpenAddTargetDialog += OpenAddTargetDialog;
+            this.DataContext = new MainViewModel();
         }
 
         //public async void OpenAddTargetDialog(object sender, EventArgs e)
