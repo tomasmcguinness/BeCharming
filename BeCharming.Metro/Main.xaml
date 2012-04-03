@@ -42,9 +42,10 @@
                         <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
                         <TextBlock Margin="0,30,0,0" TextWrapping="Wrap" Text="Enter the IP address of the computer to add it as a share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
                         <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,35" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
+                        <Button Content="Add" HorizontalAlignment="Stretch" Margin="0,0,640,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width"/>
+                        <Button Content="Cancel" Command="{Binding CancelAddTarget}" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
+
                         <StackPanel HorizontalAlignment="Center" Grid.RowSpan="3" Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                            <Button Content="Add" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}"/>
-                            <Button Content="Cancel" Command="{Binding Path=CancelAddTarget}" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>
                         </StackPanel>
                     </Grid>
                 </Border>

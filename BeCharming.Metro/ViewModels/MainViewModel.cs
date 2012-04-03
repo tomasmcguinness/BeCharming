@@ -29,7 +29,7 @@ namespace BeCharming.Metro.ViewModels
 
         public void CancelAddTargetExecute(object state)
         {
-            showAddNewShareTarget = false;
+            ShowAddNewShareTarget = false;
         }
 
         public void NotifyPropertyChanged(string propertyName)
