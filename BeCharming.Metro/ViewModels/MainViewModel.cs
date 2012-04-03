@@ -15,14 +15,38 @@ namespace BeCharming.Metro.ViewModels
         public MainViewModel()
         {
             AddTarget = new DelegateCommand(AddTargetExecute);
+            ShowAddTarget = new DelegateCommand(ShowAddTargetExecute);
             CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
         }
 
         public ICommand AddTarget { get; set; }
+        public ICommand ShowAddTarget { get; set; }
         public ICommand CancelAddTarget { get; set; }
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
+        public String IPAddress { get; set; }
 
         public void AddTargetExecute(object state)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+
+            List<string> shareTargets = container.Values["ShareTargets"] as List<string>;
+
+            if (shareTargets == null)
+            {
+                shareTargets = new List<string>();
+            }
+
+            shareTargets.Add(IPAddress);
+
+            var xml = ObjectSerializer<List<String>>.ToXml(shareTargets);
+
+            container.Values["ShareTargets"] = xml;
+
+            ShowAddNewShareTarget = false;
+        }
+
+        public void ShowAddTargetExecute(object state)
         {
             ShowAddNewShareTarget = true;
         }
