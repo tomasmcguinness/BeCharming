@@ -168,6 +168,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeCharming.Common\BeCharming.Common.csproj">
+      <Project>{f1468941-2bbf-4a7e-9dab-18f568879261}</Project>
+      <Name>BeCharming.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

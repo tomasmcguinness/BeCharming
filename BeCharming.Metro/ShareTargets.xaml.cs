@@ -37,5 +37,10 @@ namespace BeCharming.Metro
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ((ShareTargetsViewModel)DataContext).TargetSelected((ShareTarget)e.ClickedItem);
+        }
     }
 }

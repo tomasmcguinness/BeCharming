@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BeCharming.Common.ListenerService;
 
 namespace BeCharming.Metro.ViewModels
 {
@@ -13,11 +14,10 @@ namespace BeCharming.Metro.ViewModels
         public ShareTargetsViewModel()
         {
             Targets = new ObservableCollection<ShareTarget>();
-            TargetSelectedCommand = new DelegateCommand(TargetSelected);
         }
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
-        public ICommand TargetSelectedCommand { get; set; }
+        public ShareTarget SelectedTarget { get; set; }
 
         public void LoadTargets()
         {
@@ -34,21 +34,21 @@ namespace BeCharming.Metro.ViewModels
                     return;
                 }
 
-                var shareTargets = ObjectSerializer<List<String>>.FromXml(xml);
+                var shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(xml);
+
+                Targets.Clear();
 
                 foreach (var target in shareTargets)
                 {
-                    ShareTarget t = new ShareTarget();
-                    t.Name = "Test";
-                    t.IP = target;
-                    Targets.Add(t);
+                    Targets.Add(target);
                 }
             }
         }
 
-        public void TargetSelected(object state)
+        public void TargetSelected(ShareTarget state)
         {
-            //var service = new ListenerClient();
+            ListenerClient client = new ListenerClient();
+            client.OpenWebPageAsync("http://www.google.com");
         }
     }
 }

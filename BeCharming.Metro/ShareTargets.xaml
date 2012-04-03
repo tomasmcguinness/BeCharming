@@ -5,8 +5,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ShareTargetTemplate">
+            <Border HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextStyle}" />
+                    <TextBlock Text="{Binding IP}" Style="{StaticResource SubheaderTextStyle}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundBrush}">
-        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" />
+        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" SelectedItem="{Binding Path=SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" ItemClick="ListView_ItemClick" />
     </Grid>
 </Page>

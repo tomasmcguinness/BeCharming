@@ -23,23 +23,24 @@ namespace BeCharming.Metro.ViewModels
         public ICommand ShowAddTarget { get; set; }
         public ICommand CancelAddTarget { get; set; }
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
-        public String IPAddress { get; set; }
+        public String TargetIPAddress { get; set; }
+        public String TargetName { get; set; }
 
         public void AddTargetExecute(object state)
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
 
-            List<string> shareTargets = container.Values["ShareTargets"] as List<string>;
+            List<ShareTarget> shareTargets = container.Values["ShareTargets"] as List<ShareTarget>;
 
             if (shareTargets == null)
             {
-                shareTargets = new List<string>();
+                shareTargets = new List<ShareTarget>();
             }
 
-            shareTargets.Add(IPAddress);
+            shareTargets.Add(new ShareTarget() { IP = TargetIPAddress, Name = TargetName });
 
-            var xml = ObjectSerializer<List<String>>.ToXml(shareTargets);
+            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
 
