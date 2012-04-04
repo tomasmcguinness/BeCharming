@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace BeCharming.Metro.ViewModels
 
         public MainViewModel()
         {
+            Targets = new ObservableCollection<ShareTarget>();
             AddTarget = new DelegateCommand(AddTargetExecute);
             ShowAddTarget = new DelegateCommand(ShowAddTargetExecute);
             CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
@@ -25,6 +27,7 @@ namespace BeCharming.Metro.ViewModels
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
         public String TargetIPAddress { get; set; }
         public String TargetName { get; set; }
+        public ObservableCollection<ShareTarget> Targets { get; set; }
 
         public void AddTargetExecute(object state)
         {
@@ -37,8 +40,9 @@ namespace BeCharming.Metro.ViewModels
             {
                 shareTargets = new List<ShareTarget>();
             }
-
-            shareTargets.Add(new ShareTarget() { IP = TargetIPAddress, Name = TargetName });
+            var target = new ShareTarget() { IP = TargetIPAddress, Name = TargetName };
+            shareTargets.Add(target);
+            Targets.Add(target);
 
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 

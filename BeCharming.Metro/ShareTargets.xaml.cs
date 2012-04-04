@@ -38,9 +38,15 @@ namespace BeCharming.Metro
         {
         }
 
+        private void ListView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            ((ShareTargetsViewModel)DataContext).TargetSelected(e.OriginalSource);
+        }
+
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ((ShareTargetsViewModel)DataContext).TargetSelected((ShareTarget)e.ClickedItem);
+            ((ShareTargetsViewModel)DataContext).TargetSelected(e.OriginalSource);
         }
     }
 }

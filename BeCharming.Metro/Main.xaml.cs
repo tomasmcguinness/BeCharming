@@ -30,12 +30,6 @@ namespace BeCharming.Metro
             this.DataContext = new MainViewModel();
         }
 
-        //public async void OpenAddTargetDialog(object sender, EventArgs e)
-        //{
-        //    var dialog = new MessageDialog("Enter the IP address of the BeCharming target you wish to add.", "Add a new BeCharming target");
-        //    await dialog.ShowAsync();
-        //}
-
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -43,6 +37,12 @@ namespace BeCharming.Metro
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShareTargetsViewModel vm = new ShareTargetsViewModel();
+            vm.TargetSelected(null);
         }
     }
 }
