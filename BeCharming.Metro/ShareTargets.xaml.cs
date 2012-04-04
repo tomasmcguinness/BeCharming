@@ -40,14 +40,9 @@ namespace BeCharming.Metro
 
         public Windows.ApplicationModel.DataTransfer.ShareTarget.ShareOperation ShareOperation { get; set; }
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ((ShareTargetsViewModel)DataContext).TargetSelected(e.OriginalSource, this.ShareOperation);
-        }
-
         internal void LoadShareOperation(Windows.ApplicationModel.DataTransfer.ShareTarget.ShareOperation shareOperation)
         {
-            this.ShareOperation = shareOperation;
+            ((ShareTargetsViewModel)DataContext).ShareOperation = shareOperation;
         }
     }
 }

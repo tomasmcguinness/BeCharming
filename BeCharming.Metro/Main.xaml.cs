@@ -28,6 +28,9 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel();
+            ((MainViewModel)this.DataContext).TargetIPAddress = "127.0.0.1";
+            ((MainViewModel)this.DataContext).TargetName = "Localhost";
+            ((MainViewModel)this.DataContext).AddTargetExecute(null);
         }
 
         /// <summary>
@@ -37,12 +40,6 @@ namespace BeCharming.Metro
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ShareTargetsViewModel vm = new ShareTargetsViewModel();
-            vm.TargetSelected(null, null);
         }
     }
 }

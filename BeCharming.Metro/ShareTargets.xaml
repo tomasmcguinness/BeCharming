@@ -17,6 +17,11 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundBrush}">
-        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" SelectedItem="{Binding Path=SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" SelectedItem="{Binding Path=SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" IsItemClickEnabled="True" SelectionMode="Single" />
+        <Button Content="Share" Grid.Row="1" HorizontalAlignment="Right" Command="{Binding Share}" />
     </Grid>
 </Page> 
