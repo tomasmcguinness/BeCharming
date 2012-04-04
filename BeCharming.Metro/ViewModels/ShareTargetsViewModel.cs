@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BeCharming.Common.ListenerService;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
 
 namespace BeCharming.Metro.ViewModels
 {
@@ -14,12 +15,9 @@ namespace BeCharming.Metro.ViewModels
         public ShareTargetsViewModel()
         {
             Targets = new ObservableCollection<ShareTarget>();
-            ShareTargetTapped = new DelegateCommand(TargetSelected);
         }
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
-        public ShareTarget SelectedTarget { get; set; }
-        public ICommand ShareTargetTapped { get; set; }
 
         public void LoadTargets()
         {
@@ -47,11 +45,34 @@ namespace BeCharming.Metro.ViewModels
             }
         }
 
-        public void TargetSelected(object state)
+        public async void TargetSelected(object target, ShareOperation shareOperation)
         {
             ListenerClient client = new ListenerClient();
-            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.1.15:10001/BeCharming"));
-            client.OpenWebPageAsync("http://www.google.com");
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.1.15:22001/BeCharming"));
+
+            string result = null;
+
+            if (shareOperation.Data.AvailableFormats.Contains("UniformResourceLocatorW"))
+            {
+                shareOperation.ReportSubmittedBackgroundTask();
+                result = await client.OpenWebPageAsync(shareOperation.Data.Properties.Description);
+            }
+
+            if (shareOperation.Data.AvailableFormats.Contains("FileContents"))
+            {
+                shareOperation.ReportSubmittedBackgroundTask();
+                var contents = await shareOperation.Data.GetDataAsync("FileContents");
+                result = await client.OpenDocumentAsync(shareOperation.Data.Properties.Description, (byte[])contents);
+            }
+
+            if (result == "okay")
+            {
+                shareOperation.ReportCompleted();
+            }
+            else
+            {
+                shareOperation.ReportError("Failed to share that");
+            }
         }
     }
 }

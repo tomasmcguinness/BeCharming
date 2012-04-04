@@ -17,6 +17,6 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundBrush}">
-        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" SelectedItem="{Binding Path=SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None" IsTapEnabled="True" Tapped="ListView_Tapped" />
+        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Targets}" SelectedItem="{Binding Path=SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None" />
     </Grid>
 </Page> 

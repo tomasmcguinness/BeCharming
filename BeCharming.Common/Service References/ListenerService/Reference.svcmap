@@ -21,13 +21,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:10001/becharming" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:22001/becharming" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="becharming.xsd" MetadataType="Schema" ID="793b4ddc-9fa1-483e-bf10-6124cf7e525c" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd1" />
-    <MetadataFile FileName="ListenerService.wsdl" MetadataType="Wsdl" ID="1de24727-24e4-4d7e-9445-d994c311ad23" SourceId="1" SourceUrl="http://localhost:10001/becharming?wsdl" />
-    <MetadataFile FileName="becharming.disco" MetadataType="Disco" ID="2d20a556-a83e-47df-9a98-dd6762df093b" SourceId="1" SourceUrl="http://localhost:10001/becharming?disco" />
-    <MetadataFile FileName="becharming1.xsd" MetadataType="Schema" ID="d6717156-446b-4e6c-8c56-1752bd55cacb" SourceId="1" SourceUrl="http://localhost:10001/becharming?xsd=xsd0" />
+    <MetadataFile FileName="ListenerService1.wsdl" MetadataType="Wsdl" ID="c2492922-c851-4254-99ef-6fe0fcd5ff8d" SourceId="1" SourceUrl="http://localhost:22001/becharming?wsdl" />
+    <MetadataFile FileName="becharming2.xsd" MetadataType="Schema" ID="aba12ca0-0e89-4571-90f2-571d72a695c5" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd1" />
+    <MetadataFile FileName="becharming21.xsd" MetadataType="Schema" ID="4cee4df1-64e6-48e7-8ce5-000f6de4234b" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd0" />
+    <MetadataFile FileName="becharming1.disco" MetadataType="Disco" ID="13821222-e695-4d63-90c8-0d068c676c23" SourceId="1" SourceUrl="http://localhost:22001/becharming?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

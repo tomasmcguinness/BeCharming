@@ -20,6 +20,9 @@ namespace BeCharming.Common.ListenerService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListener/OpenWebPage", ReplyAction="http://tempuri.org/IListener/OpenWebPageResponse")]
         System.Threading.Tasks.Task<string> OpenWebPageAsync(string urlToOpen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListener/OpenDocument", ReplyAction="http://tempuri.org/IListener/OpenDocumentResponse")]
+        System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +72,10 @@ namespace BeCharming.Common.ListenerService {
             return base.Channel.OpenWebPageAsync(urlToOpen);
         }
         
+        public System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes) {
+            return base.Channel.OpenDocumentAsync(documentName, documentBytes);
+        }
+        
         public virtual System.Threading.Tasks.Task OpenAsync() {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
@@ -91,7 +98,7 @@ namespace BeCharming.Common.ListenerService {
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration) {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IListener)) {
-                return new System.ServiceModel.EndpointAddress("http://localhost:10001/becharming");
+                return new System.ServiceModel.EndpointAddress("http://localhost:22001/becharming");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

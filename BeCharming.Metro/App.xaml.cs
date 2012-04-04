@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
@@ -70,9 +71,12 @@ namespace BeCharming.Metro
         protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
             ShareTargets targets = new ShareTargets();
-
+            targets.LoadShareOperation(args.ShareOperation);
+            
             Window.Current.Content = targets;
             Window.Current.Activate();
+
+            args.ShareOperation.ReportStarted();
         }
     }
 }

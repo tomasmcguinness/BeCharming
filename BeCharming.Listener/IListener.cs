@@ -11,5 +11,8 @@ namespace BeCharming.Listener
     {
         [OperationContract]
         string OpenWebPage(string urlToOpen);
+
+        [OperationContract]
+        string OpenDocument(string documentName, byte[] documentBytes);
     }
 }

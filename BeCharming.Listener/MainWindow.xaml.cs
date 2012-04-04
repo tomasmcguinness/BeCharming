@@ -18,36 +18,36 @@ using System.Windows.Forms;
 
 namespace BeCharming.Listener
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
-  {
-    private ServiceHost host = null;
-
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-      InitializeComponent();
+        private ServiceHost host = null;
 
-      NotifyIcon icon = new NotifyIcon();
-      icon.Visible = true;
-      icon.Icon = new System.Drawing.Icon("Icon1.ico");
-      icon.ShowBalloonTip(3, "BeCharming", "Running...", ToolTipIcon.Info);
+        public MainWindow()
+        {
+            InitializeComponent();
 
-      host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:10001/becharming"));
-      host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);
+            NotifyIcon icon = new NotifyIcon();
+            icon.Visible = true;
+            icon.Icon = new System.Drawing.Icon("Icon1.ico");
+            icon.ShowBalloonTip(3, "BeCharming", "Running...", ToolTipIcon.Info);
 
-      ServiceMetadataBehavior metaDataBehavior = new ServiceMetadataBehavior();
-      metaDataBehavior.HttpGetEnabled = true;
-      host.Description.Behaviors.Add(metaDataBehavior);
+            host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:22001/becharming"));
+            host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);
+            
+            ServiceMetadataBehavior metaDataBehavior = new ServiceMetadataBehavior();
+            metaDataBehavior.HttpGetEnabled = true;
+            host.Description.Behaviors.Add(metaDataBehavior);
 
-      ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
-      discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
+            ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
+            discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
 
-      host.Description.Behaviors.Add(discoveryBehavior);
-      host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
+            host.Description.Behaviors.Add(discoveryBehavior);
+            host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
-      host.Open();
+            host.Open();
+        }
     }
-  }
 }

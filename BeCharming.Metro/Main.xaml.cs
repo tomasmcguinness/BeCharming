@@ -42,7 +42,7 @@ namespace BeCharming.Metro
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             ShareTargetsViewModel vm = new ShareTargetsViewModel();
-            vm.TargetSelected(null);
+            vm.TargetSelected(null, null);
         }
     }
 }
