@@ -121,31 +121,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Service References\ListenerService\becharming.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ListenerService\becharming1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ListenerService\ListenerService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ListenerService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ListenerService\becharming2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ListenerService\becharming21.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Service References\ListenerService\becharming.disco" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Service References\ListenerService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ListenerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ListenerService\ListenerService1.wsdl" />
     <None Include="Service References\ListenerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ListenerService\becharming1.disco" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

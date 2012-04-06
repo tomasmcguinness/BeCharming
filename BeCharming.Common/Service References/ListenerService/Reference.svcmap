@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1d541182-0713-4fe0-89b4-a3eed657c2e5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d86766c6-4aa1-4c75-8cff-3e51b1e708c0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -24,10 +24,10 @@
     <MetadataSource Address="http://localhost:22001/becharming" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ListenerService1.wsdl" MetadataType="Wsdl" ID="c2492922-c851-4254-99ef-6fe0fcd5ff8d" SourceId="1" SourceUrl="http://localhost:22001/becharming?wsdl" />
-    <MetadataFile FileName="becharming2.xsd" MetadataType="Schema" ID="aba12ca0-0e89-4571-90f2-571d72a695c5" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd1" />
-    <MetadataFile FileName="becharming21.xsd" MetadataType="Schema" ID="4cee4df1-64e6-48e7-8ce5-000f6de4234b" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd0" />
-    <MetadataFile FileName="becharming1.disco" MetadataType="Disco" ID="13821222-e695-4d63-90c8-0d068c676c23" SourceId="1" SourceUrl="http://localhost:22001/becharming?disco" />
+    <MetadataFile FileName="ListenerService.wsdl" MetadataType="Wsdl" ID="bb8aeddc-2ba5-4864-b83e-36ef3deef8af" SourceId="1" SourceUrl="http://localhost:22001/becharming?wsdl" />
+    <MetadataFile FileName="becharming.xsd" MetadataType="Schema" ID="d9a2baff-df9a-4116-8ddc-5ed038f4a7f4" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd1" />
+    <MetadataFile FileName="becharming1.xsd" MetadataType="Schema" ID="31ed1779-f856-490f-ba33-7ec595f7fdb5" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd0" />
+    <MetadataFile FileName="becharming.disco" MetadataType="Disco" ID="2b96310c-36f2-45da-aa45-eb534a2fac23" SourceId="1" SourceUrl="http://localhost:22001/becharming?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

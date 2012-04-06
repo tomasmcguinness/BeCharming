@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BeCharming.Metro.ViewModels;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,23 +29,11 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new ShareTargetsViewModel();
-            ((ShareTargetsViewModel)DataContext).LoadTargets();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        public async Task ActivateAsync(ShareTargetActivatedEventArgs args)
         {
-        }
-
-        public Windows.ApplicationModel.DataTransfer.ShareTarget.ShareOperation ShareOperation { get; set; }
-
-        internal void LoadShareOperation(Windows.ApplicationModel.DataTransfer.ShareTarget.ShareOperation shareOperation)
-        {
-            ((ShareTargetsViewModel)DataContext).ShareOperation = shareOperation;
+            await ((ShareTargetsViewModel)DataContext).ActivateAsync(args);
         }
     }
 }

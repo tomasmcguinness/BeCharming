@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BeCharming.Common.ListenerService;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.System.Threading;
 
 namespace BeCharming.Metro.ViewModels
 {
@@ -20,7 +26,51 @@ namespace BeCharming.Metro.ViewModels
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
         public ICommand Share { get; set; }
-        public ShareOperation ShareOperation { get; set; }
+
+        private ShareOperation shareOperation;
+        private byte[] fileBytes;
+        private string fileName;
+        private string url;
+
+        public async Task ActivateAsync(ShareTargetActivatedEventArgs args)
+        {
+            LoadTargets();
+            await ExtractShareData(args);
+        }
+
+        private async Task ExtractShareData(ShareTargetActivatedEventArgs args)
+        {
+            fileBytes = null;
+            fileName = null;
+            url = null;
+
+            ShareOperation operation = args.ShareOperation;
+
+            if (operation.Data.Contains(StandardDataFormats.Uri))
+            {
+                Uri uri = await operation.Data.GetUriAsync();
+                url = uri.ToString();
+            }
+
+            if (operation.Data.Contains(StandardDataFormats.StorageItems))
+            {
+                var storageItems = await operation.Data.GetStorageItemsAsync();
+
+                StorageFile item = storageItems[0] as StorageFile;
+                var properties = await item.GetBasicPropertiesAsync();
+                var size = properties.Size;
+                var fileStream = await item.OpenReadAsync();
+
+                DataReader dataReader = new DataReader(fileStream);
+                await dataReader.LoadAsync((uint)size);
+                byte[] buffer = new byte[(int)size];
+
+                dataReader.ReadBytes(buffer);
+
+                fileBytes = buffer;
+                fileName = operation.Data.Properties.Description;
+            }
+        }
 
         public void LoadTargets()
         {
@@ -50,39 +100,20 @@ namespace BeCharming.Metro.ViewModels
 
         public async void TargetSelected(object target)
         {
-            ShareTarget shareTarget = target as ShareTarget;
+             ShareTarget shareTarget = target as ShareTarget;
 
             ListenerClient client = new ListenerClient();
-            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.10.101:22001/BeCharming"));
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.1.12:22001/BeCharming"));
 
             string result = null;
 
-            ShareOperation.ReportStarted();
-
-            if (ShareOperation.Data.AvailableFormats.Contains("UniformResourceLocatorW"))
+            if (!string.IsNullOrEmpty(url))
             {
-                ShareOperation.ReportSubmittedBackgroundTask();
-                result = await client.OpenWebPageAsync(ShareOperation.Data.Properties.Description);
-            }
-
-            if (ShareOperation.Data.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.StorageItems))
-            {
-                //var contents = await ShareOperation.Data.GetDataAsync("FileContents");
-
-                var storageItems = await ShareOperation.Data.GetStorageItemsAsync();
-
-                //result = await client.OpenDocumentAsync(ShareOperation.Data.Properties.Description, (byte[])contents);
-            }
-
-            ShareOperation.ReportDataRetrieved();
-
-            if (result == "okay")
-            {
-                ShareOperation.ReportCompleted();
+                result = await client.OpenWebPageAsync(url);
             }
             else
             {
-                ShareOperation.ReportError("Failed to share that");
+                result = await client.OpenDocumentAsync(fileName, fileBytes);
             }
         }
     }

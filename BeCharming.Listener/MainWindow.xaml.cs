@@ -29,14 +29,18 @@ namespace BeCharming.Listener
         {
             InitializeComponent();
 
-            NotifyIcon icon = new NotifyIcon();
-            icon.Visible = true;
-            icon.Icon = new System.Drawing.Icon("Icon1.ico");
-            icon.ShowBalloonTip(3, "BeCharming", "Running...", ToolTipIcon.Info);
+            this.Visibility = Visibility.Collapsed;
+            this.ShowInTaskbar = false;
 
-            host = new ServiceHost(typeof(ListenerService), new Uri("http://localhost:22001/becharming"));
-            host.AddServiceEndpoint(typeof(IListener), new BasicHttpBinding(), String.Empty);
-            
+            var server = new ListenerService();
+
+            host = new ServiceHost(server, new Uri("http://localhost:22001/becharming"));
+
+            var httpBinding = new BasicHttpBinding();
+            httpBinding.MaxReceivedMessageSize = Int32.MaxValue;
+
+            host.AddServiceEndpoint(typeof(IListener), httpBinding, String.Empty);
+
             ServiceMetadataBehavior metaDataBehavior = new ServiceMetadataBehavior();
             metaDataBehavior.HttpGetEnabled = true;
             host.Description.Behaviors.Add(metaDataBehavior);

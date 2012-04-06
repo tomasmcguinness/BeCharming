@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using BeCharming.Common.ListenerService;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -68,11 +69,11 @@ namespace BeCharming.Metro
             //TODO: Save application state and stop any background activity
         }
 
-        protected override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        protected async override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
             ShareTargets targets = new ShareTargets();
-            targets.LoadShareOperation(args.ShareOperation);
-            
+            await targets.ActivateAsync(args);
+
             Window.Current.Content = targets;
             Window.Current.Activate();
         }

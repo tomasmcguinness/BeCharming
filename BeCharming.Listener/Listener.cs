@@ -4,13 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
+using System.ServiceModel;
 
 namespace BeCharming.Listener
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ListenerService : IListener
     {
+        private NotifyIcon icon;
+
+        public ListenerService()
+        {
+            icon = new NotifyIcon();
+            icon.Visible = true;
+            icon.Icon = new System.Drawing.Icon("Icon1.ico");
+            icon.ShowBalloonTip(3, "BeCharming", "Ready to receive shared items...", ToolTipIcon.Info);
+        }
+
         public string OpenWebPage(string urlToOpen)
         {
+            icon.ShowBalloonTip(3, "BeCharming", "Opening " + urlToOpen, ToolTipIcon.Info);
+
             Process runCmd = new Process();
             runCmd.StartInfo.FileName = @"C:\Program Files (x86)\Internet Explorer\IExplore.exe";
             runCmd.StartInfo.Arguments = urlToOpen;
@@ -25,22 +40,37 @@ namespace BeCharming.Listener
 
         public string OpenDocument(string documentName, byte[] documentBytes)
         {
-            var tempPath = Path.GetTempPath();
-            var fileName = string.Format("{0}/{1}/{2}", tempPath, Guid.NewGuid(), documentName);
+            icon.ShowBalloonTip(3, "BeCharming", "Opening " + documentName, ToolTipIcon.Info);
 
-            var tempFile = File.Create(fileName);
-            tempFile.Write(documentBytes, 0, documentBytes.Length);
+            try
+            {
+                var tempPath = Path.GetTempPath();
+                var filePath = string.Format("{0}/{1}", tempPath, Guid.NewGuid());
+                var fileName = string.Format("{0}/{1}", filePath, documentName);
 
-            // Store the file in a temp folder.
-            Process runCmd = new Process();
-            runCmd.StartInfo.FileName = fileName;// @"C:\Program Files (x86)\Internet Explorer\IExplore.exe";
-            runCmd.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                Directory.CreateDirectory(filePath);
 
-            runCmd.StartInfo.UseShellExecute = false;
-            runCmd.StartInfo.RedirectStandardOutput = true;
-            runCmd.Start();
+                using (var tempFile = File.Create(fileName))
+                {
+                    tempFile.Write(documentBytes, 0, documentBytes.Length);
+                    tempFile.Flush();
+                }
 
-            return "okay";
+                // Store the file in a temp folder.
+                Process runCmd = new Process();
+                runCmd.StartInfo.FileName = fileName;// @"C:\Program Files (x86)\Internet Explorer\IExplore.exe";
+                runCmd.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+
+                runCmd.StartInfo.UseShellExecute = true;
+                runCmd.StartInfo.RedirectStandardOutput = false;
+                runCmd.Start();
+
+                return "okay";
+            }
+            catch
+            {
+                return "error";
+            }
         }
     }
 }
