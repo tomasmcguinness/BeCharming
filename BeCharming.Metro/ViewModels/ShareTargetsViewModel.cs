@@ -100,10 +100,12 @@ namespace BeCharming.Metro.ViewModels
 
         public async void TargetSelected(object target)
         {
-             ShareTarget shareTarget = target as ShareTarget;
+            ShareTarget shareTarget = target as ShareTarget;
+
+            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", shareTarget.IP);
 
             ListenerClient client = new ListenerClient();
-            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.1.12:22001/BeCharming"));
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
 
             string result = null;
 
@@ -115,6 +117,8 @@ namespace BeCharming.Metro.ViewModels
             {
                 result = await client.OpenDocumentAsync(fileName, fileBytes);
             }
+
+            shareOperation.ReportCompleted();
         }
     }
 }

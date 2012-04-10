@@ -31,7 +31,7 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel();
-            ((MainViewModel)this.DataContext).TargetIPAddress = "127.0.0.1";
+            ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
             ((MainViewModel)this.DataContext).TargetName = "Localhost";
             ((MainViewModel)this.DataContext).AddTargetExecute(null);
         }
@@ -47,6 +47,8 @@ namespace BeCharming.Metro
 
         private async void GridView_ItemClick_1(object sender, ItemClickEventArgs e)
         {
+            ShareTarget target = e.ClickedItem as ShareTarget;
+
             var filePicker = new FileOpenPicker();
             filePicker.FileTypeFilter.Add(".pdf");
             filePicker.ViewMode = PickerViewMode.Thumbnail;
@@ -70,8 +72,10 @@ namespace BeCharming.Metro
 
                 var fileBytes = buffer;
 
+                var servicePath = string.Format("net.tcp://{0}:22001/BeCharming", target.IP);
+
                 ListenerClient client = new ListenerClient();
-                client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri("http://192.168.1.12:22001/BeCharming"));
+                client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));
 
                 await client.OpenDocumentAsync("Test.pdf", fileBytes);
             }
