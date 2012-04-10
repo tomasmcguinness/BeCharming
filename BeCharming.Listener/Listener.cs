@@ -14,12 +14,9 @@ namespace BeCharming.Listener
     {
         private NotifyIcon icon;
 
-        public ListenerService()
+        public ListenerService(NotifyIcon icon)
         {
-            icon = new NotifyIcon();
-            icon.Visible = true;
-            icon.Icon = new System.Drawing.Icon("Icon1.ico");
-            icon.ShowBalloonTip(3, "BeCharming", "Ready to receive shared items...", ToolTipIcon.Info);
+            this.icon = icon;
         }
 
         public string OpenWebPage(string urlToOpen)
