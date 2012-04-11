@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BeCharming.Listener")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BeCharming")]
+[assembly: AssemblyDescription("The client for the Windows 8 BeCharming app")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("BeCharming.Listener")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCompany("Tomas McGuinness")]
+[assembly: AssemblyProduct("BeCharming")]
+[assembly: AssemblyCopyright("Copyright © Tomas McGuinness 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

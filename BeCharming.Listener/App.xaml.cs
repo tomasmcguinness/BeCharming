@@ -51,6 +51,8 @@ namespace BeCharming.Listener
             host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             host.Open();
+
+            ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
