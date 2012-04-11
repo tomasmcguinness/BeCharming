@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d86766c6-4aa1-4c75-8cff-3e51b1e708c0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a879f032-512d-4ca5-9799-e65a3be978c9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -21,13 +21,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:22001/becharming" Protocol="http" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:22001/becharming/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ListenerService.wsdl" MetadataType="Wsdl" ID="bb8aeddc-2ba5-4864-b83e-36ef3deef8af" SourceId="1" SourceUrl="http://localhost:22001/becharming?wsdl" />
-    <MetadataFile FileName="becharming.xsd" MetadataType="Schema" ID="d9a2baff-df9a-4116-8ddc-5ed038f4a7f4" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd1" />
-    <MetadataFile FileName="becharming1.xsd" MetadataType="Schema" ID="31ed1779-f856-490f-ba33-7ec595f7fdb5" SourceId="1" SourceUrl="http://localhost:22001/becharming?xsd=xsd0" />
-    <MetadataFile FileName="becharming.disco" MetadataType="Disco" ID="2b96310c-36f2-45da-aa45-eb534a2fac23" SourceId="1" SourceUrl="http://localhost:22001/becharming?disco" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="bdbba55b-b674-4a7c-aed9-6ca9ad027ed2" SourceId="1" SourceUrl="net.tcp://localhost:22001/becharming/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7c3387a5-ab1e-4eaf-8e6a-a78c144d2309" SourceId="1" SourceUrl="net.tcp://localhost:22001/becharming/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b7f8b99f-2978-4295-9971-ca6e1cf58cd6" SourceId="1" SourceUrl="net.tcp://localhost:22001/becharming/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

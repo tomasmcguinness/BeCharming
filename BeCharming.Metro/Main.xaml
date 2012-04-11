@@ -5,9 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:BeCharming.Metro.Converters"
-	 mc:Ignorable="d">
+	 mc:Ignorable="d" Margin="0" Padding="0" Background="White">
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="b2v" />
+        <DataTemplate x:Key="ShareTarget">
+
+		<Border Width="270" Height="100" Background="#FFC3C3C3">
+        	<Grid>
+        		<TextBlock Margin="10,10,0,0" TextWrapping="Wrap" Text="HELLO??" d:LayoutOverrides="Width, Height" FontWeight="Bold" Foreground="Black"/>
+        	</Grid>
+			</Border>
+        </DataTemplate>
     </Page.Resources>
     <Page.BottomAppBar>
         <AppBar Padding="10,0,10,0">
@@ -17,18 +25,20 @@
         </AppBar>
     </Page.BottomAppBar>
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundBrush}">
+    <Grid Background="White" Margin="0">
     	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
     		<RowDefinition Height="Auto"/>
     		<RowDefinition Height="Auto"/>
     		<RowDefinition/>
     		<RowDefinition Height="Auto"/>
     	</Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="48,48,0,0"/>
-        <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="48,20,0,0" Grid.Row="1"/>
-        <GridView Margin="48,24,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick_1"/>
+        <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource PageHeaderTextStyle}" Margin="48,20,0,0" FontWeight="Bold" Foreground="#DE000000"/>
+        <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="48,20,0,0" Grid.Row="1" Foreground="#DE000000"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="50,30,0,0"/>
+        <GridView Margin="48,30,0,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="False" ItemClick="GridView_ItemClick_1" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Multiple"/>
     
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="4">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5" Opacity="0">
             <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -47,10 +57,10 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
-                        <TextBlock Margin="0,30,0,0" TextWrapping="Wrap" Text="Enter a friendly name for share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetName, Mode=TwoWay}"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5" Text="Enter the IP address of the share target " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}"/>
+                        <TextBlock Margin="0,30,0,15" TextWrapping="Wrap" Text="Enter a friendly name for share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetName, Mode=TwoWay}" Padding="10" ToolTipService.ToolTip="Friendly name"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the IP address of the share target " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}" Padding="10"/>
                         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Right">
                         <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width"/>
                         <Button Content="Cancel" Command="{Binding CancelAddTarget}" Margin="10,0,5,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}"/>

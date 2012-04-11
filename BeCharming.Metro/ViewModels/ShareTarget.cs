@@ -8,7 +8,7 @@ namespace BeCharming.Metro.ViewModels
     public class ShareTarget
     {
         public string Name { get; set; }
-
-        public string IP { get; set; }
+        public string IPAddress { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

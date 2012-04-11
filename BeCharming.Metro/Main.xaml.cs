@@ -72,7 +72,7 @@ namespace BeCharming.Metro
 
                 var fileBytes = buffer;
 
-                var servicePath = string.Format("net.tcp://{0}:22001/BeCharming", target.IP);
+                var servicePath = string.Format("net.tcp://{0}:22001/BeCharming", target.IPAddress);
 
                 ListenerClient client = new ListenerClient();
                 client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));

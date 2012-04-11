@@ -42,7 +42,7 @@ namespace BeCharming.Common.ListenerService {
         
         public ListenerClient() : 
                 base(ListenerClient.GetDefaultBinding(), ListenerClient.GetDefaultEndpointAddress()) {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IListener.ToString();
+            this.Endpoint.Name = EndpointConfiguration.NetTcpBinding_IListener.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
@@ -85,35 +85,34 @@ namespace BeCharming.Common.ListenerService {
         }
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration) {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IListener)) {
-                System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IListener)) {
+                System.ServiceModel.NetTcpBinding result = new System.ServiceModel.NetTcpBinding();
                 result.MaxBufferSize = int.MaxValue;
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
-                result.AllowCookies = true;
                 return result;
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration) {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IListener)) {
-                return new System.ServiceModel.EndpointAddress("http://localhost:22001/becharming");
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IListener)) {
+                return new System.ServiceModel.EndpointAddress(new System.Uri("net.tcp://localhost:22001/becharming"), new System.ServiceModel.UpnEndpointIdentity("THINKPADWIN8\\Tomas"));
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding() {
-            return ListenerClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IListener);
+            return ListenerClient.GetBindingForEndpoint(EndpointConfiguration.NetTcpBinding_IListener);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress() {
-            return ListenerClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IListener);
+            return ListenerClient.GetEndpointAddress(EndpointConfiguration.NetTcpBinding_IListener);
         }
         
         public enum EndpointConfiguration {
             
-            BasicHttpBinding_IListener,
+            NetTcpBinding_IListener,
         }
     }
 }

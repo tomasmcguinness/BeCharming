@@ -40,7 +40,7 @@ namespace BeCharming.Metro.ViewModels
             {
                 shareTargets = new List<ShareTarget>();
             }
-            var target = new ShareTarget() { IP = TargetIPAddress, Name = TargetName };
+            var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName };
             shareTargets.Add(target);
             Targets.Add(target);
 

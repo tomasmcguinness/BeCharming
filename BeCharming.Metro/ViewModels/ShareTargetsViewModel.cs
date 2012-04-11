@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -102,7 +103,7 @@ namespace BeCharming.Metro.ViewModels
         {
             ShareTarget shareTarget = target as ShareTarget;
 
-            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", shareTarget.IP);
+            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", shareTarget.IPAddress);
 
             ListenerClient client = new ListenerClient();
             client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
