@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
-//using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
@@ -31,6 +30,18 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel();
+            ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
+            ((MainViewModel)this.DataContext).TargetName = "Localhost";
+            ((MainViewModel)this.DataContext).AddTargetExecute(null);
+
+            ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
+            ((MainViewModel)this.DataContext).TargetName = "Localhost";
+            ((MainViewModel)this.DataContext).AddTargetExecute(null);
+
+            ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
+            ((MainViewModel)this.DataContext).TargetName = "Localhost";
+            ((MainViewModel)this.DataContext).AddTargetExecute(null);
+
             ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
             ((MainViewModel)this.DataContext).TargetName = "Localhost";
             ((MainViewModel)this.DataContext).AddTargetExecute(null);

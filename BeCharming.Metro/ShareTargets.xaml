@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" 
-                Background="White" Foreground="Black">
+    mc:Ignorable="d" >
     <UserControl.Resources>
         <DataTemplate x:Key="ShareTargetTemplate">
             <Border HorizontalAlignment="Stretch" Padding="5" Background="#FF9D9D9D">
@@ -17,14 +16,14 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="White">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Margin="25,10,0,5" Foreground="#DE000000"/>
-    	<ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Targets}" SelectedItem="{Binding SelectedTarget}" ItemTemplate="{StaticResource ShareTargetTemplate}" SelectionMode="Single" Margin="25,25,20,20" Grid.Row="1" HorizontalContentAlignment="Stretch" />
-    	<Button Content="Share" Grid.Row="2" HorizontalAlignment="Right" Margin="30" Command="{Binding Share}" />
+        <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Targets}" SelectedItem="{Binding SelectedTarget, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTargetTemplate}" SelectionMode="Single" Margin="25,25,20,20" Grid.Row="1" HorizontalContentAlignment="Stretch" />
+        <Button Content="Share" Grid.Row="2" HorizontalAlignment="Right" Margin="30" Command="{Binding Share}" />
     </Grid>
 </UserControl> 

@@ -11,8 +11,7 @@ namespace BeCharming.Listener
     {
         public static void AddShortcutToStartupGroup(string publisherName, string productName)
         {
-            //if (ApplicationDeployment.IsNetworkDeployed && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            if (true)
+            if (ApplicationDeployment.IsNetworkDeployed && ApplicationDeployment.CurrentDeployment.IsFirstRun)
             {
                 string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
 

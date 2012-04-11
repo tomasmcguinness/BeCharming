@@ -26,9 +26,11 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
+        public ShareTarget SelectedTarget { get; set; }
         public ICommand Share { get; set; }
 
         private ShareOperation shareOperation;
+
         private byte[] fileBytes;
         private string fileName;
         private string url;
@@ -71,6 +73,8 @@ namespace BeCharming.Metro.ViewModels
                 fileBytes = buffer;
                 fileName = operation.Data.Properties.Description;
             }
+
+            //shareOperation.ReportDataRetrieved();
         }
 
         public void LoadTargets()
@@ -101,9 +105,7 @@ namespace BeCharming.Metro.ViewModels
 
         public async void TargetSelected(object target)
         {
-            ShareTarget shareTarget = target as ShareTarget;
-
-            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", shareTarget.IPAddress);
+            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", SelectedTarget.IPAddress);
 
             ListenerClient client = new ListenerClient();
             client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));

@@ -29,6 +29,9 @@ namespace BeCharming.Metro.ViewModels
         public String TargetName { get; set; }
         public ObservableCollection<ShareTarget> Targets { get; set; }
 
+        int i = 0;
+        int j = 0;
+
         public void AddTargetExecute(object state)
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -40,7 +43,7 @@ namespace BeCharming.Metro.ViewModels
             {
                 shareTargets = new List<ShareTarget>();
             }
-            var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName };
+            var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName, Width = i++, Height = j++ };
             shareTargets.Add(target);
             Targets.Add(target);
 
