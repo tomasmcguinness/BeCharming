@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:BeCharming.Metro.Converters"
+    xmlns:local="using:BeCharming.Metro"
 	 mc:Ignorable="d" Margin="0" Padding="0" Background="White">
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="b2v" />
@@ -33,13 +34,13 @@
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="#DE000000"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
-        <GridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick_1" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Multiple" VerticalContentAlignment="Stretch">
-            <GridView.ItemsPanel>
+        <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick_1" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Multiple" VerticalContentAlignment="Stretch">
+            <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />
                 </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-        </GridView>
+            </local:VariableGridView.ItemsPanel>
+        </local:VariableGridView>
 
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">

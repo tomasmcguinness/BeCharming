@@ -125,6 +125,7 @@
     <Compile Include="ShareTargets.xaml.cs">
       <DependentUpon>ShareTargets.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VariableGridView.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShareTarget.cs" />
     <Compile Include="ViewModels\ShareTargetsViewModel.cs" />
