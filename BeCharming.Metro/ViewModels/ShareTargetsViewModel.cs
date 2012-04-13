@@ -85,20 +85,19 @@ namespace BeCharming.Metro.ViewModels
             {
                 var container = localSettings.Containers["BeCharmingSettings"];
 
-                var xml = container.Values["ShareTargets"] as String;
+                List<ShareTarget> shareTargets = null;
 
-                if (xml == null)
+                if (container.Values["ShareTargets"] != null)
                 {
-                    return;
+                    shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
                 }
 
-                var shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(xml);
-
-                Targets.Clear();
-
-                foreach (var target in shareTargets)
+                if (shareTargets != null)
                 {
-                    Targets.Add(target);
+                    foreach (var target in shareTargets)
+                    {
+                        Targets.Add(target);
+                    }
                 }
             }
         }

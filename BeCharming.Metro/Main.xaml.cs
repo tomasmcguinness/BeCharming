@@ -30,8 +30,9 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel();
-            ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
-            ((MainViewModel)this.DataContext).TargetName = "Localhost";
+
+            ((MainViewModel)this.DataContext).TargetIPAddress = "172.16.3.114";
+            ((MainViewModel)this.DataContext).TargetName = "Tom's Work Laptop";
             ((MainViewModel)this.DataContext).AddTargetExecute(null);
 
             ((MainViewModel)this.DataContext).TargetIPAddress = "localhost";

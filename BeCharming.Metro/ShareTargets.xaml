@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" >
+    mc:Ignorable="d"
+    Background="#FFFFFF">
     <UserControl.Resources>
         <DataTemplate x:Key="ShareTargetTemplate">
-            <Border HorizontalAlignment="Stretch" Padding="5" Background="#FF9D9D9D">
+            <Border HorizontalAlignment="Stretch" Padding="5" Background="#FF0845AD">
                 <StackPanel>
                     <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextStyle}" Foreground="#DE000000" />
                     <TextBlock Text="{Binding IP}" Style="{StaticResource SubheaderTextStyle}" Foreground="#DE000000" />
@@ -16,7 +17,7 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="#FFFFFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition/>

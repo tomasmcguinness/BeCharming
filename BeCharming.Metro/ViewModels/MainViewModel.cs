@@ -37,12 +37,18 @@ namespace BeCharming.Metro.ViewModels
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
 
-            List<ShareTarget> shareTargets = container.Values["ShareTargets"] as List<ShareTarget>;
+            List<ShareTarget> shareTargets = null;
+
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
 
             if (shareTargets == null)
             {
                 shareTargets = new List<ShareTarget>();
             }
+
             var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName, Width = i++, Height = j++ };
             shareTargets.Add(target);
             Targets.Add(target);
