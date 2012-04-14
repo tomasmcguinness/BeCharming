@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel.Description;
@@ -17,8 +18,15 @@ using Windows.System.Threading;
 
 namespace BeCharming.Metro.ViewModels
 {
-    public class ShareTargetsViewModel
+    public class ShareTargetsViewModel : INotifyPropertyChanged
     {
+        private ShareOperation shareOperation = null;
+        private byte[] fileBytes;
+        private string fileName;
+        private string url;
+        private ShareTarget selectedTarget;
+        private bool shareButtonEnabled;
+
         public ShareTargetsViewModel()
         {
             Targets = new ObservableCollection<ShareTarget>();
@@ -26,14 +34,14 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
-        public ShareTarget SelectedTarget { get; set; }
+        public ShareTarget SelectedTarget { get { return selectedTarget; } set { selectedTarget = value; UpdateSelectedTarget(); } }
         public ICommand Share { get; set; }
+        public bool ShareButtonEnabled { get { return shareButtonEnabled; } set { shareButtonEnabled = value; NotifyPropertyChanged("ShareButtonEnabled"); } }
 
-        private ShareOperation shareOperation;
-
-        private byte[] fileBytes;
-        private string fileName;
-        private string url;
+        private void UpdateSelectedTarget()
+        {
+            ShareButtonEnabled = (SelectedTarget != null);
+        }
 
         public async Task ActivateAsync(ShareTargetActivatedEventArgs args)
         {
@@ -47,17 +55,17 @@ namespace BeCharming.Metro.ViewModels
             fileName = null;
             url = null;
 
-            ShareOperation operation = args.ShareOperation;
+            shareOperation = args.ShareOperation;
 
-            if (operation.Data.Contains(StandardDataFormats.Uri))
+            if (shareOperation.Data.Contains(StandardDataFormats.Uri))
             {
-                Uri uri = await operation.Data.GetUriAsync();
+                Uri uri = await shareOperation.Data.GetUriAsync();
                 url = uri.ToString();
             }
 
-            if (operation.Data.Contains(StandardDataFormats.StorageItems))
+            if (shareOperation.Data.Contains(StandardDataFormats.StorageItems))
             {
-                var storageItems = await operation.Data.GetStorageItemsAsync();
+                var storageItems = await shareOperation.Data.GetStorageItemsAsync();
 
                 StorageFile item = storageItems[0] as StorageFile;
                 var properties = await item.GetBasicPropertiesAsync();
@@ -71,10 +79,10 @@ namespace BeCharming.Metro.ViewModels
                 dataReader.ReadBytes(buffer);
 
                 fileBytes = buffer;
-                fileName = operation.Data.Properties.Description;
+                fileName = shareOperation.Data.Properties.Description;
             }
 
-            //shareOperation.ReportDataRetrieved();
+            shareOperation.ReportDataRetrieved();
         }
 
         public void LoadTargets()
@@ -121,6 +129,16 @@ namespace BeCharming.Metro.ViewModels
             }
 
             shareOperation.ReportCompleted();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
