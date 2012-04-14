@@ -29,33 +29,12 @@ namespace BeCharming.Metro.ViewModels
         public String TargetName { get; set; }
         public ObservableCollection<ShareTarget> Targets { get; set; }
 
-        int i = 0;
-        int j = 0;
-
         public void AddTargetExecute(object state)
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+            var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName };
 
-            List<ShareTarget> shareTargets = null;
-
-            if (container.Values["ShareTargets"] != null)
-            {
-                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
-            }
-
-            if (shareTargets == null)
-            {
-                shareTargets = new List<ShareTarget>();
-            }
-
-            var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName, Width = i++, Height = j++ };
-            shareTargets.Add(target);
-            Targets.Add(target);
-
-            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
-
-            container.Values["ShareTargets"] = xml;
+            Models.ShareTargets model = new Models.ShareTargets();
+            model.AddShareTarget(target);
 
             ShowAddNewShareTarget = false;
         }

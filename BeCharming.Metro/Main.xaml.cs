@@ -46,6 +46,8 @@ namespace BeCharming.Metro
             //((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
             //((MainViewModel)this.DataContext).TargetName = "Localhost";
             //((MainViewModel)this.DataContext).AddTargetExecute(null);
+
+            this.BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace BeCharming.Metro
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            
         }
 
         private async void GridView_ItemClick_1(object sender, ItemClickEventArgs e)

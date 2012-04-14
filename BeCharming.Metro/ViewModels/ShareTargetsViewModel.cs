@@ -87,27 +87,7 @@ namespace BeCharming.Metro.ViewModels
 
         public void LoadTargets()
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-            if (localSettings.Containers.ContainsKey("BeCharmingSettings"))
-            {
-                var container = localSettings.Containers["BeCharmingSettings"];
-
-                List<ShareTarget> shareTargets = null;
-
-                if (container.Values["ShareTargets"] != null)
-                {
-                    shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
-                }
-
-                if (shareTargets != null)
-                {
-                    foreach (var target in shareTargets)
-                    {
-                        Targets.Add(target);
-                    }
-                }
-            }
+            
         }
 
         public async void TargetSelected(object target)
