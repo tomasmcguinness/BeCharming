@@ -77,5 +77,5 @@ namespace BeCharming.Metro
             Window.Current.Content = targets;
             Window.Current.Activate();
         }
-    }
+    }   
 }

@@ -26,6 +26,7 @@ namespace BeCharming.Metro.ViewModels
         private string url;
         private ShareTarget selectedTarget;
         private bool shareButtonEnabled;
+        private bool isSharing;
 
         public ShareTargetsViewModel()
         {
@@ -36,6 +37,7 @@ namespace BeCharming.Metro.ViewModels
         public ObservableCollection<ShareTarget> Targets { get; private set; }
         public ShareTarget SelectedTarget { get { return selectedTarget; } set { selectedTarget = value; UpdateSelectedTarget(); } }
         public ICommand Share { get; set; }
+        public bool IsSharing { get { return isSharing; } set { isSharing = value; NotifyPropertyChanged("IsSharing"); } }
         public bool ShareButtonEnabled { get { return shareButtonEnabled; } set { shareButtonEnabled = value; NotifyPropertyChanged("ShareButtonEnabled"); } }
 
         private void UpdateSelectedTarget()
@@ -87,11 +89,16 @@ namespace BeCharming.Metro.ViewModels
 
         public void LoadTargets()
         {
-            
+            Models.ShareTargets model = new Models.ShareTargets();
+            foreach (var target in model.GetShareTargets())
+            {
+                Targets.Add(target);
+            }
         }
 
         public async void TargetSelected(object target)
         {
+            IsSharing = true;
             var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", SelectedTarget.IPAddress);
 
             ListenerClient client = new ListenerClient();
@@ -108,7 +115,19 @@ namespace BeCharming.Metro.ViewModels
                 result = await client.OpenDocumentAsync(fileName, fileBytes);
             }
 
-            shareOperation.ReportCompleted();
+            if (result == "okay")
+            {
+                Models.ShareTargets model = new Models.ShareTargets();
+                model.IncrementShareCount(target);
+
+                shareOperation.ReportCompleted();
+            }
+            else
+            {
+                shareOperation.ReportError("Could not reach the share target");
+            }
+
+            IsSharing = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

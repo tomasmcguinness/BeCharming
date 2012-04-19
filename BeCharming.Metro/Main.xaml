@@ -10,15 +10,28 @@
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Key="ShareTarget">
-            <Border Background="#FF0845AD" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
-                <TextBlock Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White"/>
+            <Border Background="{StaticResource ComboBoxHighlightFillBrush}" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}" IsRightTapEnabled="True" RightTapped="GridView_RightTapped">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32"/>
+                        <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667"/>
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
+                </Grid>
             </Border>
         </DataTemplate>
     </Page.Resources>
     <Page.BottomAppBar>
-        <AppBar Padding="10,0,10,0">
+        <AppBar Padding="10,0,10,0" Visibility="{Binding Path=ShowBottomAppBar, Converter={StaticResource b2v}}">
             <Grid>
-                <Button Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
+                <Button Grid.Column="1" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
+                <Button Grid.Column="2" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
@@ -31,10 +44,10 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="#DE000000"/>
+        <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
-        <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick_1" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Multiple" VerticalContentAlignment="Stretch">
+        <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />

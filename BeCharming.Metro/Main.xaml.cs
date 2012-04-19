@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,23 +32,23 @@ namespace BeCharming.Metro
             this.InitializeComponent();
             this.DataContext = new MainViewModel();
 
-            //((MainViewModel)this.DataContext).TargetIPAddress = "172.16.3.114";
-            //((MainViewModel)this.DataContext).TargetName = "Tom's Work Laptop";
-            //((MainViewModel)this.DataContext).AddTargetExecute(null);
-
-            //((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
-            //((MainViewModel)this.DataContext).TargetName = "Localhost";
-            //((MainViewModel)this.DataContext).AddTargetExecute(null);
-
-            //((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
-            //((MainViewModel)this.DataContext).TargetName = "Localhost";
-            //((MainViewModel)this.DataContext).AddTargetExecute(null);
-
-            //((MainViewModel)this.DataContext).TargetIPAddress = "localhost";
-            //((MainViewModel)this.DataContext).TargetName = "Localhost";
-            //((MainViewModel)this.DataContext).AddTargetExecute(null);
-
             this.BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
+        }
+
+        private void SettingsCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand generalCommand = new SettingsCommand("generalSettings", "General", new UICommandInvokedHandler(onSettingsCommand));
+            args.Request.ApplicationCommands.Add(generalCommand);
+            SettingsCommand helpCommand = new SettingsCommand("helpPage", "Help", new UICommandInvokedHandler(onSettingsCommand));
+            args.Request.ApplicationCommands.Add(helpCommand);
+        }
+
+        public void onSettingsCommand(IUICommand command)
+        {
+            SettingsCommand settingsCommand = (SettingsCommand)command;
+            //rootPage.NotifyUser("You clicked the " + settingsCommand.Label + " settings command", NotifyType.StatusMessage);
         }
 
         /// <summary>
@@ -57,10 +58,10 @@ namespace BeCharming.Metro
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+
         }
 
-        private async void GridView_ItemClick_1(object sender, ItemClickEventArgs e)
+        private async void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             ShareTarget target = e.ClickedItem as ShareTarget;
 
@@ -94,6 +95,16 @@ namespace BeCharming.Metro
 
                 await client.OpenDocumentAsync("Test.pdf", fileBytes);
             }
+        }
+
+        private void GridView_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var selectedBorder = e.OriginalSource as Border;
+            var selectedTarget = selectedBorder.DataContext as ShareTarget;
+
+            selectedTarget.IsSelected = !selectedTarget.IsSelected;
+
+            BottomAppBar.Visibility = selectedTarget.IsSelected ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
         }
     }
 }

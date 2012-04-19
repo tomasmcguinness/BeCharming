@@ -12,30 +12,34 @@ namespace BeCharming.Metro.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         private bool showAddNewShareTarget = false;
+        private Models.ShareTargets model;
 
         public MainViewModel()
         {
-            Targets = new ObservableCollection<ShareTarget>();
+            model = new Models.ShareTargets();
             AddTarget = new DelegateCommand(AddTargetExecute);
             ShowAddTarget = new DelegateCommand(ShowAddTargetExecute);
             CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
         }
 
         public ICommand AddTarget { get; set; }
+        public ICommand EditTarget { get; set; }
+        public ICommand DeleteTarget { get; set; }
+
         public ICommand ShowAddTarget { get; set; }
         public ICommand CancelAddTarget { get; set; }
+
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
+
         public String TargetIPAddress { get; set; }
         public String TargetName { get; set; }
-        public ObservableCollection<ShareTarget> Targets { get; set; }
+        public ObservableCollection<ShareTarget> Targets { get { return model.Targets; } }
+        public ShareTarget SelectedTarget { get; set; }
 
         public void AddTargetExecute(object state)
         {
             var target = new ShareTarget() { IPAddress = TargetIPAddress, Name = TargetName };
-
-            Models.ShareTargets model = new Models.ShareTargets();
             model.AddShareTarget(target);
-
             ShowAddNewShareTarget = false;
         }
 

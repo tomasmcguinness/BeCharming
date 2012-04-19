@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
   <Identity Name="db9267c4-c225-4439-af89-1eeb20ec9a3a" Publisher="CN=Tomas" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>BeCharming.Metro</DisplayName>
+    <DisplayName>BeCharming</DisplayName>
     <PublisherDisplayName>Tomas McGuinness</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
     <Description>BeCharming.Metro</Description>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BeCharming.Metro.App">
-      <VisualElements DisplayName="BeCharming" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming allows you to send links, files and text from Win8 device to any other device using the Charm bar." ForegroundText="light" BackgroundColor="#222222">
+      <VisualElements DisplayName="BeCharming" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming allows you to send links, files and text from a Windows 8 device to any other device by using the Charm bar." ForegroundText="light" BackgroundColor="#222222">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
         <InitialRotationPreference>
@@ -42,6 +42,5 @@
   <Capabilities>
     <Capability Name="enterpriseAuthentication" />
     <Capability Name="privateNetworkClientServer" />
-    <Capability Name="internetClient" />
   </Capabilities>
 </Package>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,13 @@ namespace BeCharming.Metro.Models
 {
     public class ShareTargets
     {
+        public ShareTargets()
+        {
+            Targets = new ObservableCollection<ShareTarget>(GetShareTargets());
+        }
+
+        public ObservableCollection<ShareTarget> Targets { get; set; }
+
         public List<ShareTarget> GetShareTargets()
         {
             List<ShareTarget> targets = new List<ShareTarget>();
@@ -56,6 +64,27 @@ namespace BeCharming.Metro.Models
             }
 
             shareTargets.Add(target);
+
+            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+
+            container.Values["ShareTargets"] = xml;
+
+            Targets.Add(target);
+        }
+
+        public void IncrementShareCount(object target)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+
+            List<ShareTarget> shareTargets = null;
+
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
+
+            shareTargets[0].ShareCount++;
 
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 

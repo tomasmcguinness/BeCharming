@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:BeCharming.Metro.Converters"
     mc:Ignorable="d"
     Background="#FFFFFF">
     <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Key="ShareTargetTemplate">
             <Border HorizontalAlignment="Stretch" Background="#FF0845AD" Padding="5">
                 <Grid HorizontalAlignment="Stretch">
@@ -37,5 +39,11 @@
             </ListView.ItemContainerStyle>
         </ListView>
         <Button Content="Share" Grid.Row="2" HorizontalAlignment="Right" Margin="30" Command="{Binding Share}" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Foreground="Black" Padding="12,5" IsEnabled="{Binding Path=ShareButtonEnabled}" />
+        <Border Grid.Row="0" Grid.RowSpan="3" Background="White" Visibility="{Binding Path=IsSharing, Converter={StaticResource b2v}}">
+            <Grid>
+                <TextBlock>Sharing now</TextBlock>
+                <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl> 
