@@ -10,19 +10,20 @@
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Key="ShareTarget">
-            <Border Background="{StaticResource ComboBoxHighlightFillBrush}" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}" IsRightTapEnabled="True" RightTapped="GridView_RightTapped">
+            <!-- IsRightTapEnabled="True" RightTapped="GridView_RightTapped"-->
+            <Border Background="{StaticResource ComboBoxHighlightFillBrush}" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
                 <Grid>
                     <StackPanel>
-                        <TextBlock Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32"/>
-                        <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667"/>
+                        <TextBlock Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32" IsHitTestVisible="False" />
+                        <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667" IsHitTestVisible="False" />
                     </StackPanel>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
+                    <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
                 </Grid>
             </Border>
         </DataTemplate>
     </Page.Resources>
     <Page.BottomAppBar>
-        <AppBar Padding="10,0,10,0" Visibility="{Binding Path=ShowBottomAppBar, Converter={StaticResource b2v}}">
+        <AppBar Padding="10,0,10,0" IsOpen="{Binding Path=IsAppBarShowing, Mode=TwoWay}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -30,8 +31,8 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
-                <Button Grid.Column="1" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
-                <Button Grid.Column="2" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>
+                <Button Grid.Column="1" Command="{Binding EditTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
+                <Button Grid.Column="2" Command="{Binding DeleteTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
@@ -47,7 +48,8 @@
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
-        <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" IsItemClickEnabled="True" ItemClick="GridView_ItemClick" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" VerticalContentAlignment="Stretch">
+        <!--IsItemClickEnabled="True" ItemClick="GridView_ItemClick" -->
+        <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />
@@ -59,12 +61,14 @@
             <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="350" />
+                    <RowDefinition Height="460" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="1" Background="White">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -78,9 +82,48 @@
                         <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetName, Mode=TwoWay}" Padding="10" ToolTipService.ToolTip="Friendly name"/>
                         <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the IP address of the share target " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
                         <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}" Padding="10"/>
-                        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Right">
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the pin code for the share target " VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}" Padding="10"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
                             <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width" />
                             <Button Content="Cancel" Command="{Binding CancelAddTarget}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowEditShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
+            <Grid Margin="-10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="460" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="1" Background="White">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Edit Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
+                        <TextBlock Margin="0,30,0,15" TextWrapping="Wrap" Text="Enter a friendly name for share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=Name, Mode=TwoWay}" Padding="10" ToolTipService.ToolTip="Friendly name"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the IP address of the share target " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=IPAddress, Mode=TwoWay}" Padding="10"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the pin code for the share target " VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
+                            <Button Content="Update" Command="{Binding SaveEdit}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width" />
+                            <Button Content="Cancel" Command="{Binding CancelEdit}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
                         </StackPanel>
                     </Grid>
                 </Border>

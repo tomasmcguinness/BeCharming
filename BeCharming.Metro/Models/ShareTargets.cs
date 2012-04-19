@@ -90,5 +90,10 @@ namespace BeCharming.Metro.Models
 
             container.Values["ShareTargets"] = xml;
         }
+
+        internal void DeleteShareTarget(ShareTarget shareTarget)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

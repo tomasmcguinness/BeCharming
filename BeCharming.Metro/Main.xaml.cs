@@ -99,12 +99,23 @@ namespace BeCharming.Metro
 
         private void GridView_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            var selectedBorder = e.OriginalSource as Border;
-            var selectedTarget = selectedBorder.DataContext as ShareTarget;
+            //var selectedBorder = e.OriginalSource as Border;
+            //var selectedTarget = selectedBorder.DataContext as ShareTarget;
 
-            selectedTarget.IsSelected = !selectedTarget.IsSelected;
+            ////selectedTarget.IsSelected = !selectedTarget.IsSelected;
 
-            BottomAppBar.Visibility = selectedTarget.IsSelected ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
+            ////if (selectedTarget.IsSelected)
+            ////{
+            ////    //((MainViewModel)DataContext).SelectedTarget = selectedTarget;
+            ////}
+            ////else
+            ////{
+            ////    ((MainViewModel)DataContext).SelectedTarget = null;
+            ////}
+
+            //BottomAppBar.IsOpen = selectedTarget.IsSelected;
+
+            //e.Handled = false;
         }
     }
 }
