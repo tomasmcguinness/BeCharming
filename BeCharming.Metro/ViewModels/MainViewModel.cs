@@ -17,14 +17,29 @@ namespace BeCharming.Metro.ViewModels
         private Models.ShareTargets model;
         private bool isAppBarShowing = false;
 
-        public MainViewModel()
+        public MainViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
+            this.Dispatcher = dispatcher;
+            Targets = new ObservableCollection<ShareTarget>();
             model = new Models.ShareTargets();
+            model.TargetsUpdated += model_TargetsUpdated;
             AddTarget = new DelegateCommand(AddTargetExecute);
             EditTarget = new DelegateCommand(EditTargetExecute, CanEditTargetExecute);
             DeleteTarget = new DelegateCommand(DeleteTargetExecute, CanDeleteTargetExecute);
             ShowAddTarget = new DelegateCommand(ShowAddTargetExecute);
             CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
+        }
+
+        void model_TargetsUpdated(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
+            {
+                //Targets.Clear();
+                foreach (var target in model.Targets)
+                {
+                    Targets.Add(target);
+                }
+            }, this, null);
         }
 
         private void DeleteTargetExecute(object obj)
@@ -62,7 +77,7 @@ namespace BeCharming.Metro.ViewModels
 
         public Boolean IsAppBarShowing { get { return isAppBarShowing; } set { isAppBarShowing = value; NotifyPropertyChanged("IsAppBarShowing"); } }
 
-        public ObservableCollection<ShareTarget> Targets { get { return model.Targets; } }
+        public ObservableCollection<ShareTarget> Targets { get; set; }
         public ShareTarget SelectedTarget { get { return selectedShareTarget; } set { selectedShareTarget = value; TargetSelected(); } }
 
         private void TargetSelected()
@@ -79,6 +94,7 @@ namespace BeCharming.Metro.ViewModels
 
         public void ShowAddTargetExecute(object state)
         {
+            IsAppBarShowing = false;
             ShowAddNewShareTarget = true;
         }
 
@@ -96,5 +112,6 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private Windows.UI.Core.CoreDispatcher Dispatcher;
     }
 }

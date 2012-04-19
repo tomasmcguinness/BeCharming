@@ -30,7 +30,7 @@ namespace BeCharming.Metro
         public Main()
         {
             this.InitializeComponent();
-            this.DataContext = new MainViewModel();
+            this.DataContext = new MainViewModel(Dispatcher);
 
             this.BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
 

@@ -10,12 +10,30 @@ namespace BeCharming.Metro.Models
 {
     public class ShareTargets
     {
+        public event EventHandler TargetsUpdated;
+
         public ShareTargets()
         {
-            Targets = new ObservableCollection<ShareTarget>(GetShareTargets());
+            Targets = new List<ShareTarget>();
+            UpdateTargets();
         }
 
-        public ObservableCollection<ShareTarget> Targets { get; set; }
+        private void UpdateTargets()
+        {
+            Targets.Clear();
+
+            foreach (var target in GetShareTargets())
+            {
+                Targets.Add(target);
+            }
+
+            if (TargetsUpdated != null)
+            {
+                TargetsUpdated(this, null);
+            }
+        }
+
+        public List<ShareTarget> Targets { get; set; }
 
         public List<ShareTarget> GetShareTargets()
         {
@@ -69,7 +87,7 @@ namespace BeCharming.Metro.Models
 
             container.Values["ShareTargets"] = xml;
 
-            Targets.Add(target);
+            UpdateTargets();
         }
 
         public void IncrementShareCount(object target)
@@ -89,11 +107,29 @@ namespace BeCharming.Metro.Models
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
+
+            UpdateTargets();
         }
 
-        internal void DeleteShareTarget(ShareTarget shareTarget)
+        public void DeleteShareTarget(ShareTarget shareTarget)
         {
-            throw new NotImplementedException();
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+
+            List<ShareTarget> shareTargets = null;
+
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
+
+            shareTargets.Remove(shareTarget);
+
+            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+
+            container.Values["ShareTargets"] = xml;
+
+            UpdateTargets();
         }
     }
 }
