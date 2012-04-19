@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
@@ -32,8 +33,6 @@ namespace BeCharming.Metro
             this.InitializeComponent();
             this.DataContext = new MainViewModel(Dispatcher);
 
-            this.BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
             SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
         }
 
@@ -51,11 +50,6 @@ namespace BeCharming.Metro
             //rootPage.NotifyUser("You clicked the " + settingsCommand.Label + " settings command", NotifyType.StatusMessage);
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
@@ -76,7 +70,9 @@ namespace BeCharming.Metro
 
             if (item != null)
             {
-                var properties = await item.GetBasicPropertiesAsync();
+                ((MainViewModel)DataContext).IncrementShareCount(target);
+
+                    var properties = await item.GetBasicPropertiesAsync();
                 var size = properties.Size;
                 var fileStream = await item.OpenReadAsync();
 
@@ -93,29 +89,15 @@ namespace BeCharming.Metro
                 ListenerClient client = new ListenerClient();
                 client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));
 
-                await client.OpenDocumentAsync("Test.pdf", fileBytes);
+                try
+                {
+                    await client.OpenDocumentAsync("Test.pdf", fileBytes);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    // TODO Handle this exception.
+                }
             }
-        }
-
-        private void GridView_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            //var selectedBorder = e.OriginalSource as Border;
-            //var selectedTarget = selectedBorder.DataContext as ShareTarget;
-
-            ////selectedTarget.IsSelected = !selectedTarget.IsSelected;
-
-            ////if (selectedTarget.IsSelected)
-            ////{
-            ////    //((MainViewModel)DataContext).SelectedTarget = selectedTarget;
-            ////}
-            ////else
-            ////{
-            ////    ((MainViewModel)DataContext).SelectedTarget = null;
-            ////}
-
-            //BottomAppBar.IsOpen = selectedTarget.IsSelected;
-
-            //e.Handled = false;
         }
     }
 }

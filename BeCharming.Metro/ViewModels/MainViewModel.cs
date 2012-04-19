@@ -23,6 +23,8 @@ namespace BeCharming.Metro.ViewModels
             Targets = new ObservableCollection<ShareTarget>();
             model = new Models.ShareTargets();
             model.TargetsUpdated += model_TargetsUpdated;
+            model_TargetsUpdated(this, null);
+
             AddTarget = new DelegateCommand(AddTargetExecute);
             EditTarget = new DelegateCommand(EditTargetExecute, CanEditTargetExecute);
             DeleteTarget = new DelegateCommand(DeleteTargetExecute, CanDeleteTargetExecute);
@@ -34,7 +36,11 @@ namespace BeCharming.Metro.ViewModels
         {
             Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
-                //Targets.Clear();
+                while (Targets.Count > 0)
+                {
+                    Targets.RemoveAt(0);
+                }
+
                 foreach (var target in model.Targets)
                 {
                     Targets.Add(target);
@@ -44,7 +50,6 @@ namespace BeCharming.Metro.ViewModels
 
         private void DeleteTargetExecute(object obj)
         {
-            Models.ShareTargets model = new Models.ShareTargets();
             model.DeleteShareTarget(this.SelectedTarget);
         }
 
@@ -103,6 +108,11 @@ namespace BeCharming.Metro.ViewModels
             ShowAddNewShareTarget = false;
         }
 
+        public void IncrementShareCount(ShareTarget target)
+        {
+            model.IncrementShareCount(target);
+        }
+
         public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -113,5 +123,7 @@ namespace BeCharming.Metro.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
         private Windows.UI.Core.CoreDispatcher Dispatcher;
+
+
     }
 }
