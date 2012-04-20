@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Discovery;
+using System.Text;
+using System.Threading;
 
 namespace BeCharming.Listener
 {
@@ -18,42 +23,86 @@ namespace BeCharming.Listener
         private ServiceHost host = null;
         private System.Windows.Forms.NotifyIcon icon;
 
+        UdpClient client = null;
+
         public App()
         {
-            this.icon = CreateIcon();
-            var server = new ListenerService(this.icon);
+            //// Sending data to remote host.
+            //IPAddress addr = IPAddress.Parse("192.168.10.101");
+            //IPEndPoint ep2 = new IPEndPoint(addr, 22002);
+            //client = new UdpClient();
+            //client.Connect(ep2);
+            //string s = "**TEST** This is a test of emergency broadcast channel **";
+            //int bytesSent = client.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length);
 
-            var tcpBaseAddress = new Uri("net.tcp://localhost:22001/becharming");
+            //IPAddress addr = IPAddress.Parse("192.168.10.100");
+            //IPEndPoint ep = new IPEndPoint(addr, 22002);
+            //client = new UdpClient(ep);
+            //client.EnableBroadcast = true;
+            //UdpState s = new UdpState();
+            //s.e = ep;
+            //s.u = client;
 
-            host = new ServiceHost(server, tcpBaseAddress);
+            //IPEndPoint epOut = null;
+            //var received = client.Receive(ref epOut);
+            //var returned = Encoding.UTF8.GetString(received);
 
-            var binding = new NetTcpBinding();
-            binding.MaxReceivedMessageSize = Int32.MaxValue;
+            IPAddress addr = IPAddress.Parse("224.0.0.1");
+            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22002);
+            client = new UdpClient(ep);
+            client.JoinMulticastGroup(addr);
 
-            host.AddServiceEndpoint(typeof(IListener), binding, String.Empty);
+            IPEndPoint epOut = null;
+            var received = client.Receive(ref epOut);
+            var returned = Encoding.UTF8.GetString(received);
 
-            ServiceMetadataBehavior metadataBehavior;
-            metadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            // Original code.
+            //this.icon = CreateIcon();
+            //var server = new ListenerService(this.icon);
 
-            if (metadataBehavior == null)
-            {
-                metadataBehavior = new ServiceMetadataBehavior();
-                host.Description.Behaviors.Add(metadataBehavior);
-            }
+            //var tcpBaseAddress = new Uri("net.tcp://localhost:22001/becharming");
 
-            Binding mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
-            host.AddServiceEndpoint(typeof(IMetadataExchange), mexBinding, "MEX");
+            //host = new ServiceHost(server, tcpBaseAddress);
 
-            ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
-            discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
+            //var binding = new NetTcpBinding();
+            //binding.MaxReceivedMessageSize = Int32.MaxValue;
 
-            host.Description.Behaviors.Add(discoveryBehavior);
-            host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
+            //host.AddServiceEndpoint(typeof(IListener), binding, String.Empty);
 
-            host.Open();
+            //ServiceMetadataBehavior metadataBehavior;
+            //metadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
 
-            ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
+            //if (metadataBehavior == null)
+            //{
+            //    metadataBehavior = new ServiceMetadataBehavior();
+            //    host.Description.Behaviors.Add(metadataBehavior);
+            //}
+
+            //Binding mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
+            //host.AddServiceEndpoint(typeof(IMetadataExchange), mexBinding, "MEX");
+
+            //ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
+            //discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
+
+            //host.Description.Behaviors.Add(discoveryBehavior);
+            //host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
+
+            //host.Open();
+
+            //ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
         }
+
+        public static void ReceiveCallback(IAsyncResult ar)
+        {
+            UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
+            IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
+
+            Byte[] receiveBytes = u.EndReceive(ar, ref e);
+            string receiveString = Encoding.ASCII.GetString(receiveBytes);
+
+            Console.WriteLine("Received: {0}", receiveString);
+        }
+
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {

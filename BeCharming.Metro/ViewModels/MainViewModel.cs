@@ -123,7 +123,5 @@ namespace BeCharming.Metro.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
         private Windows.UI.Core.CoreDispatcher Dispatcher;
-
-
     }
 }

@@ -7,6 +7,8 @@ using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking;
+using Windows.Networking.Sockets;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.ApplicationSettings;
@@ -28,12 +30,19 @@ namespace BeCharming.Metro
     /// </summary>
     public sealed partial class Main : Page
     {
+        DatagramSocket socket = new DatagramSocket();
+
         public Main()
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel(Dispatcher);
-
+            BottomAppBar.Opened += BottomAppBar_Opened;
             SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
+        }
+
+        void BottomAppBar_Opened(object sender, object e)
+        {
+            //CommandManager .InvalidateRequerySuggested();
         }
 
         private void SettingsCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -50,9 +59,20 @@ namespace BeCharming.Metro
             //rootPage.NotifyUser("You clicked the " + settingsCommand.Label + " settings command", NotifyType.StatusMessage);
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            socket.MessageReceived += socket_MessageReceived;
+            //await socket.BindEndpointAsync(null, "22002");
 
+            //socket.JoinMulticastGroup(new HostName("224.0.0.1"));
+            //EndpointPair p = new EndpointPair(new HostName("127.0.0.1"), "22002", new HostName("127.0.0.1"), "22003");
+
+            //await socket.ConnectAsync(new HostName("192.168.10.100"), "22002");
+            await socket.ConnectAsync(new HostName("224.0.0.1"), "22002");
+            DataWriter wr = new DataWriter(socket.OutputStream);
+            wr.WriteString("**TEST - This is a test of the emergency broadcast system **");
+            await wr.FlushAsync();
+            await wr.StoreAsync();
         }
 
         private async void GridView_ItemClick(object sender, ItemClickEventArgs e)
@@ -70,9 +90,7 @@ namespace BeCharming.Metro
 
             if (item != null)
             {
-                ((MainViewModel)DataContext).IncrementShareCount(target);
-
-                    var properties = await item.GetBasicPropertiesAsync();
+                var properties = await item.GetBasicPropertiesAsync();
                 var size = properties.Size;
                 var fileStream = await item.OpenReadAsync();
 
@@ -92,12 +110,28 @@ namespace BeCharming.Metro
                 try
                 {
                     await client.OpenDocumentAsync("Test.pdf", fileBytes);
+                    ((MainViewModel)DataContext).IncrementShareCount(target);
                 }
                 catch (EndpointNotFoundException)
                 {
                     // TODO Handle this exception.
                 }
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            //Windows.Networking.Proximity.PeerFinder.AllowTcpIp = true;
+            //Windows.Networking.Proximity.PeerFinder.DisplayName = "Win8";
+            //Windows.Networking.Proximity.PeerFinder.Start();
+            //var peers = await Windows.Networking.Proximity.PeerFinder.FindAllPeersAsync();
+
+
+        }
+
+        void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
+        {
+
         }
     }
 }

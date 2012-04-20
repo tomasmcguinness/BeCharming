@@ -44,6 +44,9 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click_1" />
+
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
@@ -76,12 +79,12 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
-                        <TextBlock Margin="0,30,0,15" TextWrapping="Wrap" Text="Enter a friendly name for share target " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBlock Margin="0,30,0,15" TextWrapping="Wrap" Text="Friendly name " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
                         <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetName, Mode=TwoWay}" Padding="10" ToolTipService.ToolTip="Friendly name"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the IP address of the share target " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Machine name or IP address " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
                         <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}" Padding="10"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Enter the pin code for the share target " VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin code " VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
                         <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
                             <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width" />
                             <Button Content="Cancel" Command="{Binding CancelAddTarget}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
@@ -124,6 +127,7 @@
                         </StackPanel>
                     </Grid>
                 </Border>
+                
             </Grid>
         </Border>
     </Grid>
