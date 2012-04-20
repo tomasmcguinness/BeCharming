@@ -68,7 +68,7 @@ namespace BeCharming.Metro
             //EndpointPair p = new EndpointPair(new HostName("127.0.0.1"), "22002", new HostName("127.0.0.1"), "22003");
 
             //await socket.ConnectAsync(new HostName("192.168.10.100"), "22002");
-            await socket.ConnectAsync(new HostName("224.0.0.1"), "22002");
+            await socket.ConnectAsync(new HostName("230.0.0.1"), "22002");
             DataWriter wr = new DataWriter(socket.OutputStream);
             wr.WriteString("**TEST - This is a test of the emergency broadcast system **");
             await wr.FlushAsync();

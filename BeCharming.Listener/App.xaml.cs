@@ -47,9 +47,13 @@ namespace BeCharming.Listener
             //var received = client.Receive(ref epOut);
             //var returned = Encoding.UTF8.GetString(received);
 
-            IPAddress addr = IPAddress.Parse("224.0.0.1");
+            IPAddress addr = IPAddress.Parse("230.0.0.1");
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22002);
             client = new UdpClient(ep);
+            client.EnableBroadcast = true;
+            client.Ttl = 10;
+            client.MulticastLoopback = true;
+            client.AllowNatTraversal(true);
             client.JoinMulticastGroup(addr);
 
             IPEndPoint epOut = null;
