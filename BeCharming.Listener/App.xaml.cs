@@ -51,14 +51,15 @@ namespace BeCharming.Listener
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22002);
             client = new UdpClient(ep);
             client.EnableBroadcast = true;
-            client.Ttl = 10;
             client.MulticastLoopback = true;
             client.AllowNatTraversal(true);
             client.JoinMulticastGroup(addr);
 
-            IPEndPoint epOut = null;
-            var received = client.Receive(ref epOut);
-            var returned = Encoding.UTF8.GetString(received);
+            UdpState s = new UdpState();
+            s.e = ep;
+            s.u = client;
+
+            client.BeginReceive(ReceiveCallback, s);
 
             // Original code.
             //this.icon = CreateIcon();
@@ -104,9 +105,11 @@ namespace BeCharming.Listener
             Byte[] receiveBytes = u.EndReceive(ar, ref e);
             string receiveString = Encoding.ASCII.GetString(receiveBytes);
 
-            Console.WriteLine("Received: {0}", receiveString);
-        }
+            Debug.WriteLine("Received: {0}", receiveString);
 
+            string s = "**TEST RESPONSE** This is a test of emergency broadcast channel **";
+            int bytesSent = u.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length, e);
+        }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {

@@ -38,6 +38,8 @@ namespace BeCharming.Metro
             this.DataContext = new MainViewModel(Dispatcher);
             BottomAppBar.Opened += BottomAppBar_Opened;
             SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
+
+            socket.MessageReceived += socket_MessageReceived;
         }
 
         void BottomAppBar_Opened(object sender, object e)
@@ -61,18 +63,13 @@ namespace BeCharming.Metro
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            socket.MessageReceived += socket_MessageReceived;
-            //await socket.BindEndpointAsync(null, "22002");
+            await socket.BindEndpointAsync(null, "22002");
 
             //socket.JoinMulticastGroup(new HostName("224.0.0.1"));
             //EndpointPair p = new EndpointPair(new HostName("127.0.0.1"), "22002", new HostName("127.0.0.1"), "22003");
 
             //await socket.ConnectAsync(new HostName("192.168.10.100"), "22002");
-            await socket.ConnectAsync(new HostName("230.0.0.1"), "22002");
-            DataWriter wr = new DataWriter(socket.OutputStream);
-            wr.WriteString("**TEST - This is a test of the emergency broadcast system **");
-            await wr.FlushAsync();
-            await wr.StoreAsync();
+
         }
 
         private async void GridView_ItemClick(object sender, ItemClickEventArgs e)
@@ -119,14 +116,13 @@ namespace BeCharming.Metro
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //Windows.Networking.Proximity.PeerFinder.AllowTcpIp = true;
-            //Windows.Networking.Proximity.PeerFinder.DisplayName = "Win8";
-            //Windows.Networking.Proximity.PeerFinder.Start();
-            //var peers = await Windows.Networking.Proximity.PeerFinder.FindAllPeersAsync();
-
-
+            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22002");
+            DataWriter wr = new DataWriter(outputStream);
+            wr.WriteString("**TEST - This is a test of the emergency broadcast system **");
+            await wr.FlushAsync();
+            await wr.StoreAsync();
         }
 
         void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
