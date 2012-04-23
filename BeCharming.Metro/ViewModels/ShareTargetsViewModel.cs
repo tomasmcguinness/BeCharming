@@ -89,7 +89,7 @@ namespace BeCharming.Metro.ViewModels
 
         public void LoadTargets()
         {
-            Models.ShareTargets model = new Models.ShareTargets();
+            Models.ShareTargetManager model = new Models.ShareTargetManager();
             foreach (var target in model.GetShareTargets())
             {
                 Targets.Add(target);
@@ -117,7 +117,7 @@ namespace BeCharming.Metro.ViewModels
 
             if (result == "okay")
             {
-                Models.ShareTargets model = new Models.ShareTargets();
+                Models.ShareTargetManager model = new Models.ShareTargetManager();
                 model.IncrementShareCount(target);
 
                 shareOperation.ReportCompleted();

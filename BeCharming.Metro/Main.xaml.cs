@@ -30,16 +30,12 @@ namespace BeCharming.Metro
     /// </summary>
     public sealed partial class Main : Page
     {
-        DatagramSocket socket = new DatagramSocket();
-
         public Main()
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel(Dispatcher);
             BottomAppBar.Opened += BottomAppBar_Opened;
             SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
-
-            socket.MessageReceived += socket_MessageReceived;
         }
 
         void BottomAppBar_Opened(object sender, object e)
@@ -63,13 +59,7 @@ namespace BeCharming.Metro
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await socket.BindEndpointAsync(null, "22002");
-
-            //socket.JoinMulticastGroup(new HostName("224.0.0.1"));
-            //EndpointPair p = new EndpointPair(new HostName("127.0.0.1"), "22002", new HostName("127.0.0.1"), "22003");
-
-            //await socket.ConnectAsync(new HostName("192.168.10.100"), "22002");
-
+            ((MainViewModel)DataContext).PerformPeerDiscovery();
         }
 
         private async void GridView_ItemClick(object sender, ItemClickEventArgs e)
@@ -114,20 +104,6 @@ namespace BeCharming.Metro
                     // TODO Handle this exception.
                 }
             }
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22002");
-            DataWriter wr = new DataWriter(outputStream);
-            wr.WriteString("**TEST - This is a test of the emergency broadcast system **");
-            await wr.FlushAsync();
-            await wr.StoreAsync();
-        }
-
-        void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
-        {
-
         }
     }
 }

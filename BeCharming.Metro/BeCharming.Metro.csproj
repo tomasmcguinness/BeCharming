@@ -120,7 +120,7 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShareTargets.cs" />
+    <Compile Include="Models\ShareTargetsManager.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShareTargets.xaml.cs">
@@ -128,7 +128,7 @@
     </Compile>
     <Compile Include="VariableGridView.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ShareTarget.cs" />
+    <Compile Include="Models\ShareTarget.cs" />
     <Compile Include="ViewModels\ShareTargetsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +176,7 @@
       <Name>BeCharming.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

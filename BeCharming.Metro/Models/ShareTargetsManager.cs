@@ -5,14 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BeCharming.Metro.ViewModels;
+using Windows.Networking;
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
 
 namespace BeCharming.Metro.Models
 {
-    public class ShareTargets
+    public class ShareTargetManager
     {
         public event EventHandler TargetsUpdated;
+        private DatagramSocket socket = new DatagramSocket();
 
-        public ShareTargets()
+        public ShareTargetManager()
         {
             Targets = new List<ShareTarget>();
             UpdateTargets();
@@ -34,6 +38,28 @@ namespace BeCharming.Metro.Models
         }
 
         public List<ShareTarget> Targets { get; set; }
+
+        public async void PerformPeerDiscovery()
+        {
+            socket.MessageReceived += socket_MessageReceived;
+
+            await socket.BindEndpointAsync(null, "22002");
+
+            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22002");
+            DataWriter wr = new DataWriter(outputStream);
+            wr.WriteString("**BECHARMING DISCOVERY**");
+            await wr.FlushAsync();
+            await wr.StoreAsync();
+        }
+
+        void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
+        {
+            DataReader dr = args.GetDataReader();
+
+            Targets.Add(new ShareTarget() { Name = "Discovered" });
+
+            TargetsUpdated(this, null);
+        }
 
         public List<ShareTarget> GetShareTargets()
         {

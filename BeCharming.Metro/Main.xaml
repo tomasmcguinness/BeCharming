@@ -29,9 +29,11 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
+                <!--<Button Grid.Column="0" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
                 <Button Grid.Column="1" Command="{Binding EditTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
-                <Button Grid.Column="2" Command="{Binding DeleteTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>
+                <Button Grid.Column="2" Command="{Binding DeleteTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>-->
+                <Button Grid.Column="0" Command="{Binding RefreshTargets}" HorizontalAlignment="Left" Style="{StaticResource RefreshAppBarButtonStyle}"/>
+                
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
@@ -45,8 +47,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Button_Click_1" />
-
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
@@ -58,7 +58,7 @@
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
 
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
+        <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -92,9 +92,9 @@
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
+        </Border>-->
 
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowEditShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
+        <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowEditShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -127,8 +127,7 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                
             </Grid>
-        </Border>
+        </Border>-->
     </Grid>
 </Page>

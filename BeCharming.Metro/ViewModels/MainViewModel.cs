@@ -14,14 +14,14 @@ namespace BeCharming.Metro.ViewModels
         private bool showAddNewShareTarget = false;
         private bool showEditShareTarget = false;
         private ShareTarget selectedShareTarget = null;
-        private Models.ShareTargets model;
+        private Models.ShareTargetManager model;
         private bool isAppBarShowing = false;
 
         public MainViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
-            model = new Models.ShareTargets();
+            model = new Models.ShareTargetManager();
             model.TargetsUpdated += model_TargetsUpdated;
             model_TargetsUpdated(this, null);
 
@@ -111,6 +111,11 @@ namespace BeCharming.Metro.ViewModels
         public void IncrementShareCount(ShareTarget target)
         {
             model.IncrementShareCount(target);
+        }
+
+        public void PerformPeerDiscovery()
+        {
+            model.PerformPeerDiscovery();
         }
 
         public void NotifyPropertyChanged(string propertyName)

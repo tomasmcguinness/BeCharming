@@ -15,107 +15,25 @@ using System.Threading;
 
 namespace BeCharming.Listener
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : System.Windows.Application
     {
-        private ServiceHost host = null;
         private System.Windows.Forms.NotifyIcon icon;
-
-        UdpClient client = null;
+        private SharingManager manager;
 
         public App()
         {
-            //// Sending data to remote host.
-            //IPAddress addr = IPAddress.Parse("192.168.10.101");
-            //IPEndPoint ep2 = new IPEndPoint(addr, 22002);
-            //client = new UdpClient();
-            //client.Connect(ep2);
-            //string s = "**TEST** This is a test of emergency broadcast channel **";
-            //int bytesSent = client.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length);
+            icon = CreateIcon();
+            manager = new SharingManager();
+            manager.Start(icon);
 
-            //IPAddress addr = IPAddress.Parse("192.168.10.100");
-            //IPEndPoint ep = new IPEndPoint(addr, 22002);
-            //client = new UdpClient(ep);
-            //client.EnableBroadcast = true;
-            //UdpState s = new UdpState();
-            //s.e = ep;
-            //s.u = client;
-
-            //IPEndPoint epOut = null;
-            //var received = client.Receive(ref epOut);
-            //var returned = Encoding.UTF8.GetString(received);
-
-            IPAddress addr = IPAddress.Parse("230.0.0.1");
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22002);
-            client = new UdpClient(ep);
-            client.EnableBroadcast = true;
-            client.MulticastLoopback = true;
-            client.AllowNatTraversal(true);
-            client.JoinMulticastGroup(addr);
-
-            UdpState s = new UdpState();
-            s.e = ep;
-            s.u = client;
-
-            client.BeginReceive(ReceiveCallback, s);
-
-            // Original code.
-            //this.icon = CreateIcon();
-            //var server = new ListenerService(this.icon);
-
-            //var tcpBaseAddress = new Uri("net.tcp://localhost:22001/becharming");
-
-            //host = new ServiceHost(server, tcpBaseAddress);
-
-            //var binding = new NetTcpBinding();
-            //binding.MaxReceivedMessageSize = Int32.MaxValue;
-
-            //host.AddServiceEndpoint(typeof(IListener), binding, String.Empty);
-
-            //ServiceMetadataBehavior metadataBehavior;
-            //metadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
-
-            //if (metadataBehavior == null)
-            //{
-            //    metadataBehavior = new ServiceMetadataBehavior();
-            //    host.Description.Behaviors.Add(metadataBehavior);
-            //}
-
-            //Binding mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
-            //host.AddServiceEndpoint(typeof(IMetadataExchange), mexBinding, "MEX");
-
-            //ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
-            //discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
-
-            //host.Description.Behaviors.Add(discoveryBehavior);
-            //host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
-
-            //host.Open();
-
-            //ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
-        }
-
-        public static void ReceiveCallback(IAsyncResult ar)
-        {
-            UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
-            IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
-
-            Byte[] receiveBytes = u.EndReceive(ar, ref e);
-            string receiveString = Encoding.ASCII.GetString(receiveBytes);
-
-            Debug.WriteLine("Received: {0}", receiveString);
-
-            string s = "**TEST RESPONSE** This is a test of emergency broadcast channel **";
-            int bytesSent = u.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length, e);
+            ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
         {
             base.OnExit(e);
             icon.Dispose();
-            host.Close();
+            manager.Stop();
         }
 
         private System.Windows.Forms.NotifyIcon CreateIcon()
