@@ -50,6 +50,8 @@
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
+        
+        
         <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -57,6 +59,8 @@
                 </ItemsPanelTemplate>
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
+
+        <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="{StaticResource ComboBoxHighlightFillBrush}" />
 
         <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">

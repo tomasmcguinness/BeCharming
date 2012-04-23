@@ -16,23 +16,26 @@ namespace BeCharming.Metro.ViewModels
         private ShareTarget selectedShareTarget = null;
         private Models.ShareTargetManager model;
         private bool isAppBarShowing = false;
+        private bool isSearchingForPeers = false;
 
         public MainViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             model = new Models.ShareTargetManager();
-            model.TargetsUpdated += model_TargetsUpdated;
-            model_TargetsUpdated(this, null);
+            model.PeerDiscoveryComplete += PeerDiscoveryComplete;
+            model.TargetsUpdated += TargetsUpdated;
+            TargetsUpdated(this, null);
 
             AddTarget = new DelegateCommand(AddTargetExecute);
             EditTarget = new DelegateCommand(EditTargetExecute, CanEditTargetExecute);
             DeleteTarget = new DelegateCommand(DeleteTargetExecute, CanDeleteTargetExecute);
             ShowAddTarget = new DelegateCommand(ShowAddTargetExecute);
             CancelAddTarget = new DelegateCommand(CancelAddTargetExecute);
+            RefreshTargets = new DelegateCommand(PerformPeerDiscovery);
         }
 
-        void model_TargetsUpdated(object sender, EventArgs e)
+        void TargetsUpdated(object sender, EventArgs e)
         {
             Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
@@ -73,6 +76,7 @@ namespace BeCharming.Metro.ViewModels
         public ICommand DeleteTarget { get; set; }
         public ICommand ShowAddTarget { get; set; }
         public ICommand CancelAddTarget { get; set; }
+        public ICommand RefreshTargets { get; set; }
 
         public Boolean ShowAddNewShareTarget { get { return showAddNewShareTarget; } set { showAddNewShareTarget = value; NotifyPropertyChanged("ShowAddNewShareTarget"); } }
         public Boolean ShowEditShareTarget { get { return showEditShareTarget; } set { showEditShareTarget = value; NotifyPropertyChanged("ShowEditShareTarget"); } }
@@ -81,7 +85,7 @@ namespace BeCharming.Metro.ViewModels
         public String TargetName { get; set; }
 
         public Boolean IsAppBarShowing { get { return isAppBarShowing; } set { isAppBarShowing = value; NotifyPropertyChanged("IsAppBarShowing"); } }
-
+        public Boolean IsSearchingForPeers { get { return isSearchingForPeers; } set { isSearchingForPeers = value; NotifyPropertyChanged("IsSearchingForPeers"); } }
         public ObservableCollection<ShareTarget> Targets { get; set; }
         public ShareTarget SelectedTarget { get { return selectedShareTarget; } set { selectedShareTarget = value; TargetSelected(); } }
 
@@ -115,7 +119,18 @@ namespace BeCharming.Metro.ViewModels
 
         public void PerformPeerDiscovery()
         {
+            PerformPeerDiscovery(null);
+        }
+
+        public void PerformPeerDiscovery(object state)
+        {
+            IsSearchingForPeers = true;
             model.PerformPeerDiscovery();
+        }
+
+        public void PeerDiscoveryComplete(object sender, EventArgs e)
+        {
+            IsSearchingForPeers = false;
         }
 
         public void NotifyPropertyChanged(string propertyName)

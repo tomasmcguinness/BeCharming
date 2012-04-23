@@ -8,18 +8,38 @@ using BeCharming.Metro.ViewModels;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 
 namespace BeCharming.Metro.Models
 {
     public class ShareTargetManager
     {
         public event EventHandler TargetsUpdated;
-        private DatagramSocket socket = new DatagramSocket();
+        public event EventHandler PeerDiscoveryComplete;
+        private DatagramSocket socket;
+        private DispatcherTimer timer;
 
         public ShareTargetManager()
         {
+            socket = new DatagramSocket();
+            socket.MessageReceived += socket_MessageReceived;
+
+            timer = new DispatcherTimer();
+            timer.Tick += timer_Tick;
+
             Targets = new List<ShareTarget>();
             UpdateTargets();
+        }
+
+        void timer_Tick(object sender, object e)
+        {
+            timer.Stop();
+
+
+            if (PeerDiscoveryComplete != null)
+            {
+                PeerDiscoveryComplete(this, null);
+            }
         }
 
         private void UpdateTargets()
@@ -41,7 +61,8 @@ namespace BeCharming.Metro.Models
 
         public async void PerformPeerDiscovery()
         {
-            socket.MessageReceived += socket_MessageReceived;
+            timer.Interval = new TimeSpan(0, 0, 5);
+            timer.Start();
 
             await socket.BindEndpointAsync(null, "22002");
 
