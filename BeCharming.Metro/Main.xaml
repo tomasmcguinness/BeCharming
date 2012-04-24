@@ -13,7 +13,7 @@
             <Border Background="{StaticResource ComboBoxHighlightFillBrush}" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
                 <Grid>
                     <StackPanel>
-                        <TextBlock Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32" IsHitTestVisible="False" />
+                        <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32" IsHitTestVisible="False" />
                         <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667" IsHitTestVisible="False" />
                     </StackPanel>
                     <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />

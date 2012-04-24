@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BeCharming.Common.ListenerService;
+using BeCharming.Metro.Models;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
@@ -27,11 +28,31 @@ namespace BeCharming.Metro.ViewModels
         private ShareTarget selectedTarget;
         private bool shareButtonEnabled;
         private bool isSharing;
+        private bool isSearchingForPeers;
+        private ShareTargetManager model;
 
         public ShareTargetsViewModel()
         {
             Targets = new ObservableCollection<ShareTarget>();
             Share = new DelegateCommand(TargetSelected);
+            model = new ShareTargetManager();
+            model.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
+            model.TargetsUpdated += model_TargetsUpdated;
+        }
+
+        void model_TargetsUpdated(object sender, EventArgs e)
+        {
+            Targets.Clear();
+
+            foreach (var target in model.Targets)
+            {
+                Targets.Add(target);
+            }
+        }
+
+        void model_PeerDiscoveryComplete(object sender, EventArgs e)
+        {
+            IsSearchingForPeers = false;
         }
 
         public ObservableCollection<ShareTarget> Targets { get; private set; }
@@ -39,6 +60,7 @@ namespace BeCharming.Metro.ViewModels
         public ICommand Share { get; set; }
         public bool IsSharing { get { return isSharing; } set { isSharing = value; NotifyPropertyChanged("IsSharing"); } }
         public bool ShareButtonEnabled { get { return shareButtonEnabled; } set { shareButtonEnabled = value; NotifyPropertyChanged("ShareButtonEnabled"); } }
+        public bool IsSearchingForPeers { get { return isSearchingForPeers; } set { isSearchingForPeers = value; NotifyPropertyChanged("IsSearchingForPeers"); } }
 
         private void UpdateSelectedTarget()
         {
@@ -89,11 +111,8 @@ namespace BeCharming.Metro.ViewModels
 
         public void LoadTargets()
         {
-            Models.ShareTargetManager model = new Models.ShareTargetManager();
-            foreach (var target in model.GetShareTargets())
-            {
-                Targets.Add(target);
-            }
+            IsSearchingForPeers = true;
+            model.PerformPeerDiscovery();
         }
 
         public async void TargetSelected(object target)

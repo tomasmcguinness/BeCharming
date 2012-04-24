@@ -38,6 +38,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <ProgressRing Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" />
         <Button Content="Share" Grid.Row="2" HorizontalAlignment="Right" Margin="30" Command="{Binding Share}" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Foreground="Black" Padding="12,5" IsEnabled="{Binding Path=ShareButtonEnabled}" />
         <Border Grid.Row="0" Grid.RowSpan="3" Background="White" Visibility="{Binding Path=IsSharing, Converter={StaticResource b2v}}">
             <Grid>

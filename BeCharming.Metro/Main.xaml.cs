@@ -57,7 +57,7 @@ namespace BeCharming.Metro
             //rootPage.NotifyUser("You clicked the " + settingsCommand.Label + " settings command", NotifyType.StatusMessage);
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ((MainViewModel)DataContext).PerformPeerDiscovery();
         }

@@ -21,8 +21,7 @@ namespace BeCharming.Metro.Models
 
         public ShareTargetManager()
         {
-            socket = new DatagramSocket();
-            socket.MessageReceived += socket_MessageReceived;
+
 
             timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
@@ -64,9 +63,14 @@ namespace BeCharming.Metro.Models
             timer.Interval = new TimeSpan(0, 0, 5);
             timer.Start();
 
-            await socket.BindEndpointAsync(null, "22002");
+            if (socket == null)
+            {
+                socket = new DatagramSocket();
+                socket.MessageReceived += socket_MessageReceived;
+                await socket.BindEndpointAsync(null, "22002");
+            }
 
-            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22002");
+            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
             DataWriter wr = new DataWriter(outputStream);
             wr.WriteString("**BECHARMING DISCOVERY**");
             await wr.FlushAsync();
@@ -76,8 +80,13 @@ namespace BeCharming.Metro.Models
         void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
         {
             DataReader dr = args.GetDataReader();
+            var dataLength = dr.UnconsumedBufferLength;
 
-            Targets.Add(new ShareTarget() { Name = "Discovered" });
+            string discoveryResult = dr.ReadString(dataLength);
+            string[] parts = discoveryResult.Split('|');
+            string name = parts[0];
+
+            Targets.Add(new ShareTarget() { Name = name, IPAddress = args.RemoteHostName.DisplayName });
 
             TargetsUpdated(this, null);
         }
@@ -139,23 +148,23 @@ namespace BeCharming.Metro.Models
 
         public void IncrementShareCount(object target)
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
 
-            List<ShareTarget> shareTargets = null;
+            //List<ShareTarget> shareTargets = null;
 
-            if (container.Values["ShareTargets"] != null)
-            {
-                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
-            }
+            //if (container.Values["ShareTargets"] != null)
+            //{
+            //    shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            //}
 
-            shareTargets[0].ShareCount++;
+            //shareTargets[0].ShareCount++;
 
-            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+            //var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
-            container.Values["ShareTargets"] = xml;
+            //container.Values["ShareTargets"] = xml;
 
-            UpdateTargets();
+            //UpdateTargets();
         }
 
         public void DeleteShareTarget(ShareTarget shareTarget)

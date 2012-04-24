@@ -13,7 +13,7 @@ namespace BeCharming.Listener
 
         public static Settings LoadSettings()
         {
-            return null;
+            return new Settings() { Name = "Share Target 1", IsPinProtected = true };
         }
 
         public static void SaveSettings()

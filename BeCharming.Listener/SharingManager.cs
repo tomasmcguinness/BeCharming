@@ -48,7 +48,7 @@ namespace BeCharming.Listener
 
             //host.Description.Behaviors.Add(discoveryBehavior);
 
-            host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
+            //host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             host.Open();
         }
@@ -56,7 +56,7 @@ namespace BeCharming.Listener
         private void StartListeningForDiscoveryBroadcasts()
         {
             IPAddress addr = IPAddress.Parse("230.0.0.1");
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22002);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 22003);
             client = new UdpClient(ep);
             client.EnableBroadcast = true;
             client.MulticastLoopback = true;
@@ -74,6 +74,8 @@ namespace BeCharming.Listener
         {
             UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
             IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
+
+            u.BeginReceive(ReceiveCallback, (UdpState)(ar.AsyncState));
 
             Byte[] receiveBytes = u.EndReceive(ar, ref e);
             string receiveString = Encoding.ASCII.GetString(receiveBytes);
