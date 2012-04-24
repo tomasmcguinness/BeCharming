@@ -22,11 +22,18 @@ namespace BeCharming.Listener
 
         public App()
         {
-            icon = CreateIcon();
-            manager = new SharingManager();
-            manager.Start(icon);
+            try
+            {
+                icon = CreateIcon();
+                manager = new SharingManager();
+                manager.Start(icon);
 
-            ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
+                ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
+            }
+            catch
+            {
+                // Throw up a popup?
+            }
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)

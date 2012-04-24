@@ -9,8 +9,11 @@ namespace BeCharming.Metro.ViewModels
     {
         public string Name { get; set; }
         public string IPAddress { get; set; }
-        public bool IsSelected { get; set; }
+        public bool IsPinCodeRequired { get; set; }
+        public string ShareTargetUniqueName { get; set; }
         public int ShareCount { get; set; }
+
+        public bool IsSelected { get; set; }
 
         public int Width { get { return 1 + ShareCount; } }
         public int Height { get { return 1 + ShareCount; } }

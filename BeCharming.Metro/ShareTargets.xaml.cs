@@ -28,7 +28,7 @@ namespace BeCharming.Metro
         public ShareTargets()
         {
             this.InitializeComponent();
-            this.DataContext = new ShareTargetsViewModel();
+            this.DataContext = new ShareTargetsViewModel(Dispatcher);
         }
 
         public async Task ActivateAsync(ShareTargetActivatedEventArgs args)

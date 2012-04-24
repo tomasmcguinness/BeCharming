@@ -17,6 +17,7 @@ namespace BeCharming.Metro.ViewModels
         private Models.ShareTargetManager model;
         private bool isAppBarShowing = false;
         private bool isSearchingForPeers = false;
+        private Windows.UI.Core.CoreDispatcher Dispatcher;
 
         public MainViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
@@ -142,6 +143,6 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private Windows.UI.Core.CoreDispatcher Dispatcher;
+        
     }
 }

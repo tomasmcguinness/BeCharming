@@ -30,9 +30,11 @@ namespace BeCharming.Metro.ViewModels
         private bool isSharing;
         private bool isSearchingForPeers;
         private ShareTargetManager model;
+        private Windows.UI.Core.CoreDispatcher Dispatcher;
 
-        public ShareTargetsViewModel()
+        public ShareTargetsViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
         {
+            this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             Share = new DelegateCommand(TargetSelected);
             model = new ShareTargetManager();
@@ -42,12 +44,18 @@ namespace BeCharming.Metro.ViewModels
 
         void model_TargetsUpdated(object sender, EventArgs e)
         {
-            Targets.Clear();
-
-            foreach (var target in model.Targets)
+            Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
-                Targets.Add(target);
-            }
+                while (Targets.Count > 0)
+                {
+                    Targets.RemoveAt(0);
+                }
+
+                foreach (var target in model.Targets)
+                {
+                    Targets.Add(target);
+                }
+            }, this, null);
         }
 
         void model_PeerDiscoveryComplete(object sender, EventArgs e)

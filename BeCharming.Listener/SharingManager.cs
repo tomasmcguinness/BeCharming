@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -18,6 +20,8 @@ namespace BeCharming.Listener
 
         public void Start(System.Windows.Forms.NotifyIcon icon)
         {
+            GenerateAndStoreShareTargetCode();
+
             StartListeningForDiscoveryBroadcasts();
 
             var server = new ListenerService(icon);
@@ -42,13 +46,6 @@ namespace BeCharming.Listener
 
             Binding mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
             host.AddServiceEndpoint(typeof(IMetadataExchange), mexBinding, "MEX");
-
-            //ServiceDiscoveryBehavior discoveryBehavior = new ServiceDiscoveryBehavior();
-            //discoveryBehavior.AnnouncementEndpoints.Add(new UdpAnnouncementEndpoint());
-
-            //host.Description.Behaviors.Add(discoveryBehavior);
-
-            //host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             host.Open();
         }
@@ -82,8 +79,41 @@ namespace BeCharming.Listener
 
             var settings = Settings.LoadSettings();
 
-            string s = string.Format("{0}|{1}|{2}", settings.Name, settings.IsPinProtected, 5);
+            string s = string.Format("{0}|{1}|{2}|{3}", settings.Name, settings.IsPinProtected, 5, GetShareTargetCode());
             int bytesSent = u.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length, e);
+        }
+
+        public string GetShareTargetCode()
+        {
+            IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly, null, null);
+
+            using (StreamReader reader = new StreamReader(new IsolatedStorageFileStream("BeCharmingTargetName.txt", FileMode.Open, isoStore)))
+            {
+                String sb = reader.ReadLine();
+                return sb.ToString();
+            }
+        }
+
+        public void GenerateAndStoreShareTargetCode()
+        {
+            Guid shareTargetCode = Guid.NewGuid();
+
+            IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly, null, null);
+
+            try
+            {
+                IsolatedStorageFileStream stream = new IsolatedStorageFileStream("BeCharmingTargetName.txt", FileMode.CreateNew, isoStore);
+
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(shareTargetCode.ToString());
+                }
+
+            }
+            catch (IOException)
+            {
+                // The file could not be created. That's okay. TODO Should be using a File.Exists style test.
+            }
         }
 
         public void Stop()

@@ -21,8 +21,6 @@ namespace BeCharming.Metro.Models
 
         public ShareTargetManager()
         {
-
-
             timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
 
@@ -33,7 +31,6 @@ namespace BeCharming.Metro.Models
         void timer_Tick(object sender, object e)
         {
             timer.Stop();
-
 
             if (PeerDiscoveryComplete != null)
             {
@@ -67,7 +64,15 @@ namespace BeCharming.Metro.Models
             {
                 socket = new DatagramSocket();
                 socket.MessageReceived += socket_MessageReceived;
-                await socket.BindEndpointAsync(null, "22002");
+
+                try
+                {
+                    await socket.BindEndpointAsync(null, "22002");
+                }
+                catch
+                {
+                    // Swallow any already bound exceptions!
+                }
             }
 
             var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
