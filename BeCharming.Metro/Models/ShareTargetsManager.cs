@@ -90,8 +90,14 @@ namespace BeCharming.Metro.Models
             string discoveryResult = dr.ReadString(dataLength);
             string[] parts = discoveryResult.Split('|');
             string name = parts[0];
+            string uniqueName = parts[3];
 
-            Targets.Add(new ShareTarget() { Name = name, IPAddress = args.RemoteHostName.DisplayName });
+            var existingTarget = GetShareTarget(uniqueName);
+
+            var discoveredTarget = new ShareTarget() { Name = name, IPAddress = args.RemoteHostName.DisplayName };
+
+            if (existingTarget != null) discoveredTarget.ShareCount = existingTarget.ShareCount;
+            Targets.Add(discoveredTarget);
 
             TargetsUpdated(this, null);
         }
@@ -151,25 +157,51 @@ namespace BeCharming.Metro.Models
             UpdateTargets();
         }
 
-        public void IncrementShareCount(object target)
+        public ShareTarget GetShareTarget(string uniqueName)
         {
-            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            //var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
 
-            //List<ShareTarget> shareTargets = null;
+            List<ShareTarget> shareTargets = null;
 
-            //if (container.Values["ShareTargets"] != null)
-            //{
-            //    shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
-            //}
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
 
-            //shareTargets[0].ShareCount++;
+            if (shareTargets == null) return null;
 
-            //var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+            var target = shareTargets.Where(t => t.ShareTargetUniqueName == uniqueName).SingleOrDefault();
 
-            //container.Values["ShareTargets"] = xml;
+            return target;
+        }
 
-            //UpdateTargets();
+        public void IncrementShareCount(ShareTarget target)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+
+            List<ShareTarget> shareTargets = null;
+
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
+
+            if (shareTargets == null)
+            {
+                shareTargets = new List<ShareTarget>();
+                shareTargets.Add(target);
+            }
+
+            target.ShareCount++;
+            shareTargets.Where(t => t.ShareTargetUniqueName == target.ShareTargetUniqueName).Single().ShareCount = target.ShareCount;
+
+            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+
+            container.Values["ShareTargets"] = xml;
+
+            UpdateTargets();
         }
 
         public void DeleteShareTarget(ShareTarget shareTarget)

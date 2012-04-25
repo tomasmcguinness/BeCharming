@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,12 +124,24 @@ namespace BeCharming.Metro.ViewModels
             model.PerformPeerDiscovery();
         }
 
+        public void SetDataToShare(string fileName, byte[] fileContents)
+        {
+            this.fileName = fileName;
+            this.fileBytes = fileContents;
+        }
+
+        public void SetDataToShare(string url)
+        {
+            this.url = url;
+        }
+
         public async void TargetSelected(object target)
         {
             IsSharing = true;
             var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", SelectedTarget.IPAddress);
 
             ListenerClient client = new ListenerClient();
+            ((NetTcpBinding)client.Endpoint.Binding).Security.Mode = SecurityMode.None;
             client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
 
             string result = null;
@@ -145,13 +158,15 @@ namespace BeCharming.Metro.ViewModels
             if (result == "okay")
             {
                 Models.ShareTargetManager model = new Models.ShareTargetManager();
-                model.IncrementShareCount(target);
+                model.IncrementShareCount((ShareTarget)SelectedTarget);
 
-                shareOperation.ReportCompleted();
+                if (shareOperation != null)
+                    shareOperation.ReportCompleted();
             }
             else
             {
-                shareOperation.ReportError("Could not reach the share target");
+                if (shareOperation != null)
+                    shareOperation.ReportError("Could not reach the share target");
             }
 
             IsSharing = false;

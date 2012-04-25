@@ -73,13 +73,13 @@ namespace BeCharming.Metro
             filePicker.SettingsIdentifier = "picker1";
             filePicker.CommitButtonText = "Open File to Send";
 
-            var item = await filePicker.PickSingleFileAsync();
+            var selectedFile = await filePicker.PickSingleFileAsync();
 
-            if (item != null)
+            if (selectedFile != null)
             {
-                var properties = await item.GetBasicPropertiesAsync();
+                var properties = await selectedFile.GetBasicPropertiesAsync();
                 var size = properties.Size;
-                var fileStream = await item.OpenReadAsync();
+                var fileStream = await selectedFile.OpenReadAsync();
 
                 DataReader dataReader = new DataReader(fileStream);
                 await dataReader.LoadAsync((uint)size);
@@ -91,18 +91,24 @@ namespace BeCharming.Metro
 
                 var servicePath = string.Format("net.tcp://{0}:22001/BeCharming", target.IPAddress);
 
-                ListenerClient client = new ListenerClient();
-                client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));
+                ShareTargetsViewModel model = new ShareTargetsViewModel(Dispatcher);
+                model.SelectedTarget = target;
+                model.SetDataToShare(selectedFile.Name, fileBytes);
+                model.TargetSelected(null);
 
-                try
-                {
-                    await client.OpenDocumentAsync("Test.pdf", fileBytes);
-                    ((MainViewModel)DataContext).IncrementShareCount(target);
-                }
-                catch (EndpointNotFoundException)
-                {
-                    // TODO Handle this exception.
-                }
+                //ListenerClient client = new ListenerClient();
+                //((NetTcpBinding)client.Endpoint.Binding).Security.Mode = SecurityMode.None;
+                //client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));
+
+                //try
+                //{
+                //    await client.OpenDocumentAsync("Test.pdf", fileBytes);
+                //    ((MainViewModel)DataContext).IncrementShareCount(target);
+                //}
+                //catch (EndpointNotFoundException)
+                //{
+                //    // TODO Handle this exception.
+                //}
             }
         }
     }
