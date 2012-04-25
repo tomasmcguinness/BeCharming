@@ -120,8 +120,15 @@ namespace BeCharming.Listener
 
         public void Stop()
         {
-            host.Close();
-            client.Close();
+            if (host != null)
+            {
+                host.Close();
+            }
+
+            if (client != null)
+            {
+                client.Close();
+            }
         }
     }
 }

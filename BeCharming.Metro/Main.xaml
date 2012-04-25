@@ -83,11 +83,17 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Sharing" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="{Binding Path=PinCode}" VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin Code" VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" InputScope="Number" Padding="10" />
+
+                        <Border Grid.Row="1" Grid.RowSpan="2" Margin="0,15,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.99" Background="White">
+                            <ProgressRing IsActive="True" />
+                        </Border>
+
                         <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
-                            <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width" />
-                            <Button Content="Cancel" Command="{Binding CancelCommandExecute}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
+                            <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width"  Visibility="{Binding Path=IsShowingRequiresPin}" />
+                            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"  Visibility="{Binding Path=IsShowingRequiresPin}" />
                         </StackPanel>
                     </Grid>
                 </Border>

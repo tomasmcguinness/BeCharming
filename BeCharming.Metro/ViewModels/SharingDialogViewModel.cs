@@ -12,6 +12,7 @@ namespace BeCharming.Metro.ViewModels
     {
         private Windows.UI.Core.CoreDispatcher Dispatcher;
         private bool isShowingSharingDialog = false;
+        private bool isShowingRequiresPassword = false;
 
         public SharingDialogViewModel(Windows.UI.Core.CoreDispatcher Dispatcher)
         {
@@ -19,6 +20,7 @@ namespace BeCharming.Metro.ViewModels
             this.CancelCommand = new DelegateCommand(CancelCommandExecute);
         }
 
+        public Boolean IsShowingRequiresPin { get { return isShowingRequiresPassword; } set { isShowingRequiresPassword = value; NotifyPropertyChanged("IsShowingPasswordRequired"); } }
         public Boolean IsShowingSharingDialog { get { return isShowingSharingDialog; } set { isShowingSharingDialog = value; NotifyPropertyChanged("IsShowingSharingDialog"); } }
         public string PinCode { get; set; }
         public ICommand CancelCommand { get; set; }
