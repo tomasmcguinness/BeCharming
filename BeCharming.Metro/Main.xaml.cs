@@ -95,20 +95,6 @@ namespace BeCharming.Metro
                 model.SelectedTarget = target;
                 model.SetDataToShare(selectedFile.Name, fileBytes);
                 model.TargetSelected(null);
-
-                //ListenerClient client = new ListenerClient();
-                //((NetTcpBinding)client.Endpoint.Binding).Security.Mode = SecurityMode.None;
-                //client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(servicePath));
-
-                //try
-                //{
-                //    await client.OpenDocumentAsync("Test.pdf", fileBytes);
-                //    ((MainViewModel)DataContext).IncrementShareCount(target);
-                //}
-                //catch (EndpointNotFoundException)
-                //{
-                //    // TODO Handle this exception.
-                //}
             }
         }
     }

@@ -24,9 +24,9 @@ namespace BeCharming.Metro.ViewModels
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             model = new Models.ShareTargetManager();
+            model.InitShareTargetStorage();
             model.PeerDiscoveryComplete += PeerDiscoveryComplete;
-            model.TargetsUpdated += TargetsUpdated;
-            TargetsUpdated(this, null);
+            model.PeerDiscovered += PeerDiscovered;
 
             AddTarget = new DelegateCommand(AddTargetExecute);
             EditTarget = new DelegateCommand(EditTargetExecute, CanEditTargetExecute);
@@ -36,18 +36,26 @@ namespace BeCharming.Metro.ViewModels
             RefreshTargets = new DelegateCommand(PerformPeerDiscovery);
         }
 
-        void TargetsUpdated(object sender, EventArgs e)
+        void PeerDiscovered(ShareTarget discoveredTarget)
         {
             Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
-                while (Targets.Count > 0)
+                // Update if existing, add if new.
+                //
+                bool alreadyDiscovered = false;
+
+                foreach (ShareTarget target in Targets)
                 {
-                    Targets.RemoveAt(0);
+                    if (target.Equals(discoveredTarget))
+                    {
+                        alreadyDiscovered = true;
+                        break;
+                    }
                 }
 
-                foreach (var target in model.Targets)
+                if (!alreadyDiscovered)
                 {
-                    Targets.Add(target);
+                    Targets.Add(discoveredTarget);
                 }
             }, this, null);
         }
@@ -143,6 +151,5 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
     }
 }

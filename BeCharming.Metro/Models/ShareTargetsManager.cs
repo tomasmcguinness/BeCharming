@@ -14,8 +14,9 @@ namespace BeCharming.Metro.Models
 {
     public class ShareTargetManager
     {
-        public event EventHandler TargetsUpdated;
         public event EventHandler PeerDiscoveryComplete;
+        public delegate void PeerDiscoveredHandler(ShareTarget shareTarget);
+        public event PeerDiscoveredHandler PeerDiscovered;
         private DatagramSocket socket;
         private DispatcherTimer timer;
 
@@ -23,9 +24,6 @@ namespace BeCharming.Metro.Models
         {
             timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
-
-            Targets = new List<ShareTarget>();
-            UpdateTargets();
         }
 
         void timer_Tick(object sender, object e)
@@ -37,23 +35,6 @@ namespace BeCharming.Metro.Models
                 PeerDiscoveryComplete(this, null);
             }
         }
-
-        private void UpdateTargets()
-        {
-            Targets.Clear();
-
-            foreach (var target in GetShareTargets())
-            {
-                Targets.Add(target);
-            }
-
-            if (TargetsUpdated != null)
-            {
-                TargetsUpdated(this, null);
-            }
-        }
-
-        public List<ShareTarget> Targets { get; set; }
 
         public async void PerformPeerDiscovery()
         {
@@ -90,16 +71,25 @@ namespace BeCharming.Metro.Models
             string discoveryResult = dr.ReadString(dataLength);
             string[] parts = discoveryResult.Split('|');
             string name = parts[0];
+            bool isPinProtected = bool.Parse(parts[1]);
             string uniqueName = parts[3];
 
             var existingTarget = GetShareTarget(uniqueName);
 
-            var discoveredTarget = new ShareTarget() { Name = name, IPAddress = args.RemoteHostName.DisplayName };
+            var discoveredTarget = new ShareTarget()
+            {
+                Name = name,
+                IPAddress = args.RemoteHostName.DisplayName,
+                IsPinCodeRequired = isPinProtected,
+                ShareTargetUniqueName = uniqueName
+            };
 
             if (existingTarget != null) discoveredTarget.ShareCount = existingTarget.ShareCount;
-            Targets.Add(discoveredTarget);
 
-            TargetsUpdated(this, null);
+            if (PeerDiscovered != null)
+            {
+                PeerDiscovered(discoveredTarget);
+            }
         }
 
         public List<ShareTarget> GetShareTargets()
@@ -153,8 +143,28 @@ namespace BeCharming.Metro.Models
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
+        }
 
-            UpdateTargets();
+        public void InitShareTargetStorage()
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var container = localSettings.CreateContainer("BeCharmingSettings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+
+            List<ShareTarget> shareTargets = null;
+
+            if (container.Values["ShareTargets"] != null)
+            {
+                shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
+            }
+
+            if (shareTargets == null)
+            {
+                shareTargets = new List<ShareTarget>();
+            }
+
+            var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+
+            container.Values["ShareTargets"] = xml;
         }
 
         public ShareTarget GetShareTarget(string uniqueName)
@@ -188,20 +198,22 @@ namespace BeCharming.Metro.Models
                 shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
             }
 
-            if (shareTargets == null)
-            {
-                shareTargets = new List<ShareTarget>();
-                shareTargets.Add(target);
-            }
+            var targetToUpdate = shareTargets.Where(t => t.ShareTargetUniqueName == target.ShareTargetUniqueName).SingleOrDefault();
 
             target.ShareCount++;
-            shareTargets.Where(t => t.ShareTargetUniqueName == target.ShareTargetUniqueName).Single().ShareCount = target.ShareCount;
+
+            if (targetToUpdate == null)
+            {
+                shareTargets.Add(target);
+            }
+            else
+            {
+                targetToUpdate.ShareCount = target.ShareCount;
+            }
 
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
-
-            UpdateTargets();
         }
 
         public void DeleteShareTarget(ShareTarget shareTarget)
@@ -221,8 +233,6 @@ namespace BeCharming.Metro.Models
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
-
-            UpdateTargets();
         }
     }
 }

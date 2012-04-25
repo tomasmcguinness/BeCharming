@@ -21,6 +21,8 @@ namespace BeCharming.Listener
 
         public string OpenWebPage(string urlToOpen)
         {
+            // TODO Open in background thread
+            //
             icon.ShowBalloonTip(3, "BeCharming", "Opening " + urlToOpen, ToolTipIcon.Info);
 
             Process runCmd = new Process();
@@ -37,6 +39,8 @@ namespace BeCharming.Listener
 
         public string OpenDocument(string documentName, byte[] documentBytes)
         {
+            // TODO Open in background thread
+            //
             icon.ShowBalloonTip(3, "BeCharming", "Opening " + documentName, ToolTipIcon.Info);
 
             try

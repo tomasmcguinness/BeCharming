@@ -40,22 +40,14 @@ namespace BeCharming.Metro.ViewModels
             Share = new DelegateCommand(TargetSelected);
             model = new ShareTargetManager();
             model.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
-            model.TargetsUpdated += model_TargetsUpdated;
+            model.PeerDiscovered += model_PeerDiscovered;
         }
 
-        void model_TargetsUpdated(object sender, EventArgs e)
+        void model_PeerDiscovered(ShareTarget shareTarget)
         {
             Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
-                while (Targets.Count > 0)
-                {
-                    Targets.RemoveAt(0);
-                }
-
-                foreach (var target in model.Targets)
-                {
-                    Targets.Add(target);
-                }
+                Targets.Add(shareTarget);
             }, this, null);
         }
 
