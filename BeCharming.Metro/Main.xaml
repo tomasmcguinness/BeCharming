@@ -33,7 +33,7 @@
                 <Button Grid.Column="1" Command="{Binding EditTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
                 <Button Grid.Column="2" Command="{Binding DeleteTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>-->
                 <Button Grid.Column="0" Command="{Binding RefreshTargets}" HorizontalAlignment="Left" Style="{StaticResource RefreshAppBarButtonStyle}"/>
-                
+
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
@@ -50,8 +50,8 @@
         <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
-        
-        
+
+
         <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -62,15 +62,15 @@
 
         <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="{StaticResource ComboBoxHighlightFillBrush}" />
 
-        <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowAddNewShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" DataContext="{Binding Path=SharingDialogModel}" Visibility="{Binding Path=IsShowingSharingDialog, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="460" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Border Grid.Row="1" Background="White">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Grid.Row="1" Background="White" Height="245">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -82,21 +82,17 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Add A New Share Target" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
-                        <TextBlock Margin="0,30,0,15" TextWrapping="Wrap" Text="Friendly name " VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetName, Mode=TwoWay}" Padding="10" ToolTipService.ToolTip="Friendly name"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Machine name or IP address " VerticalAlignment="Top" Grid.Row="3" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="4" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=TargetIPAddress, Mode=TwoWay}" Padding="10"/>
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin code " VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
+                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Sharing" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="{Binding Path=PinCode}" VerticalAlignment="Top" Grid.Row="5" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
                         <TextBox TextWrapping="Wrap" Grid.Row="6" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
                         <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right">
                             <Button Content="Add" Command="{Binding AddTarget}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" d:LayoutOverrides="Width" />
-                            <Button Content="Cancel" Command="{Binding CancelAddTarget}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
+                            <Button Content="Cancel" Command="{Binding CancelCommandExecute}" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left"/>
                         </StackPanel>
                     </Grid>
                 </Border>
             </Grid>
-        </Border>-->
+        </Border>
 
         <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" Visibility="{Binding Path=ShowEditShareTarget, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">

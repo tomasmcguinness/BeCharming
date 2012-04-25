@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using BeCharming.Common.ListenerService;
+using BeCharming.Metro.Models;
 using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -68,11 +69,11 @@ namespace BeCharming.Metro
             ShareTarget target = e.ClickedItem as ShareTarget;
 
             var filePicker = new FileOpenPicker();
-            filePicker.FileTypeFilter.Add(".pdf");
             filePicker.ViewMode = PickerViewMode.Thumbnail;
-            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            filePicker.SettingsIdentifier = "picker1";
-            filePicker.CommitButtonText = "Open File to Send";
+            filePicker.CommitButtonText = "Share File";
+            filePicker.SettingsIdentifier = "becharming";
+            filePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            filePicker.FileTypeFilter.Add("*");
 
             var selectedFile = await filePicker.PickSingleFileAsync();
 
@@ -90,26 +91,12 @@ namespace BeCharming.Metro
 
                 var fileBytes = buffer;
 
-                var servicePath = string.Format("net.tcp://{0}:22001/BeCharming", target.IPAddress);
+                ShareRequest request = new ShareRequest();
+                request.FileContents = fileBytes;
+                request.FileName = selectedFile.Name;
+                request.Target = target;
 
-                ShareTargetsViewModel model = new ShareTargetsViewModel(Dispatcher);
-                model.SelectedTarget = target;
-
-                bool pinCodeRequired = model.DoesTargetRequirePin(target);
-
-                if (pinCodeRequired)
-                {
-                    var pinCode = await GetPinCode();
-                }
-
-                model.SetDataToShare(selectedFile.Name, fileBytes);
-                model.TargetSelected(null);
-            }
-
-            private Task<string> GetPinCode()
-            {
-
-                return new Task<string>("1234");
+                ((MainViewModel)DataContext).StartShare(request);
             }
         }
     }

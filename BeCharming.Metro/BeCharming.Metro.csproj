@@ -120,6 +120,7 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShareRequest.cs" />
     <Compile Include="Models\ShareTargetsManager.cs" />
     <Compile Include="ObjectSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\ShareTarget.cs" />
     <Compile Include="ViewModels\ShareTargetsViewModel.cs" />
+    <Compile Include="ViewModels\SharingDialogViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

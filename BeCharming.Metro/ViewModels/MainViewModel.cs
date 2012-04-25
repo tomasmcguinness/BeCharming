@@ -28,6 +28,8 @@ namespace BeCharming.Metro.ViewModels
             model.PeerDiscoveryComplete += PeerDiscoveryComplete;
             model.PeerDiscovered += PeerDiscovered;
 
+            SharingDialogModel = new SharingDialogViewModel(Dispatcher);
+
             AddTarget = new DelegateCommand(AddTargetExecute);
             EditTarget = new DelegateCommand(EditTargetExecute, CanEditTargetExecute);
             DeleteTarget = new DelegateCommand(DeleteTargetExecute, CanDeleteTargetExecute);
@@ -90,11 +92,16 @@ namespace BeCharming.Metro.ViewModels
 
         public String TargetIPAddress { get; set; }
         public String TargetName { get; set; }
+        public String PinCode { get; set; }
+        public Boolean RememberPinCode { get; set; }
 
         public Boolean IsAppBarShowing { get { return isAppBarShowing; } set { isAppBarShowing = value; NotifyPropertyChanged("IsAppBarShowing"); } }
         public Boolean IsSearchingForPeers { get { return isSearchingForPeers; } set { isSearchingForPeers = value; NotifyPropertyChanged("IsSearchingForPeers"); } }
+
         public ObservableCollection<ShareTarget> Targets { get; set; }
         public ShareTarget SelectedTarget { get { return selectedShareTarget; } set { selectedShareTarget = value; TargetSelected(); } }
+
+        public SharingDialogViewModel SharingDialogModel { get; private set; }
 
         private void TargetSelected()
         {
@@ -149,5 +156,24 @@ namespace BeCharming.Metro.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void StartShare(Models.ShareRequest request)
+        {
+            SharingDialogModel.IsShowingSharingDialog = true;
+
+            //ShareTargetsViewModel model = new ShareTargetsViewModel(Dispatcher);
+            //bool pinCodeRequired = model.DoesTargetRequirePin(target);
+
+            //if (pinCodeRequired && string.IsNullOrEmpty(PinCode))
+            //{
+
+            //}
+            //else
+            //{
+            //    model.SelectedTarget = target;
+            //    model.SetDataToShare(selectedFile.Name, fileBytes);
+            //    model.TargetSelected(null);
+            //}
+        }
     }
 }
