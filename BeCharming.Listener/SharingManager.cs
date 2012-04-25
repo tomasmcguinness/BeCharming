@@ -26,12 +26,14 @@ namespace BeCharming.Listener
 
             var server = new ListenerService(icon);
 
-            var tcpBaseAddress = new Uri("net.tcp://localhost:22001/becharming");
+            var tcpBaseAddress = new Uri("net.tcp://0.0.0.0:22001/becharming");
 
             host = new ServiceHost(server, tcpBaseAddress);
 
             var binding = new NetTcpBinding();
             binding.MaxReceivedMessageSize = Int32.MaxValue;
+            binding.ReaderQuotas.MaxArrayLength = Int32.MaxValue;
+            binding.Security.Mode = SecurityMode.None;
 
             host.AddServiceEndpoint(typeof(IListener), binding, String.Empty);
 
