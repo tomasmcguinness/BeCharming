@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
@@ -93,8 +94,22 @@ namespace BeCharming.Metro
 
                 ShareTargetsViewModel model = new ShareTargetsViewModel(Dispatcher);
                 model.SelectedTarget = target;
+
+                bool pinCodeRequired = model.DoesTargetRequirePin(target);
+
+                if (pinCodeRequired)
+                {
+                    var pinCode = await GetPinCode();
+                }
+
                 model.SetDataToShare(selectedFile.Name, fileBytes);
                 model.TargetSelected(null);
+            }
+
+            private Task<string> GetPinCode()
+            {
+
+                return new Task<string>("1234");
             }
         }
     }

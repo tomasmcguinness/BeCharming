@@ -40,8 +40,6 @@ namespace BeCharming.Metro.ViewModels
         {
             Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
             {
-                // Update if existing, add if new.
-                //
                 bool alreadyDiscovered = false;
 
                 foreach (ShareTarget target in Targets)

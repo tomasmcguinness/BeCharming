@@ -173,5 +173,10 @@ namespace BeCharming.Metro.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public bool DoesTargetRequirePin(ShareTarget target)
+        {
+            return target.IsPinCodeRequired;
+        }
     }
 }
