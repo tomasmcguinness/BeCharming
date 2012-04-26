@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
 using Windows.Networking;
 using Windows.Networking.Sockets;
@@ -12,15 +14,18 @@ using Windows.UI.Xaml;
 
 namespace BeCharming.Metro.Models
 {
-    public class ShareTargetManager
+    public class ShareTargetsManager
     {
+        public event EventHandler ShareComplete;
+        public event EventHandler ShareFailed;
+        public event EventHandler ShareFailedWithInvalidPin;
         public event EventHandler PeerDiscoveryComplete;
         public delegate void PeerDiscoveredHandler(ShareTarget shareTarget);
         public event PeerDiscoveredHandler PeerDiscovered;
         private DatagramSocket socket;
         private DispatcherTimer timer;
 
-        public ShareTargetManager()
+        public ShareTargetsManager()
         {
             timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
@@ -233,6 +238,48 @@ namespace BeCharming.Metro.Models
             var xml = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
 
             container.Values["ShareTargets"] = xml;
+        }
+
+        public bool RequiresPin(ShareRequest request)
+        {
+            return request.Target.IsPinCodeRequired;
+        }
+
+        public async void Share(ShareRequest request)
+        {
+            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", request.Target.IPAddress);
+
+            ListenerClient client = new ListenerClient();
+            ((NetTcpBinding)client.Endpoint.Binding).Security.Mode = SecurityMode.None;
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
+
+            string result = null;
+
+            if (!string.IsNullOrEmpty(request.Url))
+            {
+                result = await client.OpenWebPageAsync(request.Url);
+            }
+            else
+            {
+                result = await client.OpenDocumentAsync(request.FileName, request.FileContents);
+            }
+
+            if (result == "okay")
+            {
+                IncrementShareCount(request.Target);
+
+                if (ShareComplete != null)
+                {
+                    ShareComplete(this, null);
+                }
+            }
+            else
+            {
+                if (ShareFailed != null)
+                {
+                    ShareFailed(this, null);
+                }
+            }
         }
     }
 }

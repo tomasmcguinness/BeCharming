@@ -14,7 +14,7 @@ namespace BeCharming.Metro.ViewModels
         private bool showAddNewShareTarget = false;
         private bool showEditShareTarget = false;
         private ShareTarget selectedShareTarget = null;
-        private Models.ShareTargetManager model;
+        private Models.ShareTargetsManager model;
         private bool isAppBarShowing = false;
         private bool isSearchingForPeers = false;
         private Windows.UI.Core.CoreDispatcher Dispatcher;
@@ -23,7 +23,7 @@ namespace BeCharming.Metro.ViewModels
         {
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
-            model = new Models.ShareTargetManager();
+            model = new Models.ShareTargetsManager();
             model.InitShareTargetStorage();
             model.PeerDiscoveryComplete += PeerDiscoveryComplete;
             model.PeerDiscovered += PeerDiscovered;
@@ -159,21 +159,8 @@ namespace BeCharming.Metro.ViewModels
 
         public void StartShare(Models.ShareRequest request)
         {
+            SharingDialogModel.SetupForShareRequest(request);
             SharingDialogModel.IsShowingSharingDialog = true;
-
-            //ShareTargetsViewModel model = new ShareTargetsViewModel(Dispatcher);
-            //bool pinCodeRequired = model.DoesTargetRequirePin(target);
-
-            //if (pinCodeRequired && string.IsNullOrEmpty(PinCode))
-            //{
-
-            //}
-            //else
-            //{
-            //    model.SelectedTarget = target;
-            //    model.SetDataToShare(selectedFile.Name, fileBytes);
-            //    model.TargetSelected(null);
-            //}
         }
     }
 }

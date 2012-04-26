@@ -30,7 +30,7 @@ namespace BeCharming.Metro.ViewModels
         private bool shareButtonEnabled;
         private bool isSharing;
         private bool isSearchingForPeers;
-        private ShareTargetManager model;
+        private ShareTargetsManager manager;
         private Windows.UI.Core.CoreDispatcher Dispatcher;
 
         public ShareTargetsViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
@@ -38,9 +38,21 @@ namespace BeCharming.Metro.ViewModels
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             Share = new DelegateCommand(TargetSelected);
-            model = new ShareTargetManager();
-            model.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
-            model.PeerDiscovered += model_PeerDiscovered;
+            manager = new ShareTargetsManager();
+            manager.ShareComplete += manager_ShareComplete;
+            manager.ShareFailed += manager_ShareFailed;
+            manager.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
+            manager.PeerDiscovered += model_PeerDiscovered;
+        }
+
+        void manager_ShareFailed(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void manager_ShareComplete(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         void model_PeerDiscovered(ShareTarget shareTarget)
@@ -113,7 +125,7 @@ namespace BeCharming.Metro.ViewModels
         public void LoadTargets()
         {
             IsSearchingForPeers = true;
-            model.PerformPeerDiscovery();
+            manager.PerformPeerDiscovery();
         }
 
         public void SetDataToShare(string fileName, byte[] fileContents)
@@ -130,36 +142,13 @@ namespace BeCharming.Metro.ViewModels
         public async void TargetSelected(object target)
         {
             IsSharing = true;
-            var serverPath = string.Format("net.tcp://{0}:22001/BeCharming", SelectedTarget.IPAddress);
 
-            ListenerClient client = new ListenerClient();
-            ((NetTcpBinding)client.Endpoint.Binding).Security.Mode = SecurityMode.None;
-            client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
+            ShareRequest request = new ShareRequest();
+            request.Url = this.url;
+            request.FileContents = fileBytes;
+            request.FileName = fileName;
 
-            string result = null;
-
-            if (!string.IsNullOrEmpty(url))
-            {
-                result = await client.OpenWebPageAsync(url);
-            }
-            else
-            {
-                result = await client.OpenDocumentAsync(fileName, fileBytes);
-            }
-
-            if (result == "okay")
-            {
-                Models.ShareTargetManager model = new Models.ShareTargetManager();
-                model.IncrementShareCount((ShareTarget)SelectedTarget);
-
-                if (shareOperation != null)
-                    shareOperation.ReportCompleted();
-            }
-            else
-            {
-                if (shareOperation != null)
-                    shareOperation.ReportError("Could not reach the share target");
-            }
+            manager.Share(request);
 
             IsSharing = false;
         }
