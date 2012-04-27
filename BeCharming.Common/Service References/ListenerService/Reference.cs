@@ -19,10 +19,10 @@ namespace BeCharming.Common.ListenerService {
     public interface IListener {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListener/OpenWebPage", ReplyAction="http://tempuri.org/IListener/OpenWebPageResponse")]
-        System.Threading.Tasks.Task<string> OpenWebPageAsync(string urlToOpen);
+        System.Threading.Tasks.Task<string> OpenWebPageAsync(string urlToOpen, string pinCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListener/OpenDocument", ReplyAction="http://tempuri.org/IListener/OpenDocumentResponse")]
-        System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes);
+        System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes, string pinCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -68,12 +68,12 @@ namespace BeCharming.Common.ListenerService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Threading.Tasks.Task<string> OpenWebPageAsync(string urlToOpen) {
-            return base.Channel.OpenWebPageAsync(urlToOpen);
+        public System.Threading.Tasks.Task<string> OpenWebPageAsync(string urlToOpen, string pinCode) {
+            return base.Channel.OpenWebPageAsync(urlToOpen, pinCode);
         }
         
-        public System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes) {
-            return base.Channel.OpenDocumentAsync(documentName, documentBytes);
+        public System.Threading.Tasks.Task<string> OpenDocumentAsync(string documentName, byte[] documentBytes, string pinCode) {
+            return base.Channel.OpenDocumentAsync(documentName, documentBytes, pinCode);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {
@@ -90,6 +90,7 @@ namespace BeCharming.Common.ListenerService {
                 result.MaxBufferSize = int.MaxValue;
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
+                result.Security.Mode = System.ServiceModel.SecurityMode.None;
                 return result;
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
@@ -97,7 +98,7 @@ namespace BeCharming.Common.ListenerService {
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration) {
             if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IListener)) {
-                return new System.ServiceModel.EndpointAddress(new System.Uri("net.tcp://localhost:22001/becharming"), new System.ServiceModel.UpnEndpointIdentity("THINKPADWIN8\\Tomas"));
+                return new System.ServiceModel.EndpointAddress("net.tcp://0.0.0.0:22001/becharming");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

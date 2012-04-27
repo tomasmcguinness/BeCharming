@@ -19,8 +19,13 @@ namespace BeCharming.Listener
             this.icon = icon;
         }
 
-        public string OpenWebPage(string urlToOpen)
+        public string OpenWebPage(string urlToOpen, string pinCode)
         {
+            if (!IsPinCodeCorrect(pinCode))
+            {
+                return "InvalidPin";
+            }
+
             // TODO Open in background thread
             //
             icon.ShowBalloonTip(3, "BeCharming", "Opening " + urlToOpen, ToolTipIcon.Info);
@@ -37,8 +42,13 @@ namespace BeCharming.Listener
             return "okay";
         }
 
-        public string OpenDocument(string documentName, byte[] documentBytes)
+        public string OpenDocument(string documentName, byte[] documentBytes, string pinCode)
         {
+            if (!IsPinCodeCorrect(pinCode))
+            {
+                return "InvalidPin";
+            }
+
             // TODO Open in background thread
             //
             icon.ShowBalloonTip(3, "BeCharming", "Opening " + documentName, ToolTipIcon.Info);
@@ -72,6 +82,11 @@ namespace BeCharming.Listener
             {
                 return "error";
             }
+        }
+
+        private bool IsPinCodeCorrect(string pinCode)
+        {
+            return pinCode == "1234";
         }
     }
 }

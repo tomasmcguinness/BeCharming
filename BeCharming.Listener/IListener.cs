@@ -10,9 +10,9 @@ namespace BeCharming.Listener
     public interface IListener
     {
         [OperationContract]
-        string OpenWebPage(string urlToOpen);
+        string OpenWebPage(string urlToOpen, string pinCode);
 
         [OperationContract]
-        string OpenDocument(string documentName, byte[] documentBytes);
+        string OpenDocument(string documentName, byte[] documentBytes, string pinCode);
     }
 }

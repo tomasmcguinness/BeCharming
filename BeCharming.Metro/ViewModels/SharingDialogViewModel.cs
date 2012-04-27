@@ -15,6 +15,7 @@ namespace BeCharming.Metro.ViewModels
         private ShareTargetsManager manager;
         private bool isShowingSharingDialog = false;
         private bool isShowingRequiresPassword = false;
+        private bool isShowingInvalidPinMessage = false;
         private bool isSharing = false;
         private string pinCode = null;
 
@@ -23,22 +24,31 @@ namespace BeCharming.Metro.ViewModels
             this.Dispatcher = Dispatcher;
             this.manager = new ShareTargetsManager();
             this.manager.ShareComplete += manager_ShareComplete;
+            this.manager.ShareFailedWithInvalidPin += manager_ShareFailedWithInvalidPin;
 
             this.CancelCommand = new DelegateCommand(CancelCommandExecute);
             this.ShareCommand = new DelegateCommand(ShareCommandExecute, CanShareCommandExecute);
         }
 
-        void manager_ShareComplete(object sender, EventArgs e)
-        {
-            this.IsShowingSharingDialog = false;
-        }
-
+        public Boolean IsShowingInvalidPinMessage { get { return isShowingInvalidPinMessage; } set { isShowingInvalidPinMessage = value; NotifyPropertyChanged("IsShowingInvalidPinMessage"); } }
         public Boolean IsShowingRequiresPin { get { return isShowingRequiresPassword; } set { isShowingRequiresPassword = value; NotifyPropertyChanged("IsShowingPasswordRequired"); } }
         public Boolean IsSharing { get { return isSharing; } set { isSharing = value; NotifyPropertyChanged("IsSharing"); } }
         public Boolean IsShowingSharingDialog { get { return isShowingSharingDialog; } set { isShowingSharingDialog = value; NotifyPropertyChanged("IsShowingSharingDialog"); } }
         public string PinCode { get { return pinCode; } set { pinCode = value; UpdateSendCommand(); NotifyPropertyChanged("PinCode"); } }
         public ICommand CancelCommand { get; set; }
         public ICommand ShareCommand { get; set; }
+        public ShareRequest ShareRequest { get; set; }
+
+        void manager_ShareFailedWithInvalidPin(object sender, EventArgs e)
+        {
+            this.IsShowingRequiresPin = true;
+            this.IsShowingInvalidPinMessage = true;
+        }
+
+        void manager_ShareComplete(object sender, EventArgs e)
+        {
+            this.IsShowingSharingDialog = false;
+        }
 
         public void CancelCommandExecute(object state)
         {
@@ -51,12 +61,15 @@ namespace BeCharming.Metro.ViewModels
             if (!string.IsNullOrEmpty(PinCode))
             {
                 IsSharing = true;
+                ShareRequest.PinCode = PinCode;
+                manager.Share(ShareRequest);
             }
         }
 
         public bool CanShareCommandExecute(object state)
         {
-            return !string.IsNullOrEmpty(PinCode) && PinCode.Length == 4;
+            //return !string.IsNullOrEmpty(PinCode) && PinCode.Length == 4;
+            return true;
         }
 
         public void UpdateSendCommand()
@@ -76,7 +89,9 @@ namespace BeCharming.Metro.ViewModels
 
         public void SetupForShareRequest(Models.ShareRequest request)
         {
-            if (manager.RequiresPin(request))
+            ShareRequest = request;
+
+            if (manager.RequiresPin(ShareRequest))
             {
                 IsShowingRequiresPin = true;
                 IsSharing = false;
@@ -85,7 +100,7 @@ namespace BeCharming.Metro.ViewModels
             {
                 IsShowingRequiresPin = false;
                 IsSharing = true;
-                manager.Share(request);
+                manager.Share(ShareRequest);
             }
         }
     }

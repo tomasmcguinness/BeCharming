@@ -139,7 +139,7 @@ namespace BeCharming.Metro.ViewModels
             this.url = url;
         }
 
-        public async void TargetSelected(object target)
+        public void TargetSelected(object target)
         {
             IsSharing = true;
 

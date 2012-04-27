@@ -255,13 +255,15 @@ namespace BeCharming.Metro.Models
 
             string result = null;
 
+            // The PinCode should be forward hashed so it cannot be read??
+
             if (!string.IsNullOrEmpty(request.Url))
             {
-                result = await client.OpenWebPageAsync(request.Url);
+                result = await client.OpenWebPageAsync(request.Url, request.PinCode);
             }
             else
             {
-                result = await client.OpenDocumentAsync(request.FileName, request.FileContents);
+                result = await client.OpenDocumentAsync(request.FileName, request.FileContents, request.PinCode);
             }
 
             if (result == "okay")
@@ -275,9 +277,19 @@ namespace BeCharming.Metro.Models
             }
             else
             {
-                if (ShareFailed != null)
+                if (result == "InvalidPin")
                 {
-                    ShareFailed(this, null);
+                    if (ShareFailedWithInvalidPin != null)
+                    {
+                        ShareFailedWithInvalidPin(this, null);
+                    }
+                }
+                else
+                {
+                    if (ShareFailed != null)
+                    {
+                        ShareFailed(this, null);
+                    }
                 }
             }
         }
