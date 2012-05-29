@@ -9,7 +9,7 @@ using BeCharming.Metro.Models;
 
 namespace BeCharming.Metro.ViewModels
 {
-    public class SharingDialogViewModel : INotifyPropertyChanged
+    public class SharingDialogViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private Windows.UI.Core.CoreDispatcher Dispatcher;
         private ShareTargetsManager manager;
@@ -19,9 +19,9 @@ namespace BeCharming.Metro.ViewModels
         private bool isSharing = false;
         private string pinCode = null;
 
-        public SharingDialogViewModel(Windows.UI.Core.CoreDispatcher Dispatcher)
-        {
-            this.Dispatcher = Dispatcher;
+        public SharingDialogViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
+            : base(dispatcher)
+        {           
             this.manager = new ShareTargetsManager();
             this.manager.ShareComplete += manager_ShareComplete;
             this.manager.ShareFailedWithInvalidPin += manager_ShareFailedWithInvalidPin;

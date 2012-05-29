@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace BeCharming.Metro.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private bool showAddNewShareTarget = false;
         private bool showEditShareTarget = false;
@@ -17,11 +17,10 @@ namespace BeCharming.Metro.ViewModels
         private Models.ShareTargetsManager model;
         private bool isAppBarShowing = false;
         private bool isSearchingForPeers = false;
-        private Windows.UI.Core.CoreDispatcher Dispatcher;
-
+        
         public MainViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
+            : base(dispatcher)
         {
-            this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             model = new Models.ShareTargetsManager();
             model.InitShareTargetStorage();

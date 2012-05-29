@@ -26,18 +26,8 @@ namespace BeCharming.Listener
                 return "InvalidPin";
             }
 
-            // TODO Open in background thread
-            //
-            icon.ShowBalloonTip(3, "BeCharming", "Opening " + urlToOpen, ToolTipIcon.Info);
-
-            Process runCmd = new Process();
-            runCmd.StartInfo.FileName = @"C:\Program Files (x86)\Internet Explorer\IExplore.exe";
-            runCmd.StartInfo.Arguments = urlToOpen;
-            runCmd.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
-
-            runCmd.StartInfo.UseShellExecute = false;
-            runCmd.StartInfo.RedirectStandardOutput = true;
-            runCmd.Start();
+            icon.ShowBalloonTip(3, "BeCharming", "Opening " + urlToOpen, ToolTipIcon.Info);            
+            Process.Start(urlToOpen);
 
             return "okay";
         }
@@ -67,14 +57,7 @@ namespace BeCharming.Listener
                     tempFile.Flush();
                 }
 
-                // Store the file in a temp folder.
-                Process runCmd = new Process();
-                runCmd.StartInfo.FileName = fileName;// @"C:\Program Files (x86)\Internet Explorer\IExplore.exe";
-                runCmd.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
-
-                runCmd.StartInfo.UseShellExecute = true;
-                runCmd.StartInfo.RedirectStandardOutput = false;
-                runCmd.Start();
+                Process.Start(fileName);
 
                 return "okay";
             }

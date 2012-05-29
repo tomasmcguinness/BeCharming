@@ -12,7 +12,7 @@ using Windows.Storage.Streams;
 
 namespace BeCharming.Metro.ViewModels
 {
-    public class ShareTargetsViewModel : INotifyPropertyChanged
+    public class ShareTargetsViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private ShareOperation shareOperation = null;
         private byte[] fileBytes;
@@ -23,11 +23,10 @@ namespace BeCharming.Metro.ViewModels
         private bool isSharing;
         private bool isSearchingForPeers;
         private ShareTargetsManager manager;
-        private Windows.UI.Core.CoreDispatcher Dispatcher;
-
+        
         public ShareTargetsViewModel(Windows.UI.Core.CoreDispatcher dispatcher)
+            : base(dispatcher)
         {
-            this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
             Share = new DelegateCommand(TargetSelected);
             manager = new ShareTargetsManager();

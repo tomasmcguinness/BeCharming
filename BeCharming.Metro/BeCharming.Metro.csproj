@@ -132,6 +132,7 @@
     <Compile Include="Models\ShareTarget.cs" />
     <Compile Include="ViewModels\ShareTargetsViewModel.cs" />
     <Compile Include="ViewModels\SharingDialogViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
