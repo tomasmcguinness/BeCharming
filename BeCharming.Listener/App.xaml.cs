@@ -12,6 +12,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Discovery;
 using System.Text;
 using System.Threading;
+using CharmingProps = BeCharming.Listener.Properties;
 
 namespace BeCharming.Listener
 {
@@ -24,7 +25,7 @@ namespace BeCharming.Listener
         {
             try
             {
-                icon = CreateIcon();
+                CreateIcon();
                 manager = new SharingManager();
                 manager.Start(icon);
 
@@ -43,30 +44,25 @@ namespace BeCharming.Listener
             manager.Stop();
         }
 
-        private System.Windows.Forms.NotifyIcon CreateIcon()
+        private void CreateIcon()
         {
             icon = new System.Windows.Forms.NotifyIcon();
             icon.Visible = true;
-            icon.Icon = new System.Drawing.Icon("Icon1.ico");
+            icon.Icon = CharmingProps.Resources.Icon1;
             icon.ShowBalloonTip(3, "BeCharming", "Ready to receive shared items...", System.Windows.Forms.ToolTipIcon.Info);
             icon.ContextMenu = GetContextMenu();
-
-            return icon;
         }
 
         private System.Windows.Forms.ContextMenu GetContextMenu()
         {
-            System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
+            var menu = new System.Windows.Forms.ContextMenu();
             var exitItem = new System.Windows.Forms.MenuItem() { Text = "Exit" };
-            exitItem.Click += exitItem_Click;
+            exitItem.Click += (s, e) => App.Current.Shutdown();
             menu.MenuItems.Add(exitItem);
 
             return menu;
         }
 
-        void exitItem_Click(object sender, EventArgs e)
-        {
-            App.Current.Shutdown();
-        }
+       
     }
 }

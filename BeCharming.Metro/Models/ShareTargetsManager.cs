@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using BeCharming.Common.ListenerService;
 using BeCharming.Metro.ViewModels;
 using Windows.Networking;
@@ -63,7 +60,7 @@ namespace BeCharming.Metro.Models
 
             var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
             DataWriter wr = new DataWriter(outputStream);
-            wr.WriteString("**BECHARMING DISCOVERY**");
+            wr.WriteString("**BECHARMING DISCOVERY**");            
             await wr.FlushAsync();
             await wr.StoreAsync();
         }

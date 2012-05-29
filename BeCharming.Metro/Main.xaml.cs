@@ -1,26 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using BeCharming.Common.ListenerService;
 using BeCharming.Metro.Models;
 using BeCharming.Metro.ViewModels;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Networking;
-using Windows.Networking.Sockets;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238

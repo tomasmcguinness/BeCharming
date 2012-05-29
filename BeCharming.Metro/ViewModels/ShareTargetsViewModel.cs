@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using BeCharming.Common.ListenerService;
 using BeCharming.Metro.Models;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.System.Threading;
 
 namespace BeCharming.Metro.ViewModels
 {
