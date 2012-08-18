@@ -38,9 +38,9 @@ namespace BeCharming.Metro.ViewModels
             RefreshTargets = new DelegateCommand(PerformPeerDiscovery);
         }
 
-        void PeerDiscovered(ShareTarget discoveredTarget)
+        async void PeerDiscovered(ShareTarget discoveredTarget)
         {
-            Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 bool alreadyDiscovered = false;
 
@@ -57,7 +57,7 @@ namespace BeCharming.Metro.ViewModels
                 {
                     Targets.Add(discoveredTarget);
                 }
-            }, this, null);
+            });
         }
 
         private void DeleteTargetExecute(object obj)

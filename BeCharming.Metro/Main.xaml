@@ -11,7 +11,7 @@
         <converters:BooleanToVisibilityConverter x:Key="b2v" />
         <converters:BooleanToVisibilityConverter x:Key="b2vr" IsReversed="True" />
         <DataTemplate x:Key="ShareTarget">
-            <Border Background="{StaticResource ComboBoxHighlightFillBrush}" VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
+            <Border VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
                 <Grid>
                     <StackPanel>
                         <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32" IsHitTestVisible="False" />
@@ -33,7 +33,7 @@
                 <!--<Button Grid.Column="0" Command="{Binding ShowAddTarget}" HorizontalAlignment="Left" Style="{StaticResource AddAppBarButtonStyle}"/>
                 <Button Grid.Column="1" Command="{Binding EditTarget}" HorizontalAlignment="Left" Style="{StaticResource EditAppBarButtonStyle}"/>
                 <Button Grid.Column="2" Command="{Binding DeleteTarget}" HorizontalAlignment="Left" Style="{StaticResource DeleteAppBarButtonStyle}"/>-->
-                <Button Grid.Column="0" Command="{Binding RefreshTargets}" HorizontalAlignment="Left" Style="{StaticResource RefreshAppBarButtonStyle}"/>
+                <Button Grid.Column="0" Command="{Binding RefreshTargets}" HorizontalAlignment="Left" />
 
             </Grid>
         </AppBar>
@@ -48,9 +48,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock TextWrapping="Wrap" Text="BeCharming" Style="{StaticResource HeaderTextStyle}" Margin="80,50,0,0" FontWeight="Normal" Foreground="{StaticResource ComboBoxHighlightFillBrush}"/>
-        <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Style="{StaticResource SubheaderTextStyle}" Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE000000" Margin="80,35,0,0"/>
+        <TextBlock TextWrapping="Wrap" Text="BeCharming" Margin="80,50,0,0" FontWeight="Normal" />
+        <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Margin="80,30,0,0" Grid.Row="1" Foreground="#DE000000"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Foreground="#DE000000" Margin="80,35,0,0"/>
 
 
         <local:VariableGridView Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
@@ -61,7 +61,7 @@
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
 
-        <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="{StaticResource ComboBoxHighlightFillBrush}" />
+        <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" />
 
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" DataContext="{Binding Path=SharingDialogModel}" Visibility="{Binding Path=IsShowingSharingDialog, Converter={StaticResource b2v}}" Grid.RowSpan="5">
             <Grid Margin="-10,0,10,0">
@@ -78,10 +78,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Sharing" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Foreground="#DE000000"/>
+                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Sharing" VerticalAlignment="Top" Foreground="#DE000000"/>
 
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin Code" VerticalAlignment="Top" Grid.Row="1" Foreground="Black" Style="{StaticResource SubheaderTextStyle}"/>
-                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin Code" VerticalAlignment="Top" Grid.Row="1" Foreground="Black" />
+                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
 
                         <Border Grid.Row="1" Grid.RowSpan="2" Margin="0,15,0,0" Visibility="{Binding Path=IsShowingInvalidPinMessage, Converter={StaticResource b2v}}">
                             <TextBlock TextWrapping="NoWrap" Margin="10" Grid.Row="1" Text="The Pin Code Specified Was Invalid." Foreground="Red" FontWeight="Bold" />
@@ -92,8 +92,8 @@
                         </Border>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsShowingRequiresPin}">
-                            <Button Content="Share" Command="{Binding Path=ShareCommand}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxItemHighlightFillBrush}" />
-                            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" BorderBrush="{StaticResource ComboBoxHighlightFillBrush}" Padding="12,4,12,5" HorizontalAlignment="Left" />
+                            <Button Content="Share" Command="{Binding Path=ShareCommand}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" />
+                            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" Padding="12,4,12,5" HorizontalAlignment="Left" />
                         </StackPanel>
                     </Grid>
                 </Border>

@@ -55,12 +55,12 @@ namespace BeCharming.Metro.ViewModels
             throw new NotImplementedException();
         }
 
-        void model_PeerDiscovered(ShareTarget shareTarget)
+        async void model_PeerDiscovered(ShareTarget shareTarget)
         {
-            Dispatcher.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, (i, u) =>
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 Targets.Add(shareTarget);
-            }, this, null);
+            });
         }
 
         void model_PeerDiscoveryComplete(object sender, EventArgs e)

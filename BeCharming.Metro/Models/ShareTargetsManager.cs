@@ -84,7 +84,7 @@ namespace BeCharming.Metro.Models
             var discoveredTarget = new ShareTarget()
             {
                 Name = name,
-                IPAddress = args.RemoteHostName.DisplayName,
+                IPAddress = args.RemoteAddress.DisplayName,
                 IsPinCodeRequired = isPinProtected,
                 ShareTargetUniqueName = uniqueName
             };
