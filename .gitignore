@@ -23,10 +23,8 @@
 *.sbr
 *.sdf
 ipch/
-obj/
-[Bb]in*/
-[Dd]ebug*/
-[Rr]elease*/
+obj
+bin
 Ankh.NoLoad
 
 #Tooling

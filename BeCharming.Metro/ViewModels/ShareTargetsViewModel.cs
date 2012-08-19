@@ -39,20 +39,26 @@ namespace BeCharming.Metro.ViewModels
             Targets = new ObservableCollection<ShareTarget>();
             Share = new DelegateCommand(TargetSelected);
             manager = new ShareTargetsManager();
+            manager.ShareStarted += manager_ShareStarted;
             manager.ShareComplete += manager_ShareComplete;
             manager.ShareFailed += manager_ShareFailed;
             manager.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
             manager.PeerDiscovered += model_PeerDiscovered;
         }
 
+        void manager_ShareStarted(object sender, EventArgs e)
+        {
+            shareOperation.ReportStarted();
+        }
+
         void manager_ShareFailed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            shareOperation.ReportError("The sharing failed");
         }
 
         void manager_ShareComplete(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            shareOperation.ReportCompleted();
         }
 
         async void model_PeerDiscovered(ShareTarget shareTarget)

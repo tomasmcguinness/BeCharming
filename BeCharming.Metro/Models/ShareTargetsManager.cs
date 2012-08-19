@@ -16,6 +16,7 @@ namespace BeCharming.Metro.Models
 {
     public class ShareTargetsManager
     {
+        public event EventHandler ShareStarted;
         public event EventHandler ShareComplete;
         public event EventHandler ShareFailed;
         public event EventHandler ShareFailedWithInvalidPin;
@@ -207,6 +208,11 @@ namespace BeCharming.Metro.Models
             {
                 shareTargets = ObjectSerializer<List<ShareTarget>>.FromXml(container.Values["ShareTargets"] as string);
             }
+            else
+            {
+                shareTargets = new List<ShareTarget>();
+                container.Values["ShareTargets"] = ObjectSerializer<List<ShareTarget>>.ToXml(shareTargets);
+            }
 
             var targetToUpdate = shareTargets.Where(t => t.ShareTargetUniqueName == target.ShareTargetUniqueName).SingleOrDefault();
 
@@ -259,6 +265,11 @@ namespace BeCharming.Metro.Models
             client.Endpoint.Address = new System.ServiceModel.EndpointAddress(new Uri(serverPath));
 
             string result = null;
+
+            if (ShareStarted != null)
+            {
+                ShareStarted(this, null);
+            }
 
             // The PinCode should be forward hashed so it cannot be read??
 
