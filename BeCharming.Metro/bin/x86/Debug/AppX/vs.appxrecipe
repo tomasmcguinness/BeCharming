@@ -5,7 +5,7 @@
     <WindowsUser>Tomas</WindowsUser>
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
-    <RegisteredManifestChecksum>E5E0D4B20B1E0F1309AB290300557C88CDF2A0AD3322096C93A197AAD0CF7C90</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>6F93B0FFA7C8FC8BBEE4F5A08E8961711564CC87C23682351D4ACE26E03EDA7E</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>bad231db-df88-4461-9ad0-0ed76446c718_1.0.0.0_x86__36e0w7wn70k7e</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>bad231db-df88-4461-9ad0-0ed76446c718_36e0w7wn70k7e!App</RegisteredUserModeAppID>
     <RegisteredPackageID>bad231db-df88-4461-9ad0-0ed76446c718</RegisteredPackageID>
@@ -16,17 +16,17 @@
     <AppXManifest Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2012-08-19T07:14:55.771</Modified>
+      <Modified>2012-08-19T07:54:12.994</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\BeCharming.Metro.exe">
       <PackagePath>BeCharming.Metro.exe</PackagePath>
-      <Modified>2012-08-19T07:29:24.791</Modified>
+      <Modified>2012-08-19T07:50:16.098</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\BeCharming.Metro.pdb">
       <PackagePath>BeCharming.Metro.pdb</PackagePath>
-      <Modified>2012-08-19T07:29:24.758</Modified>
+      <Modified>2012-08-19T07:50:16.063</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Common\bin\x86\Debug\BeCharming.Common.pdb">
       <PackagePath>BeCharming.Common.pdb</PackagePath>
@@ -90,7 +90,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\Main.xaml">
       <PackagePath>Main.xaml</PackagePath>
-      <Modified>2012-08-19T07:29:02.528</Modified>
+      <Modified>2012-08-19T07:49:44.207</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\ShareTargets.xaml">
       <PackagePath>ShareTargets.xaml</PackagePath>
@@ -98,7 +98,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\Development\BeCharming\BeCharming.Metro\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2012-08-19T07:14:55.695</Modified>
+      <Modified>2012-08-19T07:54:12.915</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

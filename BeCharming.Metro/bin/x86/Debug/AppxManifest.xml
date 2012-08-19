@@ -22,10 +22,21 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="BeCharming.Metro.exe" EntryPoint="BeCharming.Metro.App">
-      <VisualElements DisplayName="BeCharming.Metro" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming.Metro" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="BeCharming.Metro" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming.Metro" ForegroundText="light" BackgroundColor="#007CD3">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
       </VisualElements>
+      <Extensions>
+        <Extension Category="windows.shareTarget">
+          <ShareTarget>
+            <SupportedFileTypes>
+              <SupportsAnyFileType />
+            </SupportedFileTypes>
+            <DataFormat>Bitmap</DataFormat>
+            <DataFormat>URI</DataFormat>
+          </ShareTarget>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

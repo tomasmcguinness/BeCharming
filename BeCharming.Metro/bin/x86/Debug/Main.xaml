@@ -11,10 +11,10 @@
         <common:BooleanToVisibilityConverter x:Key="b2v" />
         <common:BooleanToVisibilityConverter x:Key="b2vr" IsReversed="True" />
         <DataTemplate x:Key="ShareTarget">
-            <Border VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}">
+            <Border VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}" Background="#DE007CD3">
                 <Grid>
                     <StackPanel>
-                        <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="32" IsHitTestVisible="False" />
+                        <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="28" IsHitTestVisible="False" />
                         <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667" IsHitTestVisible="False" />
                     </StackPanel>
                     <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
@@ -50,18 +50,19 @@
 
         <TextBlock TextWrapping="Wrap" Text="BeCharming" FontWeight="Normal" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE007CD3" Margin="72,0,0,40" VerticalAlignment="Bottom" />
         <TextBlock TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Margin="80,0,0,25" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Foreground="#DE000000" Margin="80,30,0,10" Style="{StaticResource SubheaderTextStyle}"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Grid.Row="2" Foreground="#DE007CD3" Margin="80,30,0,15" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold"/>
 
 
-        <local:VariableGridView x:ConnectionId='1' Margin="80,35,30,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3"                                IsItemClickEnabled="True" ItemsSource="{Binding Targets}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
+        <local:VariableGridView x:ConnectionId='1' Margin="80,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3"                                IsItemClickEnabled="True" ItemsSource="{Binding Path=Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />
                 </ItemsPanelTemplate>
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Searching network for BeCharming clients..." VerticalAlignment="Center" Grid.Row="3" Margin="0,0,0,100" Foreground="#DE007CD3" FontSize="18.667" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}"/>
 
-        <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#DE007CD3" Margin="0" Width="50" Height="50" />
+        <ProgressRing Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#DE007CD3" Margin="0" Width="50" Height="50" ToolTipService.ToolTip="Searching network for BeCharming clients...." />
 
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" DataContext="{Binding Path=SharingDialogModel}" Visibility="{Binding Path=IsShowingSharingDialog, Converter={StaticResource b2v}}" Grid.RowSpan="5" Margin="0" Opacity="0.015">
             <Grid Margin="-10,0,10,0">
