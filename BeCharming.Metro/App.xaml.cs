@@ -35,6 +35,12 @@ namespace BeCharming.Metro
             this.Suspending += OnSuspending;
         }
 
+        protected async override void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            var shareTargetPage = new ShareTargets();
+            await shareTargetPage.ActivateAsync(args);
+        }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -47,7 +53,7 @@ namespace BeCharming.Metro
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            
+
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page

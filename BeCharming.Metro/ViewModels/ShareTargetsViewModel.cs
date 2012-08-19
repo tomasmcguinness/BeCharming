@@ -82,8 +82,17 @@ namespace BeCharming.Metro.ViewModels
 
         public async Task ActivateAsync(ShareTargetActivatedEventArgs args)
         {
-            LoadTargets();
-            await ExtractShareData(args);
+            try
+            {
+                shareOperation = args.ShareOperation;
+
+                LoadTargets();
+                await ExtractShareData(args);
+            }
+            catch
+            {
+                shareOperation.ReportError("Could not determine the type of data to share");
+            }
         }
 
         private async Task ExtractShareData(ShareTargetActivatedEventArgs args)
@@ -91,8 +100,6 @@ namespace BeCharming.Metro.ViewModels
             fileBytes = null;
             fileName = null;
             url = null;
-
-            shareOperation = args.ShareOperation;
 
             if (shareOperation.Data.Contains(StandardDataFormats.Uri))
             {
@@ -147,6 +154,7 @@ namespace BeCharming.Metro.ViewModels
             request.Url = this.url;
             request.FileContents = fileBytes;
             request.FileName = fileName;
+            request.Target = this.SelectedTarget;
 
             manager.Share(request);
 

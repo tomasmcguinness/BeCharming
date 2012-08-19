@@ -23,7 +23,7 @@ namespace BeCharming.Metro
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ShareTargets : UserControl
+    public sealed partial class ShareTargets : Page
     {
         public ShareTargets()
         {
@@ -31,9 +31,11 @@ namespace BeCharming.Metro
             this.DataContext = new ShareTargetsViewModel(Dispatcher);
         }
 
-        public async Task ActivateAsync(ShareTargetActivatedEventArgs args)
+        public Task ActivateAsync(ShareTargetActivatedEventArgs args)
         {
-            await ((ShareTargetsViewModel)DataContext).ActivateAsync(args);
+            Window.Current.Content = this;
+            Window.Current.Activate();
+            return ((ShareTargetsViewModel)DataContext).ActivateAsync(args);
         }
     }
 }

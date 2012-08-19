@@ -23,6 +23,7 @@ namespace BeCharming.Metro.Models
         public delegate void PeerDiscoveredHandler(ShareTarget shareTarget);
         public event PeerDiscoveredHandler PeerDiscovered;
         private DatagramSocket socket;
+        private IOutputStream outputStream;
         private DispatcherTimer timer;
 
         public ShareTargetsManager()
@@ -61,7 +62,11 @@ namespace BeCharming.Metro.Models
                 }
             }
 
-            var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
+            if (outputStream == null)
+            {
+                outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
+            }
+
             DataWriter wr = new DataWriter(outputStream);
             wr.WriteString("**BECHARMING DISCOVERY**");
             await wr.FlushAsync();

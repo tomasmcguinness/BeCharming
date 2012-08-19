@@ -86,7 +86,8 @@ namespace BeCharming.Listener
 
         private bool IsPinCodeCorrect(string pinCode)
         {
-            return pinCode == "1234";
+            return true;
+            //return pinCode == "1234";
         }
     }
 }
