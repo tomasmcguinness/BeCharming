@@ -1,0 +1,1 @@
+F:\Development\BeCharming\BeCharming.Metro\BeCharming.Metro.csproj;neutral

@@ -1,49 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="db9267c4-c225-4439-af89-1eeb20ec9a3a" Publisher="CN=Tomas" Version="1.0.0.0" />
+  <Identity Name="bad231db-df88-4461-9ad0-0ed76446c718" Publisher="CN=Tomas" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>BeCharming</DisplayName>
-    <PublisherDisplayName>Tomas McGuinness</PublisherDisplayName>
+    <DisplayName>BeCharming.Metro</DisplayName>
+    <PublisherDisplayName>Tomas</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
-    <Description>BeCharming.Metro</Description>
   </Properties>
   <Prerequisites>
-    <OSMinVersion>6.2</OSMinVersion>
-    <OSMaxVersionTested>6.2</OSMaxVersionTested>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
   </Prerequisites>
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BeCharming.Metro.App">
-      <VisualElements DisplayName="BeCharming" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming allows you to send links, files and text from a Windows 8 device to any other device by using the Charm bar." ForegroundText="light" BackgroundColor="#222222">
+      <VisualElements DisplayName="BeCharming.Metro" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="BeCharming.Metro" ForegroundText="light" BackgroundColor="#464646">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" />
-        <InitialRotationPreference>
-          <Rotation Preference="landscape" />
-        </InitialRotationPreference>
       </VisualElements>
-      <Extensions>
-        <Extension Category="windows.shareTarget">
-          <ShareTarget>
-            <SupportedFileTypes>
-              <SupportsAnyFileType />
-            </SupportedFileTypes>
-            <DataFormat>Html</DataFormat>
-            <DataFormat>Text</DataFormat>
-            <DataFormat>Uri</DataFormat>
-            <DataFormat>Rtf</DataFormat>
-            <DataFormat>Bitmap</DataFormat>
-          </ShareTarget>
-        </Extension>
-      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="privateNetworkClientServer" />
     <Capability Name="internetClientServer" />
     <Capability Name="internetClient" />
-    <Capability Name="enterpriseAuthentication" />
-    <Capability Name="privateNetworkClientServer" />
-    <DeviceCapability Name="proximity" />
   </Capabilities>
 </Package>

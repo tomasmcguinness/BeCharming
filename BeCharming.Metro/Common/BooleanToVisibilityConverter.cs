@@ -19,9 +19,26 @@ namespace BeCharming.Metro.Common
     /// </summary>
     public sealed class BooleanToVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// If set to True, conversion is reversed: True will become Collapsed.
+        /// </summary>
+        public bool IsReversed { get; set; }
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            var val = System.Convert.ToBoolean(value);
+
+            if (this.IsReversed)
+            {
+                val = !val;
+            }
+
+            if (val)
+            {
+                return Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

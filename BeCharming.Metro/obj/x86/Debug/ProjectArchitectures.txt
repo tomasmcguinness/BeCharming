@@ -1,0 +1,2 @@
+F:\Development\BeCharming\BeCharming.Common\BeCharming.Common.csproj;x86
+F:\Development\BeCharming\BeCharming.Metro\BeCharming.Metro.csproj;x86
