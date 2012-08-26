@@ -14,7 +14,7 @@
             <Border VariableSizedWrapGrid.ColumnSpan="{Binding Path=Width}" VariableSizedWrapGrid.RowSpan="{Binding Path=Height}" Background="#DE007CD3">
                 <Grid>
                     <StackPanel>
-                        <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" FontWeight="Bold" Foreground="White" FontSize="28" IsHitTestVisible="False" />
+                        <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" TextTrimming="WordEllipsis" FontWeight="Bold" Foreground="White" FontSize="28" IsHitTestVisible="False" />
                         <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667" IsHitTestVisible="False" />
                     </StackPanel>
                     <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
@@ -57,53 +57,16 @@
             </Grid.ColumnDefinitions>
             <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#DE007CD3" Margin="0,12,15,0" ToolTipService.ToolTip="Searching network for BeCharming clients...." Width="30" Height="30" />
 
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Foreground="#DE007CD3" Margin="0,15" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Available Share Targets" VerticalAlignment="Top" Foreground="#DE007CD3" Margin="0,15" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1"/>
         </Grid>
 
 
-        <local:VariableGridView Margin="80,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Path=Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTarget, Mode=TwoWay}" VerticalContentAlignment="Stretch">
+        <local:VariableGridView Margin="80,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Path=Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />
                 </ItemsPanelTemplate>
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
-
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AA000000" DataContext="{Binding Path=SharingDialogModel}" Visibility="{Binding Path=IsShowingSharingDialog, Converter={StaticResource b2v}}" Grid.RowSpan="5" Margin="0" Opacity="0.015">
-            <Grid Margin="-10,0,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="460" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Border Grid.Row="1" Background="White" Height="245">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="Sharing" VerticalAlignment="Top" Foreground="#DE000000"/>
-
-                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,15" Text="Pin Code" VerticalAlignment="Top" Grid.Row="1" Foreground="Black" />
-                        <TextBox TextWrapping="Wrap" Grid.Row="2" Margin="0,5" d:LayoutOverrides="Height, VerticalMargin" Text="{Binding Path=PinCode, Mode=TwoWay}" Padding="10" />
-
-                        <Border Grid.Row="1" Grid.RowSpan="2" Margin="0,15,0,0" Visibility="{Binding Path=IsShowingInvalidPinMessage, Converter={StaticResource b2v}}">
-                            <TextBlock TextWrapping="NoWrap" Margin="10" Grid.Row="1" Text="The Pin Code Specified Was Invalid." Foreground="Red" FontWeight="Bold" />
-                        </Border>
-
-                        <Border Grid.Row="1" Grid.RowSpan="2" Margin="0,15,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.99" Background="White" Visibility="{Binding Path=IsSharing, Converter={StaticResource b2v}}">
-                            <ProgressRing IsActive="True" />
-                        </Border>
-
-                        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsShowingRequiresPin}">
-                            <Button Content="Share" Command="{Binding Path=ShareCommand}" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="Black" />
-                            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Foreground="Black" Padding="12,4,12,5" HorizontalAlignment="Left" />
-                        </StackPanel>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
     </Grid>
 </Page>

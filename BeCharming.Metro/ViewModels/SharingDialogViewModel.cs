@@ -24,7 +24,6 @@ namespace BeCharming.Metro.ViewModels
             this.Dispatcher = Dispatcher;
             this.manager = new ShareTargetsManager();
             this.manager.ShareComplete += manager_ShareComplete;
-            this.manager.ShareFailedWithInvalidPin += manager_ShareFailedWithInvalidPin;
 
             this.CancelCommand = new DelegateCommand(CancelCommandExecute);
             this.ShareCommand = new DelegateCommand(ShareCommandExecute, CanShareCommandExecute);

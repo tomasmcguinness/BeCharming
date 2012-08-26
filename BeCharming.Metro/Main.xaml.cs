@@ -96,7 +96,9 @@ namespace BeCharming.Metro
                 request.FileName = selectedFile.Name;
                 request.Target = target;
 
-                ((MainViewModel)DataContext).StartShare(request);
+                ((MainViewModel)DataContext).Share(request);
+
+                //((MainViewModel)DataContext).StartShare(request);
             }
         }
     }

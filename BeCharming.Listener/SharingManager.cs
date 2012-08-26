@@ -79,9 +79,7 @@ namespace BeCharming.Listener
             Byte[] receiveBytes = u.EndReceive(ar, ref e);
             string receiveString = Encoding.ASCII.GetString(receiveBytes);
 
-            var settings = Settings.LoadSettings();
-
-            string s = string.Format("{0}|{1}|{2}|{3}", settings.Name, settings.IsPinProtected, 5, GetShareTargetCode());
+            string s = string.Format("{0}|{1}|{2}|{3}", System.Environment.MachineName, false, 5, GetShareTargetCode());
             int bytesSent = u.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length, e);
         }
 

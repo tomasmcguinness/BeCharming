@@ -19,12 +19,10 @@ namespace BeCharming.Metro.Models
         public event EventHandler ShareStarted;
         public event EventHandler ShareComplete;
         public event EventHandler ShareFailed;
-        public event EventHandler ShareFailedWithInvalidPin;
         public event EventHandler PeerDiscoveryComplete;
         public delegate void PeerDiscoveredHandler(ShareTarget shareTarget);
         public event PeerDiscoveredHandler PeerDiscovered;
         private DatagramSocket socket;
-        private IOutputStream outputStream;
         private DispatcherTimer timer;
 
         public ShareTargetsManager()
@@ -293,20 +291,11 @@ namespace BeCharming.Metro.Models
             }
             else
             {
-                if (result == "InvalidPin")
+                if (ShareFailed != null)
                 {
-                    if (ShareFailedWithInvalidPin != null)
-                    {
-                        ShareFailedWithInvalidPin(this, null);
-                    }
+                    ShareFailed(this, null);
                 }
-                else
-                {
-                    if (ShareFailed != null)
-                    {
-                        ShareFailed(this, null);
-                    }
-                }
+
             }
         }
     }

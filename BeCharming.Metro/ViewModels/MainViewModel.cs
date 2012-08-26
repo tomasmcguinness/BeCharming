@@ -139,6 +139,7 @@ namespace BeCharming.Metro.ViewModels
         public void PerformPeerDiscovery(object state)
         {
             IsSearchingForPeers = true;
+            Targets.Clear();
             model.PerformPeerDiscovery();
         }
 
@@ -161,6 +162,11 @@ namespace BeCharming.Metro.ViewModels
         {
             SharingDialogModel.SetupForShareRequest(request);
             SharingDialogModel.IsShowingSharingDialog = true;
+        }
+
+        public void Share(Models.ShareRequest request)
+        {
+            model.Share(request);
         }
     }
 }
