@@ -34,6 +34,8 @@ namespace BeCharming.Metro.Models
         void timer_Tick(object sender, object e)
         {
             timer.Stop();
+            socket.Dispose();
+            socket = null;
 
             if (PeerDiscoveryComplete != null)
             {
