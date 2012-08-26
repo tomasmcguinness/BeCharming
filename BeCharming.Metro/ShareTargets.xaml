@@ -11,13 +11,18 @@
         <common:BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Key="ShareTargetTemplate">
             <Border HorizontalAlignment="Stretch" Background="#DE007CD3" Padding="5">
-                <Grid HorizontalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" MinWidth="150">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource SubheaderTextStyle}" Foreground="#FFFFFF" />
-                    <TextBlock Grid.Row="1" Text="{Binding IPAddress}" Style="{StaticResource SubheaderTextStyle}" Foreground="#FFFFFF" />
+                    <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource SubheaderTextStyle}" TextTrimming="WordEllipsis" Foreground="#FFFFFF" FontWeight="Bold" Margin="10,0,0,5" />
+                    <TextBlock Grid.Row="1" Text="{Binding IPAddress}" Style="{StaticResource SubheaderTextStyle}" TextTrimming="WordEllipsis" Foreground="#FFFFFF" Margin="20,0,0,5" />
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" Text="{Binding ShareCount}" VerticalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" FontWeight="Bold" FontSize="32" Margin="0,0,10,0"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -29,7 +34,17 @@
             <RowDefinition/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Share Targets" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Margin="25,10,0,5" Foreground="#DE000000"/>
+        <Grid>
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="Auto"/>
+        		<ColumnDefinition/>
+        	</Grid.ColumnDefinitions>
+        	<ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Width="30" Height="29" Foreground="#DE007CD3" Margin="25,5,0,5" />
+        	<TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Margin="25,0,0,15" Foreground="#DE007CD3" FontSize="26.667" FontWeight="Bold" Grid.Column="1" TextTrimming="None">
+        		<Run Text="Available "/>
+        		<Run Text="Share Targets"/>
+        	</TextBlock>
+        </Grid>
         <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Targets}" SelectedItem="{Binding SelectedTarget, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTargetTemplate}" SelectionMode="Single" Margin="25,25,20,20" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -38,13 +53,8 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <ProgressRing Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding Path=IsSearchingForPeers}" Visibility="{Binding Path=IsSearchingForPeers, Converter={StaticResource b2v}}" />
-        <Button Content="Share" Grid.Row="2" HorizontalAlignment="Right" Margin="30" Command="{Binding Share}" Foreground="Black" Padding="12,5" IsEnabled="{Binding Path=ShareButtonEnabled}" />
-        <Border Grid.Row="0" Grid.RowSpan="3" Background="White" Visibility="{Binding Path=IsSharing, Converter={StaticResource b2v}}">
-            <Grid>
-                <TextBlock>Sharing now</TextBlock>
-                <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True"/>
-            </Grid>
+        <Border BorderBrush="Black" BorderThickness="0" Grid.RowSpan="2" Grid.Row="2" Background="Black">
+        	<Button Content="Share" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="5,15,15,15" IsEnabled="{Binding ShareButtonEnabled, Converter={StaticResource b2v}}" Command="{Binding Share}" Padding="15,5" />
         </Border>
     </Grid>
 </Page> 

@@ -37,13 +37,18 @@ namespace BeCharming.Metro.ViewModels
         {
             this.Dispatcher = dispatcher;
             Targets = new ObservableCollection<ShareTarget>();
-            Share = new DelegateCommand(TargetSelected);
+            Share = new DelegateCommand(TargetSelected, ShareEnabled);
             manager = new ShareTargetsManager();
             manager.ShareStarted += manager_ShareStarted;
             manager.ShareComplete += manager_ShareComplete;
             manager.ShareFailed += manager_ShareFailed;
             manager.PeerDiscoveryComplete += model_PeerDiscoveryComplete;
             manager.PeerDiscovered += model_PeerDiscovered;
+        }
+
+        private bool ShareEnabled(object obj)
+        {
+            return ShareButtonEnabled;
         }
 
         void manager_ShareStarted(object sender, EventArgs e)
@@ -84,6 +89,8 @@ namespace BeCharming.Metro.ViewModels
         private void UpdateSelectedTarget()
         {
             ShareButtonEnabled = (SelectedTarget != null);
+            var cmd = Share as DelegateCommand;
+            cmd.RaiseCanExecuteChanged();
         }
 
         public async Task ActivateAsync(ShareTargetActivatedEventArgs args)

@@ -36,27 +36,6 @@ namespace BeCharming.Metro
         {
             this.InitializeComponent();
             this.DataContext = new MainViewModel(Dispatcher);
-            BottomAppBar.Opened += BottomAppBar_Opened;
-            SettingsPane.GetForCurrentView().CommandsRequested += new TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>(SettingsCommandsRequested);
-        }
-
-        void BottomAppBar_Opened(object sender, object e)
-        {
-            //CommandManager .InvalidateRequerySuggested();
-        }
-
-        private void SettingsCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
-        {
-            SettingsCommand generalCommand = new SettingsCommand("generalSettings", "General", new UICommandInvokedHandler(onSettingsCommand));
-            args.Request.ApplicationCommands.Add(generalCommand);
-            SettingsCommand helpCommand = new SettingsCommand("helpPage", "Help", new UICommandInvokedHandler(onSettingsCommand));
-            args.Request.ApplicationCommands.Add(helpCommand);
-        }
-
-        public void onSettingsCommand(IUICommand command)
-        {
-            SettingsCommand settingsCommand = (SettingsCommand)command;
-            //rootPage.NotifyUser("You clicked the " + settingsCommand.Label + " settings command", NotifyType.StatusMessage);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -83,22 +62,22 @@ namespace BeCharming.Metro
                 var size = properties.Size;
                 var fileStream = await selectedFile.OpenReadAsync();
 
-                DataReader dataReader = new DataReader(fileStream);
-                await dataReader.LoadAsync((uint)size);
-                byte[] buffer = new byte[(int)size];
+                using (DataReader dataReader = new DataReader(fileStream))
+                {
+                    await dataReader.LoadAsync((uint)size);
+                    byte[] buffer = new byte[(int)size];
 
-                dataReader.ReadBytes(buffer);
+                    dataReader.ReadBytes(buffer);
 
-                var fileBytes = buffer;
+                    var fileBytes = buffer;
 
-                ShareRequest request = new ShareRequest();
-                request.FileContents = fileBytes;
-                request.FileName = selectedFile.Name;
-                request.Target = target;
+                    ShareRequest request = new ShareRequest();
+                    request.FileContents = fileBytes;
+                    request.FileName = selectedFile.Name;
+                    request.Target = target;
 
-                ((MainViewModel)DataContext).Share(request);
-
-                //((MainViewModel)DataContext).StartShare(request);
+                    ((MainViewModel)DataContext).Share(request);
+                }
             }
         }
     }

@@ -95,7 +95,10 @@ namespace BeCharming.Metro.Models
                 ShareTargetUniqueName = uniqueName
             };
 
-            if (existingTarget != null) discoveredTarget.ShareCount = existingTarget.ShareCount;
+            if (existingTarget != null)
+            {
+                discoveredTarget.ShareCount = existingTarget.ShareCount;
+            }
 
             if (PeerDiscovered != null)
             {
