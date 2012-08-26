@@ -63,15 +63,15 @@ namespace BeCharming.Metro.Models
                 }
             }
 
-            if (outputStream == null)
+            using (var outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003"))
             {
-                outputStream = await socket.GetOutputStreamAsync(new HostName("230.0.0.1"), "22003");
+                using (DataWriter wr = new DataWriter(outputStream))
+                {
+                    wr.WriteString("**BECHARMING DISCOVERY**");
+                    await wr.FlushAsync();
+                    await wr.StoreAsync();
+                }
             }
-
-            DataWriter wr = new DataWriter(outputStream);
-            wr.WriteString("**BECHARMING DISCOVERY**");
-            await wr.FlushAsync();
-            await wr.StoreAsync();
         }
 
         void socket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
