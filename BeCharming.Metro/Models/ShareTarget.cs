@@ -14,12 +14,19 @@ namespace BeCharming.Metro.ViewModels
         public string IPAddress { get; set; }
         public bool IsPinCodeRequired { get; set; }
         public string ShareTargetUniqueName { get; set; }
-        public int ShareCount { get { return shareCount; } set { shareCount = value; NotifyPropertyChanged("ShareCount"); } }
+        public int ShareCount { get { return shareCount; } set { shareCount = value; NotifyPropertyChanged("ShareCount"); NotifyPropertyChanged("Width"); NotifyPropertyChanged("Height"); } }
 
         public bool IsSelected { get; set; }
 
-        public int Width { get { if (shareCount > 3) return 4; else return 1 + ShareCount; } }
-        public int Height { get { if (shareCount > 3) return 4; else return 1 + ShareCount; } }
+        public int Width
+        {
+            get { if (shareCount > 3) return 4; else return 1 + ShareCount; }
+        }
+
+        public int Height
+        {
+            get { if (shareCount > 3) return 4; else return 1 + ShareCount; }
+        }
 
         public bool Equals(ShareTarget other)
         {
