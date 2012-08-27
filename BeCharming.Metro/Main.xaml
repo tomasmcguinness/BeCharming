@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="using:BeCharming.Metro.Common"
     xmlns:local="using:BeCharming.Metro"
-	 mc:Ignorable="d" Margin="0" Padding="0" Background="White">
+	mc:Ignorable="d" Margin="0" Padding="0" Background="White">
+
     <Page.Resources>
         <common:BooleanToVisibilityConverter x:Key="b2v" />
         <common:BooleanToVisibilityConverter x:Key="b2vr" IsReversed="True" />
@@ -26,42 +27,19 @@
         <DataTemplate x:Key="ShareTargetList">
             <Border Height="40" Background="#DE007CD3">
                 <Grid>
+                	<Grid.ColumnDefinitions>
+                		<ColumnDefinition/>
+                		<ColumnDefinition Width="Auto"/>
+                	</Grid.ColumnDefinitions>
                     <StackPanel>
                         <TextBlock Margin="10,0,0,0" TextWrapping="NoWrap" Text="{Binding Path=Name}" TextTrimming="WordEllipsis" FontWeight="Bold" Foreground="White" FontSize="28" IsHitTestVisible="False" />
                         <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Path=IPAddress}" Foreground="White" FontSize="18.667" IsHitTestVisible="False" />
                     </StackPanel>
-                    <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
+                    <TextBlock HorizontalAlignment="Right" IsHitTestVisible="False" VerticalAlignment="Bottom" Text="{Binding Path=ShareCount}" FontSize="72" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" Grid.Column="1" />
                 </Grid>
             </Border>
         </DataTemplate>
-
     </Page.Resources>
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup>
-            <VisualState x:Name="FullScreenLandscape"/>
-            <VisualState x:Name="Filled"/>
-            <VisualState x:Name="FullScreenPortrait"/>
-            <VisualState x:Name="Snapped">
-                <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TargetList" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                    </ObjectAnimationUsingKeyFrames>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainTitle" Storyboard.TargetProperty="FontSize">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                    </ObjectAnimationUsingKeyFrames>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainTitle" Storyboard.TargetProperty="Margin">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="20,0,0,40"/>
-                    </ObjectAnimationUsingKeyFrames>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HelpMessage" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                    </ObjectAnimationUsingKeyFrames>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                    </ObjectAnimationUsingKeyFrames>
-                </Storyboard>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
     <Page.BottomAppBar>
         <AppBar Padding="10,0,10,0" IsOpen="{Binding Path=IsAppBarShowing, Mode=TwoWay}">
             <Grid>
@@ -77,26 +55,59 @@
 
     <Grid Background="White" Margin="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="MainTitle" TextWrapping="Wrap" Text="BeCharming" FontWeight="Normal" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE007CD3" Margin="72,0,0,0" VerticalAlignment="Center" />
-        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Margin="72,0,0,20" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
-        
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="72,0,0,0">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+                <VisualState x:Name="FullScreenPortrait"/>
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TargetList" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainTitle" Storyboard.TargetProperty="FontSize">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="54"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainTitle" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="20,20,0,20"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HelpMessage" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SnappedFooter" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SubTitleGrid" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="20,0,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <TextBlock x:Name="MainTitle" TextWrapping="Wrap" Text="BeCharming" FontWeight="Normal" Style="{StaticResource PageHeaderTextStyle}" Foreground="#DE007CD3" Margin="72,30,0,30" VerticalAlignment="Center" />
+        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Margin="72,10,0,15" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
+
+        <Grid x:Name="SubTitleGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="72,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#DE007CD3" Margin="0,12,15,0" ToolTipService.ToolTip="Searching network for BeCharming clients...." Width="30" Height="30" />
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Available Share Targets" VerticalAlignment="Top" Foreground="#DE007CD3" Margin="0,15" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1"/>
+            <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#DE007CD3" Margin="0,0,5,0" ToolTipService.ToolTip="Searching network for BeCharming clients...." Width="30" Height="30" />
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Available Share Targets" VerticalAlignment="Center" Foreground="#DE007CD3" Margin="0,10,0,20" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1" FontSize="24"/>
         </Grid>
 
-        <local:VariableGridView x:Name="TargetGrid" Margin="72,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Path=Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" VerticalContentAlignment="Stretch">
+        <local:VariableGridView x:Name="TargetGrid" Margin="72,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="Single" VerticalContentAlignment="Stretch">
             <local:VariableGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VariableSizedWrapGrid ItemHeight="200" ItemWidth="200" MaximumRowsOrColumns="4" />
@@ -104,7 +115,11 @@
             </local:VariableGridView.ItemsPanel>
         </local:VariableGridView>
 
-        <ListView x:Name="TargetList" Visibility="Collapsed" Margin="22,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Path=Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTargetList}" SelectionMode="Single" VerticalContentAlignment="Stretch" Background="Red">
-        </ListView>
+        <ListView x:Name="TargetList" Visibility="Collapsed" Margin="22,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="TargetList_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTargetList}" SelectionMode="Single" VerticalContentAlignment="Stretch" />
+
+		<Border x:Name="SnappedFooter" Visibility="Collapsed" BorderBrush="Black" BorderThickness="0" Grid.Row="4" Background="Black">
+        	<Button Content="Refresh" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="5,15,15,15" Command="{Binding RefreshTargets}" Padding="15,5" />
+        </Border>
+
     </Grid>
 </common:LayoutAwarePage>

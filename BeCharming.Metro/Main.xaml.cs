@@ -44,10 +44,20 @@ namespace BeCharming.Metro
             ((MainViewModel)DataContext).PerformPeerDiscovery();
         }
 
-        private async void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             ShareTarget target = e.ClickedItem as ShareTarget;
+            Share(target);
+        }
 
+        private void TargetList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShareTarget target = e.ClickedItem as ShareTarget;
+            Share(target);
+        }
+
+        private async void Share(ShareTarget target)
+        {
             var filePicker = new FileOpenPicker();
             filePicker.ViewMode = PickerViewMode.Thumbnail;
             filePicker.CommitButtonText = "Share File";
