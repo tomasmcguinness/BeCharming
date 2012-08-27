@@ -18,8 +18,8 @@ namespace BeCharming.Metro.ViewModels
 
         public bool IsSelected { get; set; }
 
-        public int Width { get { return 1 + ShareCount; } }
-        public int Height { get { return 1 + ShareCount; } }
+        public int Width { get { if (shareCount > 3) return 4; else return 1 + ShareCount; } }
+        public int Height { get { if (shareCount > 3) return 4; else return 1 + ShareCount; } }
 
         public bool Equals(ShareTarget other)
         {
