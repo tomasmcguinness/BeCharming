@@ -1,0 +1,495 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C522F8715F33918005F7310 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522F8615F33918005F7310 /* Cocoa.framework */; };
+		2C522F9115F33918005F7310 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C522F8F15F33918005F7310 /* InfoPlist.strings */; };
+		2C522F9315F33918005F7310 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522F9215F33918005F7310 /* main.m */; };
+		2C522F9715F33918005F7310 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2C522F9515F33918005F7310 /* Credits.rtf */; };
+		2C522F9A15F33918005F7310 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522F9915F33918005F7310 /* AppDelegate.m */; };
+		2C522F9D15F33918005F7310 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C522F9B15F33918005F7310 /* MainMenu.xib */; };
+		2C522FA515F33918005F7310 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522FA415F33918005F7310 /* SenTestingKit.framework */; };
+		2C522FA615F33918005F7310 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522F8615F33918005F7310 /* Cocoa.framework */; };
+		2C522FAE15F33918005F7310 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C522FAC15F33918005F7310 /* InfoPlist.strings */; };
+		2C522FB115F33918005F7310 /* BeCharmingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FB015F33918005F7310 /* BeCharmingTests.m */; };
+		2C522FBC15F339FC005F7310 /* Listener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FBB15F339FC005F7310 /* Listener.m */; };
+		2C522FC115F33C58005F7310 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FBE15F33C58005F7310 /* GCDAsyncSocket.m */; };
+		2C522FC215F33C58005F7310 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FC015F33C58005F7310 /* GCDAsyncUdpSocket.m */; };
+		2C522FC515F33D61005F7310 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522FC415F33D61005F7310 /* CFNetwork.framework */; };
+		2C522FCB15F33F27005F7310 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FBE15F33C58005F7310 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		2C522FCD15F33F27005F7310 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522FC015F33C58005F7310 /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		2C522FCE15F33F37005F7310 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522FC615F33DD3005F7310 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2C522FA715F33918005F7310 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C522F7915F33918005F7310 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C522F8115F33918005F7310;
+			remoteInfo = BeCharming;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C522F8215F33918005F7310 /* BeCharming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeCharming.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C522F8615F33918005F7310 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2C522F8915F33918005F7310 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2C522F8A15F33918005F7310 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2C522F8B15F33918005F7310 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2C522F8E15F33918005F7310 /* BeCharming-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeCharming-Info.plist"; sourceTree = "<group>"; };
+		2C522F9015F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C522F9215F33918005F7310 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2C522F9415F33918005F7310 /* BeCharming-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeCharming-Prefix.pch"; sourceTree = "<group>"; };
+		2C522F9615F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2C522F9815F33918005F7310 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2C522F9915F33918005F7310 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2C522F9C15F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2C522FA315F33918005F7310 /* BeCharmingTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeCharmingTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C522FA415F33918005F7310 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2C522FAB15F33918005F7310 /* BeCharmingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeCharmingTests-Info.plist"; sourceTree = "<group>"; };
+		2C522FAD15F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C522FAF15F33918005F7310 /* BeCharmingTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeCharmingTests.h; sourceTree = "<group>"; };
+		2C522FB015F33918005F7310 /* BeCharmingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeCharmingTests.m; sourceTree = "<group>"; };
+		2C522FBA15F339FC005F7310 /* Listener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listener.h; sourceTree = "<group>"; };
+		2C522FBB15F339FC005F7310 /* Listener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listener.m; sourceTree = "<group>"; };
+		2C522FBD15F33C58005F7310 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		2C522FBE15F33C58005F7310 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		2C522FBF15F33C58005F7310 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		2C522FC015F33C58005F7310 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		2C522FC415F33D61005F7310 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2C522FC615F33DD3005F7310 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2C522FC815F33DF8005F7310 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C522F7F15F33918005F7310 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522FCE15F33F37005F7310 /* Security.framework in Frameworks */,
+				2C522FC515F33D61005F7310 /* CFNetwork.framework in Frameworks */,
+				2C522F8715F33918005F7310 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C522F9F15F33918005F7310 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522FA515F33918005F7310 /* SenTestingKit.framework in Frameworks */,
+				2C522FA615F33918005F7310 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C522F7715F33918005F7310 = {
+			isa = PBXGroup;
+			children = (
+				2C522F8C15F33918005F7310 /* BeCharming */,
+				2C522FA915F33918005F7310 /* BeCharmingTests */,
+				2C522FC415F33D61005F7310 /* CFNetwork.framework */,
+				2C522F8515F33918005F7310 /* Frameworks */,
+				2C522FC815F33DF8005F7310 /* libxml2.dylib */,
+				2C522F8315F33918005F7310 /* Products */,
+				2C522FC615F33DD3005F7310 /* Security.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		2C522F8315F33918005F7310 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C522F8215F33918005F7310 /* BeCharming.app */,
+				2C522FA315F33918005F7310 /* BeCharmingTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C522F8515F33918005F7310 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C522F8615F33918005F7310 /* Cocoa.framework */,
+				2C522FA415F33918005F7310 /* SenTestingKit.framework */,
+				2C522F8815F33918005F7310 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C522F8815F33918005F7310 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C522F8915F33918005F7310 /* AppKit.framework */,
+				2C522F8A15F33918005F7310 /* CoreData.framework */,
+				2C522F8B15F33918005F7310 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2C522F8C15F33918005F7310 /* BeCharming */ = {
+			isa = PBXGroup;
+			children = (
+				2C522FC315F33C5C005F7310 /* AsyncSocket */,
+				2C522F9815F33918005F7310 /* AppDelegate.h */,
+				2C522F9915F33918005F7310 /* AppDelegate.m */,
+				2C522FBA15F339FC005F7310 /* Listener.h */,
+				2C522FBB15F339FC005F7310 /* Listener.m */,
+				2C522F9B15F33918005F7310 /* MainMenu.xib */,
+				2C522F8D15F33918005F7310 /* Supporting Files */,
+			);
+			path = BeCharming;
+			sourceTree = "<group>";
+		};
+		2C522F8D15F33918005F7310 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C522F8E15F33918005F7310 /* BeCharming-Info.plist */,
+				2C522F8F15F33918005F7310 /* InfoPlist.strings */,
+				2C522F9215F33918005F7310 /* main.m */,
+				2C522F9415F33918005F7310 /* BeCharming-Prefix.pch */,
+				2C522F9515F33918005F7310 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C522FA915F33918005F7310 /* BeCharmingTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C522FAF15F33918005F7310 /* BeCharmingTests.h */,
+				2C522FB015F33918005F7310 /* BeCharmingTests.m */,
+				2C522FAA15F33918005F7310 /* Supporting Files */,
+			);
+			path = BeCharmingTests;
+			sourceTree = "<group>";
+		};
+		2C522FAA15F33918005F7310 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C522FAB15F33918005F7310 /* BeCharmingTests-Info.plist */,
+				2C522FAC15F33918005F7310 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C522FC315F33C5C005F7310 /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				2C522FBD15F33C58005F7310 /* GCDAsyncSocket.h */,
+				2C522FBE15F33C58005F7310 /* GCDAsyncSocket.m */,
+				2C522FBF15F33C58005F7310 /* GCDAsyncUdpSocket.h */,
+				2C522FC015F33C58005F7310 /* GCDAsyncUdpSocket.m */,
+			);
+			name = AsyncSocket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2C522F8115F33918005F7310 /* BeCharming */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C522FB415F33918005F7310 /* Build configuration list for PBXNativeTarget "BeCharming" */;
+			buildPhases = (
+				2C522F7E15F33918005F7310 /* Sources */,
+				2C522F7F15F33918005F7310 /* Frameworks */,
+				2C522F8015F33918005F7310 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeCharming;
+			productName = BeCharming;
+			productReference = 2C522F8215F33918005F7310 /* BeCharming.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C522FA215F33918005F7310 /* BeCharmingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C522FB715F33918005F7310 /* Build configuration list for PBXNativeTarget "BeCharmingTests" */;
+			buildPhases = (
+				2C522F9E15F33918005F7310 /* Sources */,
+				2C522F9F15F33918005F7310 /* Frameworks */,
+				2C522FA015F33918005F7310 /* Resources */,
+				2C522FA115F33918005F7310 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C522FA815F33918005F7310 /* PBXTargetDependency */,
+			);
+			name = BeCharmingTests;
+			productName = BeCharmingTests;
+			productReference = 2C522FA315F33918005F7310 /* BeCharmingTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2C522F7915F33918005F7310 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = tomasmcguinness.com;
+			};
+			buildConfigurationList = 2C522F7C15F33918005F7310 /* Build configuration list for PBXProject "BeCharming" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2C522F7715F33918005F7310;
+			productRefGroup = 2C522F8315F33918005F7310 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2C522F8115F33918005F7310 /* BeCharming */,
+				2C522FA215F33918005F7310 /* BeCharmingTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C522F8015F33918005F7310 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522F9115F33918005F7310 /* InfoPlist.strings in Resources */,
+				2C522F9715F33918005F7310 /* Credits.rtf in Resources */,
+				2C522F9D15F33918005F7310 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C522FA015F33918005F7310 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522FAE15F33918005F7310 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C522FA115F33918005F7310 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C522F7E15F33918005F7310 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522FCB15F33F27005F7310 /* GCDAsyncSocket.m in Sources */,
+				2C522FCD15F33F27005F7310 /* GCDAsyncUdpSocket.m in Sources */,
+				2C522F9315F33918005F7310 /* main.m in Sources */,
+				2C522F9A15F33918005F7310 /* AppDelegate.m in Sources */,
+				2C522FBC15F339FC005F7310 /* Listener.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C522F9E15F33918005F7310 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C522FB115F33918005F7310 /* BeCharmingTests.m in Sources */,
+				2C522FC115F33C58005F7310 /* GCDAsyncSocket.m in Sources */,
+				2C522FC215F33C58005F7310 /* GCDAsyncUdpSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C522FA815F33918005F7310 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C522F8115F33918005F7310 /* BeCharming */;
+			targetProxy = 2C522FA715F33918005F7310 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2C522F8F15F33918005F7310 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C522F9015F33918005F7310 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2C522F9515F33918005F7310 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C522F9615F33918005F7310 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		2C522F9B15F33918005F7310 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C522F9C15F33918005F7310 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		2C522FAC15F33918005F7310 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C522FAD15F33918005F7310 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2C522FB215F33918005F7310 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2C522FB315F33918005F7310 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2C522FB515F33918005F7310 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
+				INFOPLIST_FILE = "BeCharming/BeCharming-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2C522FB615F33918005F7310 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
+				INFOPLIST_FILE = "BeCharming/BeCharming-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2C522FB815F33918005F7310 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BeCharming.app/Contents/MacOS/BeCharming";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
+				INFOPLIST_FILE = "BeCharmingTests/BeCharmingTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2C522FB915F33918005F7310 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BeCharming.app/Contents/MacOS/BeCharming";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
+				INFOPLIST_FILE = "BeCharmingTests/BeCharmingTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C522F7C15F33918005F7310 /* Build configuration list for PBXProject "BeCharming" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C522FB215F33918005F7310 /* Debug */,
+				2C522FB315F33918005F7310 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C522FB415F33918005F7310 /* Build configuration list for PBXNativeTarget "BeCharming" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C522FB515F33918005F7310 /* Debug */,
+				2C522FB615F33918005F7310 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2C522FB715F33918005F7310 /* Build configuration list for PBXNativeTarget "BeCharmingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C522FB815F33918005F7310 /* Debug */,
+				2C522FB915F33918005F7310 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2C522F7915F33918005F7310 /* Project object */;
+}
