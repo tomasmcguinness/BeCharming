@@ -65,6 +65,7 @@
 		2C522FC415F33D61005F7310 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2C522FC615F33DD3005F7310 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2C522FC815F33DF8005F7310 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		2C522FCF15F34694005F7310 /* BeCharming.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BeCharming.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +136,7 @@
 		2C522F8C15F33918005F7310 /* BeCharming */ = {
 			isa = PBXGroup;
 			children = (
+				2C522FCF15F34694005F7310 /* BeCharming.entitlements */,
 				2C522FC315F33C5C005F7310 /* AsyncSocket */,
 				2C522F9815F33918005F7310 /* AppDelegate.h */,
 				2C522F9915F33918005F7310 /* AppDelegate.m */,
@@ -410,10 +412,12 @@
 		2C522FB515F33918005F7310 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
 				INFOPLIST_FILE = "BeCharming/BeCharming-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -422,10 +426,12 @@
 		2C522FB615F33918005F7310 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
 				INFOPLIST_FILE = "BeCharming/BeCharming-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -12,6 +12,7 @@
 @interface Listener : NSObject
 
 @property (nonatomic, retain) GCDAsyncUdpSocket *socket;
+@property (nonatomic, retain) GCDAsyncUdpSocket *serverSocket;
 
 - (void)start;
 - (void)stop;

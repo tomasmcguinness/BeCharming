@@ -12,6 +12,18 @@
 
 - (void)start;
 {
+    [self openBroadcastListener];
+    [self openServiceListener];
+}
+
+- (void)stop
+{
+    [self.socket close];
+    self.socket = nil;
+}
+
+- (void)openBroadcastListener
+{
     self.socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     self.socket.delegate = self;
     
@@ -32,12 +44,26 @@
     {
         NSLog(@"I goofed: %@", error);
     }
+
 }
 
-- (void)stop
+- (void)openServiceListener
 {
-    [self.socket close];
-    self.socket = nil;
+    self.serverSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    self.serverSocket.delegate = self;
+    
+    NSError *error = nil;
+    
+    if(![self.serverSocket bindToPort:22001 error:&error])
+    {
+        NSLog(@"I goofed: %@", error);
+    }
+    
+    if (![self.serverSocket beginReceiving:&error])
+    {
+        NSLog(@"Error receiving: %@", [error description]);
+        return;
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -50,19 +76,20 @@ withFilterContext:(id)filterContext
     if (msg)
     {
         NSLog(@"Message: %@",msg);
-        
-        // Respond!
-        NSString *response = @"MacBookPro|false|5|111111-1111-1111-11111111";
-        NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
-        
         NSString *host = nil;
         uint16_t port = 0;
         [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
         
         NSLog(@"Message received from: %@:%hu", host, port);
-
-        [sock sendData:data toAddress:address withTimeout:-1 tag:0];
-        [sock close];
+        
+        if([msg isEqualToString:@"**BECHARMING DISCOVERY**"])
+        {
+            // Respond!
+            NSString *response = @"MacBookPro|false|5|111111-1111-1111-11111111";
+            NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+            
+            [sock sendData:data toAddress:address withTimeout:-1 tag:0];
+        }
     }
     else
     {
