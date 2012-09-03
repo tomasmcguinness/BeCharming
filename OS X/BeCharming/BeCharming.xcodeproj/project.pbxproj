@@ -12,7 +12,6 @@
 		2C522F9315F33918005F7310 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522F9215F33918005F7310 /* main.m */; };
 		2C522F9715F33918005F7310 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2C522F9515F33918005F7310 /* Credits.rtf */; };
 		2C522F9A15F33918005F7310 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C522F9915F33918005F7310 /* AppDelegate.m */; };
-		2C522F9D15F33918005F7310 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C522F9B15F33918005F7310 /* MainMenu.xib */; };
 		2C522FA515F33918005F7310 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522FA415F33918005F7310 /* SenTestingKit.framework */; };
 		2C522FA615F33918005F7310 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C522F8615F33918005F7310 /* Cocoa.framework */; };
 		2C522FAE15F33918005F7310 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C522FAC15F33918005F7310 /* InfoPlist.strings */; };
@@ -49,7 +48,6 @@
 		2C522F9615F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2C522F9815F33918005F7310 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C522F9915F33918005F7310 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2C522F9C15F33918005F7310 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2C522FA315F33918005F7310 /* BeCharmingTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeCharmingTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C522FA415F33918005F7310 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2C522FAB15F33918005F7310 /* BeCharmingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeCharmingTests-Info.plist"; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				2C522F9915F33918005F7310 /* AppDelegate.m */,
 				2C522FBA15F339FC005F7310 /* Listener.h */,
 				2C522FBB15F339FC005F7310 /* Listener.m */,
-				2C522F9B15F33918005F7310 /* MainMenu.xib */,
 				2C522F8D15F33918005F7310 /* Supporting Files */,
 			);
 			path = BeCharming;
@@ -263,7 +260,6 @@
 			files = (
 				2C522F9115F33918005F7310 /* InfoPlist.strings in Resources */,
 				2C522F9715F33918005F7310 /* Credits.rtf in Resources */,
-				2C522F9D15F33918005F7310 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,14 +339,6 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		2C522F9B15F33918005F7310 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C522F9C15F33918005F7310 /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
 		2C522FAC15F33918005F7310 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -412,7 +400,6 @@
 		2C522FB515F33918005F7310 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
@@ -426,7 +413,6 @@
 		2C522FB615F33918005F7310 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeCharming/BeCharming-Prefix.pch";
@@ -486,6 +472,7 @@
 				2C522FB615F33918005F7310 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C522FB715F33918005F7310 /* Build configuration list for PBXNativeTarget "BeCharmingTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +481,7 @@
 				2C522FB915F33918005F7310 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

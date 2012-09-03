@@ -19,6 +19,9 @@
 {
     self.listener = [[Listener alloc] init];
     [self.listener start];
+    
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:40.0];
+    self.statusItem.title = @"BeCharming";
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification

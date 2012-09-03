@@ -14,4 +14,6 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (retain) Listener *listener;
 
+@property (nonatomic, retain) NSStatusItem *statusItem;
+
 @end

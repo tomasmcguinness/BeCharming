@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "GCDAsyncUdpSocket.h"
+#import "GCDAsyncSocket.h"
 
 @interface Listener : NSObject
 
 @property (nonatomic, retain) GCDAsyncUdpSocket *socket;
-@property (nonatomic, retain) GCDAsyncUdpSocket *serverSocket;
+@property (nonatomic, retain) GCDAsyncSocket *serverSocket;
 
 - (void)start;
 - (void)stop;

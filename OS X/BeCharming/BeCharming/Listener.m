@@ -49,21 +49,43 @@
 
 - (void)openServiceListener
 {
-    self.serverSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    self.serverSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     self.serverSocket.delegate = self;
     
     NSError *error = nil;
-    
-    if(![self.serverSocket bindToPort:22001 error:&error])
+    uint16_t port = 22001;
+    if (![self.serverSocket acceptOnPort:port error:&error])
     {
         NSLog(@"I goofed: %@", error);
     }
     
-    if (![self.serverSocket beginReceiving:&error])
-    {
-        NSLog(@"Error receiving: %@", [error description]);
-        return;
-    }
+//    if(![self.serverSocket bindToPort:22001 error:&error])
+//    {
+//        NSLog(@"I goofed: %@", error);
+//    }
+//    
+//    if (![self.serverSocket beginReceiving:&error])
+//    {
+//        NSLog(@"Error receiving: %@", [error description]);
+//        return;
+//    }
+}
+
+- (void)socket:(GCDAsyncSocket *)sender didAcceptNewSocket:(GCDAsyncSocket *)newSocket
+{
+    // The "sender" parameter is the listenSocket we created.
+    // The "newSocket" is a new instance of GCDAsyncSocket.
+    // It represents the accepted incoming client connection.
+    
+    // Do server stuff with newSocket...
+    newSocket.delegate = self;
+    //newSocket readDataToData:<#(NSData *)#> withTimeout:<#(NSTimeInterval)#> buffer:<#(NSMutableData *)#> bufferOffset:<#(NSUInteger)#> maxLength:<#(NSUInteger)#> tag:<#(long)#>
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",str);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
