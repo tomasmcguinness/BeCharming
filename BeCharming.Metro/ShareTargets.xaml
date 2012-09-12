@@ -39,7 +39,7 @@
         		<ColumnDefinition Width="Auto"/>
         		<ColumnDefinition/>
         	</Grid.ColumnDefinitions>
-        	<ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Width="30" Height="29" Foreground="#DE007CD3" Margin="25,5,0,5" />
+            <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Width="30" Height="29" Foreground="#E44E1B" Margin="25,5,0,5" />
             <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Margin="25,0,0,15" Foreground="#E44E1B" FontSize="26.667" FontWeight="Bold" Grid.Column="1" TextTrimming="None">
         		Available Share Targets
         	</TextBlock>
