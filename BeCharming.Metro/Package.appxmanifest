@@ -4,7 +4,7 @@
   <Properties>
     <DisplayName>BeCharming</DisplayName>
     <PublisherDisplayName>Tomas McGuinness</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\Be-Charming-Icon-Store.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
