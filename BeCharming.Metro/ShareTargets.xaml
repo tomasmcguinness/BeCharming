@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <common:BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Key="ShareTargetTemplate">
-            <Border HorizontalAlignment="Stretch" Background="#DE007CD3" Padding="5">
+            <Border HorizontalAlignment="Stretch" Background="#E44E1B" Padding="5">
                 <Grid HorizontalAlignment="Stretch" MinWidth="150">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -40,9 +40,8 @@
         		<ColumnDefinition/>
         	</Grid.ColumnDefinitions>
         	<ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Width="30" Height="29" Foreground="#DE007CD3" Margin="25,5,0,5" />
-        	<TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Margin="25,0,0,15" Foreground="#DE007CD3" FontSize="26.667" FontWeight="Bold" Grid.Column="1" TextTrimming="None">
-        		<Run Text="Available "/>
-        		<Run Text="Share Targets"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Margin="25,0,0,15" Foreground="#E44E1B" FontSize="26.667" FontWeight="Bold" Grid.Column="1" TextTrimming="None">
+        		Available Share Targets
         	</TextBlock>
         </Grid>
         <ListView HorizontalAlignment="Stretch" ItemsSource="{Binding Targets}" SelectedItem="{Binding SelectedTarget, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTargetTemplate}" SelectionMode="Single" Margin="25,25,20,20" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">

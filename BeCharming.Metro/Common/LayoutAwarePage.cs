@@ -367,6 +367,8 @@ namespace BeCharming.Metro.Common
         /// property provides the group to be displayed.</param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            if (_pageKey == null) return;
+
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             var pageState = new Dictionary<String, Object>();
             this.SaveState(pageState);

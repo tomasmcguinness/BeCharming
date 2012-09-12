@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BeCharming.Metro.App">
-      <VisualElements DisplayName="BeCharming" Logo="Assets\Be-Charming-Icon-150.png" SmallLogo="Assets\SmallLogo.png" Description="Easily share data to other machines on your network using the Share charm." ForegroundText="light" BackgroundColor="#007CD3">
-        <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\SplashScreen.png" />
+      <VisualElements DisplayName="BeCharming" Logo="Assets\Be-Charming-Icon-150.png" SmallLogo="Assets\Be-Charming-Icon-Small.png" Description="Easily share data to other machines on your network using the Share charm." ForegroundText="light" BackgroundColor="#E44E1B">
+        <DefaultTile ShowName="logoOnly" ShortName="BeCharming" />
+        <SplashScreen Image="Assets\Be-Charming-Icon-Splash.png" BackgroundColor="#E44E1B" />
       </VisualElements>
       <Extensions>
         <Extension Category="windows.shareTarget">
