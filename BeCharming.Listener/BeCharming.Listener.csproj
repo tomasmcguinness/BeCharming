@@ -16,7 +16,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>http://www.becharmingapp.com/download/</PublishUrl>
+    <PublishUrl>F:\Development\BeCharming\Temp\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,15 +26,16 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>http://localhost/BeCharming/</UpdateUrl>
-    <SupportUrl>http://www.becharmingapp.com/support</SupportUrl>
+    <InstallUrl>http://www.tomasmcguinness.com/becharming/</InstallUrl>
+    <UpdateUrl>http://www.tomasmcguinness.com/becharming/</UpdateUrl>
+    <SupportUrl>http://www.tomasmcguinness.com/apps/roomr</SupportUrl>
     <ProductName>BeCharming</ProductName>
     <PublisherName>Tomas McGuinness</PublisherName>
     <SuiteName>BeCharming</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -63,10 +64,11 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>308BCF7B992D70C569BB28ACFAD0E97E41D3D478</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1D84F89D365D89B22808390559FAC5063B167CE0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>BeCharming.Listener_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

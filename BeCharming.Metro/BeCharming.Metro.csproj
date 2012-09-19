@@ -12,7 +12,9 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>BeCharming.Metro_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>BeCharming.Metro_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <PackageCertificateThumbprint>547FC0AEBC169E133EE60B9579B872686E2395BB</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -134,6 +136,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="BeCharming.Metro_StoreKey.pfx" />
     <None Include="Common\ReadMe.txt" />
     <None Include="BeCharming.Metro_TemporaryKey.pfx" />
   </ItemGroup>
@@ -142,6 +145,7 @@
     <Content Include="Assets\Be-Charming-Icon-Small.png" />
     <Content Include="Assets\Be-Charming-Icon-Splash.png" />
     <Content Include="Assets\Be-Charming-Icon-Store.png" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

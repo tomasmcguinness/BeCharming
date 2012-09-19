@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="bad231db-df88-4461-9ad0-0ed76446c718" Publisher="CN=Tomas" Version="1.0.0.0" />
+  <Identity Name="29507TomasMcGuinness.BeCharming" Publisher="CN=9730CA1B-AD2F-4C9E-B6F7-C770F4FE37F7" Version="1.0.0.0" />
   <Properties>
     <DisplayName>BeCharming</DisplayName>
     <PublisherDisplayName>Tomas McGuinness</PublisherDisplayName>

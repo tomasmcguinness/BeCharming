@@ -80,7 +80,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <TextBlock x:Name="MainTitle" TextWrapping="Wrap" Text="BeCharming" FontWeight="Normal" Style="{StaticResource PageHeaderTextStyle}" Foreground="#E44E1B" Margin="72,30,0,30" VerticalAlignment="Center" />
-        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client." Margin="72,10,0,15" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
+        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.tomasmcguinness.com/becharming" Margin="72,10,0,15" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
 
         <Grid x:Name="SubTitleGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="72,0,0,0">
             <Grid.ColumnDefinitions>

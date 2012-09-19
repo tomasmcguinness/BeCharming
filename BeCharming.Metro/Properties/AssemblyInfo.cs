@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BeCharming.Metro")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BeCharming")]
+[assembly: AssemblyDescription("Easily share to another PC from your Charm Bar")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BeCharming.Metro")]
+[assembly: AssemblyProduct("BeCharming")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
