@@ -109,7 +109,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Background="#DE007CD3" HorizontalAlignment="Stretch">
+                    <Border Background="#E44E1B" HorizontalAlignment="Stretch">
                         <Grid HorizontalAlignment="Stretch" Margin="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
