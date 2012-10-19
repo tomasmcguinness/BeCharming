@@ -80,7 +80,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <TextBlock x:Name="MainTitle" TextWrapping="Wrap" Text="BeCharming" FontWeight="Normal" Style="{StaticResource PageHeaderTextStyle}" Foreground="#E44E1B" Margin="72,30,0,30" VerticalAlignment="Center" />
-        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.tomasmcguinness.com/becharming" Margin="72,10,0,15" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
+        <TextBlock x:Name="HelpMessage" TextWrapping="Wrap" Text="To download the BeCharming client, just visit www.becharmingapp.com/client" Margin="72,10,0,15" Grid.Row="1" Foreground="#DE000000" Style="{StaticResource PageSubheaderTextStyle}"/>
 
         <Grid x:Name="SubTitleGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Margin="72,0,0,0">
             <Grid.ColumnDefinitions>
@@ -88,7 +88,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="{Binding IsSearchingForPeers}" Visibility="{Binding IsSearchingForPeers, Converter={StaticResource b2v}}" Foreground="#E44E1B" Margin="0,0,5,0" ToolTipService.ToolTip="Searching network for BeCharming clients...." Width="30" Height="30" />
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Available Share Targets" VerticalAlignment="Center" Foreground="#E44E1B" Margin="0,10,0,20" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1" FontSize="24"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Available Clients" VerticalAlignment="Center" Foreground="#E44E1B" Margin="0,10,0,20" Style="{StaticResource SubheaderTextStyle}" FontWeight="Bold" Grid.Column="1" FontSize="24"/>
         </Grid>
 
         <local:VariableGridView x:Name="TargetGrid" Margin="72,20,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" ItemClick="GridView_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding Targets, Mode=TwoWay}" ItemTemplate="{StaticResource ShareTarget}" SelectionMode="None" VerticalContentAlignment="Stretch">
