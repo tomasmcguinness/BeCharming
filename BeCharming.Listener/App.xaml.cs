@@ -31,6 +31,8 @@ namespace BeCharming.Listener
                 manager.Start(icon);
 
                 ClickOnceHelper.AddShortcutToStartupGroup("Tomas McGuinness", "BeCharming");
+
+                this.MainWindow = new MainWindow();
             }
             catch
             {
@@ -49,9 +51,10 @@ namespace BeCharming.Listener
         {
             icon = new System.Windows.Forms.NotifyIcon();
             icon.Visible = true;
-            icon.Icon = new System.Drawing.Icon("Icon1.ico");
-            icon.ShowBalloonTip(3, "BeCharming", "Ready to receive shared items...", System.Windows.Forms.ToolTipIcon.Info);
+            icon.Icon = new System.Drawing.Icon("small-orange-sphere.ico");
             icon.ContextMenu = GetContextMenu();
+
+            icon.ShowBalloonTip(3, "BeCharming", "Ready to receive shared items...", System.Windows.Forms.ToolTipIcon.Info);
 
             return icon;
         }
@@ -59,8 +62,14 @@ namespace BeCharming.Listener
         private System.Windows.Forms.ContextMenu GetContextMenu()
         {
             System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
+            
             var exitItem = new System.Windows.Forms.MenuItem() { Text = "Exit" };
             exitItem.Click += exitItem_Click;
+
+            var settingsItem = new System.Windows.Forms.MenuItem() { Text = "Settings" };
+            settingsItem.Click += settingsItem_Click;
+
+            menu.MenuItems.Add(settingsItem);
             menu.MenuItems.Add(exitItem);
 
             return menu;
@@ -69,6 +78,11 @@ namespace BeCharming.Listener
         void exitItem_Click(object sender, EventArgs e)
         {
             App.Current.Shutdown();
+        }
+
+        void settingsItem_Click(object sender, EventArgs e)
+        {
+          this.MainWindow.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

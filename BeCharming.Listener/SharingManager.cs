@@ -71,6 +71,8 @@ namespace BeCharming.Listener
 
         public void ReceiveCallback(IAsyncResult ar)
         {
+          try
+          {
             UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
             IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
 
@@ -81,6 +83,11 @@ namespace BeCharming.Listener
 
             string s = string.Format("{0}|{1}|{2}|{3}", System.Environment.MachineName, false, 5, GetShareTargetCode());
             int bytesSent = u.Send(Encoding.UTF8.GetBytes(s), Encoding.UTF8.GetBytes(s).Length, e);
+          }
+          catch
+          {
+
+          }
         }
 
         public string GetShareTargetCode()
