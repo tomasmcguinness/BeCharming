@@ -18,30 +18,37 @@ using System.Windows.Forms;
 
 namespace BeCharming.Listener
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
-  {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-      InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
 
-      this.Visibility = Visibility.Collapsed;
-      this.ShowInTaskbar = false;
+            this.Visibility = Visibility.Collapsed;
+            this.ShowInTaskbar = false;
+            this.DataContext = this;
+        }
+
+        public bool OpenItemsAutomatically
+        {
+            get
+            {
+                return Settings.OpenItemsAutomatically;
+            }
+            set
+            {
+                Settings.OpenItemsAutomatically = value;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visibility = System.Windows.Visibility.Collapsed;
+            e.Cancel = true;
+        }
+
     }
-
-    public bool OpenItemsAutomatically
-    {
-      get
-      {
-        return Settings.OpenItemsAutomatically;
-      }
-      set
-      {
-
-      }
-    }
-
-  }
 }

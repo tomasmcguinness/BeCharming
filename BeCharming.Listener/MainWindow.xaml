@@ -1,18 +1,22 @@
 ﻿<Window x:Class="BeCharming.Listener.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BeCharming Client" ShowInTaskbar="True" Width="400" Height="200">
+        Title="BeCharming Client" ShowInTaskbar="True" Width="400" Height="200" Closing="Window_Closing">
   <Grid>
-    <Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <TextBlock Grid.Row="0" FontFamily="Segoe UI" FontSize="38" Margin="10" Foreground="#E44E1B">Be Charming</TextBlock>
-    <TextBlock Grid.Row="1" Margin="10,0,0,10" FontFamily="Segoe UI" FontSize="20" Foreground="#DE000000" FontWeight="Bold">Settings</TextBlock>
-    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="20,0,0,0">
+    <TextBlock Grid.Row="0" FontFamily="Segoe UI" FontSize="38" Margin="10" Foreground="#E44E1B" Grid.ColumnSpan="2">Be Charming</TextBlock>
+    <TextBlock Grid.Row="1" Margin="10,0,0,10" FontFamily="Segoe UI" FontSize="20" Foreground="#DE000000" FontWeight="Bold" Grid.ColumnSpan="2">Settings</TextBlock>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="20,0,0,0" Grid.ColumnSpan="2">
       <TextBlock Grid.Row="1" FontFamily="Segoe UI" FontSize="20" Foreground="#DE000000" Margin="0,0,10,0">Open Shared Items Automatically</TextBlock>
-      <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=OpenItemsAutomatically}" />
+      <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=OpenItemsAutomatically, Mode=TwoWay}" />
     </StackPanel>
   </Grid>
 </Window>

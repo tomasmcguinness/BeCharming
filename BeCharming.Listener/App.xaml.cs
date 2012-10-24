@@ -19,7 +19,6 @@ namespace BeCharming.Listener
     {
         private System.Windows.Forms.NotifyIcon icon;
         private SharingManager manager;
-        private ListenerService listener;
 
         public App()
         {
